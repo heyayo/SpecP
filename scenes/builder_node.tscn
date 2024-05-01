@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxw8rk2ph6pv3"]
+
+[ext_resource type="Script" path="res://scripts/builder.gd" id="1_q1tf4"]
+[ext_resource type="Texture2D" uid="uid://c4behmnjvukwi" path="res://sprites/world_tileset.png" id="2_sha1y"]
+
+[node name="Builder Node" type="Node2D"]
+script = ExtResource("1_q1tf4")
+
+[node name="Select" type="Sprite2D" parent="."]
+texture = ExtResource("2_sha1y")
+region_enabled = true
+region_rect = Rect2(32, 0, 16, 16)
+
+[node name="Highlight" type="Sprite2D" parent="."]
+texture = ExtResource("2_sha1y")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Build Menu" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Build Menu"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -76.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
