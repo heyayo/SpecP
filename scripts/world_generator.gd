@@ -8,12 +8,11 @@ extends TileMap
 	set(value):
 		regenerate_world();
 
-var world_tileset : TileSet;
+@onready var world_tileset : TileSet = preload('res://tilesets/test_map.tres');
 var tile_dirt = Vector2(0,1);
 var tile_water = Vector2(4,10);
 
 func _ready():
-	world_tileset = load("res://tilesets/test_map.tres");
 	generate_world();
 
 func generate_world():

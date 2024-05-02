@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ckqhwsdgj5wtq" path="res://scenes/pause.tscn" id="5_y4e8x"]
 
 [node name="Test_Map" type="TileMap"]
+position = Vector2(-1, 0)
 tile_set = ExtResource("1_wdt78")
 format = 2
 script = ExtResource("2_uo8gq")

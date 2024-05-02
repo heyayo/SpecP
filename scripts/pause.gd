@@ -1,15 +1,15 @@
 extends Control
 
-var isPaused : bool = false;
+var _isPaused : bool = false;
 
 func _ready():
-	visible = isPaused;
+	visible = _isPaused;
 
 func _process(delta):
 	if (Input.is_action_just_pressed("Pause")):
-		isPaused = !isPaused;
-		visible = isPaused;
-		get_tree().paused = isPaused;
+		_isPaused = !_isPaused;
+		visible = _isPaused;
+		get_tree().paused = _isPaused;
 		pass
 	pass
 

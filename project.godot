@@ -14,9 +14,9 @@ config/name="Specialisation Project"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
+[autoload]
 
-window/size/always_on_top=true
+Tile_Database="*res://scripts/tile_data.gd"
 
 [input]
 

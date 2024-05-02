@@ -5,7 +5,9 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_adk7m"]
 resource_name = "STOCK_SET"
 texture = ExtResource("1_i5ajm")
+0:0/next_alternative_id = 3
 0:0/0 = 0
+0:0/0/custom_data_0 = "grass"
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -18,6 +20,7 @@ texture = ExtResource("1_i5ajm")
 10:0/0 = 0
 11:0/0 = 0
 0:1/0 = 0
+0:1/0/custom_data_0 = "dirt"
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -134,4 +137,6 @@ texture = ExtResource("1_i5ajm")
 3:15/0 = 0
 
 [resource]
+custom_data_layer_0/name = "names"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_adk7m")

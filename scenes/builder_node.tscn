@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxw8rk2ph6pv3"]
+[gd_scene load_steps=4 format=3 uid="uid://bxw8rk2ph6pv3"]
 
 [ext_resource type="Script" path="res://scripts/builder.gd" id="1_q1tf4"]
 [ext_resource type="Texture2D" uid="uid://c4behmnjvukwi" path="res://sprites/world_tileset.png" id="2_sha1y"]
+[ext_resource type="Script" path="res://scripts/info_panel.gd" id="3_5re8v"]
 
 [node name="Builder Node" type="Node2D"]
 script = ExtResource("1_q1tf4")
@@ -16,16 +17,58 @@ texture = ExtResource("2_sha1y")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="Build Menu" type="CanvasLayer" parent="."]
+[node name="Menu" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="Build Menu"]
+[node name="Build Menu" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Bar" type="Panel" parent="Menu/Build Menu"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -576.0
-offset_top = -76.0
-offset_right = 576.0
+offset_left = -20.0
+offset_top = 532.0
+offset_right = 1132.0
+offset_bottom = 608.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Info Panel" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_5re8v")
+
+[node name="ColorRect" type="ColorRect" parent="Menu/Info Panel"]
+layout_mode = 0
+offset_left = 954.0
+offset_top = 185.0
+offset_right = 1152.0
+offset_bottom = 572.0
+color = Color(0.14902, 0.14902, 0.14902, 1)
+
+[node name="Tile Name" type="Label" parent="Menu/Info Panel/ColorRect"]
+layout_mode = 0
+offset_right = 198.0
+offset_bottom = 86.0
+text = "TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Tile Description" type="Label" parent="Menu/Info Panel/ColorRect"]
+layout_mode = 0
+offset_top = 86.0
+offset_right = 198.0
+offset_bottom = 317.0
+text = "TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL "
+autowrap_mode = 2
+clip_text = true

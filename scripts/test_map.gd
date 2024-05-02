@@ -1,11 +1,11 @@
 extends TileMap
 
-var world_tileset : TileSet;
+var _worldTileset : TileSet;
 var tile_dirt = Vector2i(0,1);
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	world_tileset = load("res://tilesets/test_map.tres");
+	_worldTileset = load("res://tilesets/test_map.tres");
 	generate_world();
 
 func _process(delta):
