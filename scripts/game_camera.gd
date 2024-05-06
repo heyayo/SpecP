@@ -4,6 +4,7 @@ extends Camera2D
 @export var zoom_max : float = 4;
 @export var zoom_min : float = 1;
 @export var zoom_speed : float = 1;
+@export var zoom_scroll : float = 5;
 
 @export_category("CAMERA Controls")
 @export var cam_speed : float = 1;
@@ -16,9 +17,13 @@ func _ready():
 	zoom = Vector2(zoom_value,zoom_value);
 
 func _process(delta):
-	if (Input.is_action_pressed("ScrollIn") or Input.is_action_just_released("ScrollIn")):
+	if (Input.is_action_just_released("ScrollIn")):
+		adjust_zoom(zoom_value * zoom_scroll);
+	if (Input.is_action_just_released("ScrollOut")):
+		adjust_zoom(-zoom_value * zoom_scroll);
+	if (Input.is_action_pressed("ScrollIn")):
 		adjust_zoom(zoom_value);
-	if (Input.is_action_pressed("ScrollOut") or Input.is_action_just_released("Scrol")):
+	if (Input.is_action_pressed("ScrollOut")):
 		adjust_zoom(-zoom_value);
 	
 	var adjusted_speed = cam_speed * delta / zoom_value;

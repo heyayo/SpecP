@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxw8rk2ph6pv3"]
+[gd_scene load_steps=5 format=3 uid="uid://bxw8rk2ph6pv3"]
 
 [ext_resource type="Script" path="res://scripts/builder.gd" id="1_q1tf4"]
 [ext_resource type="Texture2D" uid="uid://c4behmnjvukwi" path="res://sprites/world_tileset.png" id="2_sha1y"]
 [ext_resource type="Script" path="res://scripts/info_panel.gd" id="3_5re8v"]
+[ext_resource type="Script" path="res://scenes/build_menu.gd" id="3_uklwy"]
 
 [node name="Builder Node" type="Node2D"]
 script = ExtResource("1_q1tf4")
@@ -21,37 +22,79 @@ region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Build Menu" type="Control" parent="Menu"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Bar" type="Panel" parent="Menu/Build Menu"]
-layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = 532.0
-offset_right = 1132.0
-offset_bottom = 608.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+script = ExtResource("3_uklwy")
+
+[node name="Options" type="Panel" parent="Menu/Build Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Actions" type="ItemList" parent="Menu/Build Menu/Options"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 160.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Description" type="Label" parent="Menu/Build Menu/Options"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Name" type="Label" parent="Menu/Build Menu/Options"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Info Panel" type="Control" parent="Menu"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
 script = ExtResource("3_5re8v")
 
 [node name="ColorRect" type="ColorRect" parent="Menu/Info Panel"]
-layout_mode = 0
-offset_left = 954.0
-offset_top = 185.0
-offset_right = 1152.0
-offset_bottom = 572.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -125.0
+offset_bottom = 245.0
+grow_horizontal = 0
+grow_vertical = 2
 color = Color(0.14902, 0.14902, 0.14902, 1)
 
 [node name="Tile Name" type="Label" parent="Menu/Info Panel/ColorRect"]
@@ -66,9 +109,33 @@ clip_text = true
 
 [node name="Tile Description" type="Label" parent="Menu/Info Panel/ColorRect"]
 layout_mode = 0
+offset_left = 10.0
 offset_top = 86.0
-offset_right = 198.0
+offset_right = 184.0
 offset_bottom = 317.0
 text = "TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL "
 autowrap_mode = 2
 clip_text = true
+
+[node name="Bar" type="Panel" parent="Menu"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -80.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Buildings" type="Button" parent="Menu/Bar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_right = 120.0
+offset_bottom = 40.0
+grow_vertical = 2
+text = "Buildings"
