@@ -1,15 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://btuge7ek766cb"]
 
-[ext_resource type="TileSet" uid="uid://ssqqeijs20o6" path="res://tilesets/test_map.tres" id="1_wdt78"]
+[ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="1_d1qqc"]
 [ext_resource type="Script" path="res://scripts/world_generator.gd" id="2_uo8gq"]
 [ext_resource type="PackedScene" uid="uid://bcdlppkrq0bm6" path="res://scenes/game_camera.tscn" id="3_h4kp3"]
 [ext_resource type="PackedScene" uid="uid://bxw8rk2ph6pv3" path="res://scenes/builder_node.tscn" id="4_kglqv"]
 [ext_resource type="PackedScene" uid="uid://ckqhwsdgj5wtq" path="res://scenes/pause.tscn" id="5_y4e8x"]
 
-[node name="Test_Map" type="TileMap"]
+[node name="World" type="TileMap"]
 position = Vector2(-1, 0)
-tile_set = ExtResource("1_wdt78")
+tile_set = ExtResource("1_d1qqc")
 format = 2
+layer_0/name = "Ground"
+layer_1/name = "Foliage"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Structure"
+layer_2/tile_data = PackedInt32Array()
 script = ExtResource("2_uo8gq")
 world_size = Vector2i(256, 256)
 noise_scaling = 1.25

@@ -21,9 +21,9 @@ func _process(delta):
 		adjust_zoom(zoom_value * zoom_scroll);
 	if (Input.is_action_just_released("ScrollOut")):
 		adjust_zoom(-zoom_value * zoom_scroll);
-	if (Input.is_action_pressed("ScrollIn")):
+	if (Input.is_action_pressed("ZoomIn")):
 		adjust_zoom(zoom_value);
-	if (Input.is_action_pressed("ScrollOut")):
+	if (Input.is_action_pressed("ZoomOut")):
 		adjust_zoom(-zoom_value);
 	
 	var adjusted_speed = cam_speed * delta / zoom_value;

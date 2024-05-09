@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/builder.gd" id="1_q1tf4"]
 [ext_resource type="Texture2D" uid="uid://c4behmnjvukwi" path="res://sprites/world_tileset.png" id="2_sha1y"]
 [ext_resource type="Script" path="res://scripts/info_panel.gd" id="3_5re8v"]
-[ext_resource type="Script" path="res://scenes/build_menu.gd" id="3_uklwy"]
+[ext_resource type="Script" path="res://scripts/build_menu.gd" id="3_kl0cm"]
 
 [node name="Builder Node" type="Node2D"]
 script = ExtResource("1_q1tf4")
@@ -33,7 +33,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_uklwy")
+script = ExtResource("3_kl0cm")
 
 [node name="Options" type="Panel" parent="Menu/Build Menu"]
 layout_mode = 1
@@ -49,7 +49,7 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Actions" type="ItemList" parent="Menu/Build Menu/Options"]
+[node name="Actions" type="ScrollContainer" parent="Menu/Build Menu/Options"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -58,16 +58,44 @@ offset_top = -150.0
 offset_right = 160.0
 offset_bottom = 150.0
 grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Contents" type="VBoxContainer" parent="Menu/Build Menu/Options/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
 
 [node name="Description" type="Label" parent="Menu/Build Menu/Options"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -247.0
+offset_right = 129.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"
+autowrap_mode = 2
+clip_text = true
 
 [node name="Name" type="Label" parent="Menu/Build Menu/Options"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_right = 129.0
+offset_bottom = 53.0
+grow_horizontal = 2
+text = "TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
 
 [node name="Info Panel" type="Control" parent="Menu"]
 layout_mode = 3
@@ -139,3 +167,5 @@ offset_right = 120.0
 offset_bottom = 40.0
 grow_vertical = 2
 text = "Buildings"
+
+[connection signal="pressed" from="Menu/Bar/Buildings" to="." method="_on_buildings_pressed"]

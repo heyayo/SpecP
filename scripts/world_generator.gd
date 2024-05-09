@@ -1,5 +1,7 @@
 extends TileMap
 
+class_name WORLD_MAP;
+
 @export_category("Configuration")
 @export var world_size : Vector2i = Vector2i(10,10);
 @export var noise_scaling : float = 5;
@@ -8,9 +10,15 @@ extends TileMap
 	set(value):
 		regenerate_world();
 
-@onready var world_tileset : TileSet = preload('res://tilesets/test_map.tres');
-var tile_dirt = Vector2(0,1);
-var tile_water = Vector2(4,10);
+@onready var world_tileset : TileSet = preload('res://tilesets/set.tres');
+var tile_grass = Vector2(1,0);
+
+# Tilemap Layers
+enum Layers {
+	Ground,
+	Foliage,
+	Structure
+}
 
 func _ready():
 	generate_world();
@@ -21,7 +29,6 @@ func generate_world():
 	noise_gen.seed = 1;
 	noise_gen.noise_type = FastNoiseLite.TYPE_PERLIN;
 	
-	#print("Sea Level: " + str(sea_level));
 	var world_x_half = world_size.x/2;
 	var world_y_half = world_size.y/2;
 	for x in range(-world_x_half, world_x_half):
@@ -29,11 +36,11 @@ func generate_world():
 			var noise_value = noise_gen.get_noise_2d(x / noise_scaling,y / noise_scaling);
 			var tile_pos = Vector2i(x,y);
 			
-			if (noise_value > sea_level):
-				set_cell(0,tile_pos,0,tile_dirt);
-			else:
-				set_cell(0,tile_pos,0,tile_water);
-			pass
+			set_cell(Layers.Ground,tile_pos,0,grass_patches(noise_value));
+
+# TODO
+func grass_patches(level : float) -> Vector2:
+	return tile_grass;
 	pass
 
 func clear_all():
