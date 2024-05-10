@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Tile_Database="*res://scripts/tile_data.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
+
 [input]
 
 ScrollIn={
