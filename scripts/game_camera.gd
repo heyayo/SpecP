@@ -13,7 +13,7 @@ extends Camera2D
 var zoom_value : float = 1;
 
 func _ready():
-	zoom_value = zoom_min;
+	zoom_value = (zoom_max - zoom_min) / 2;
 	zoom = Vector2(zoom_value,zoom_value);
 
 func _process(delta):

@@ -11,6 +11,10 @@ var _buttonPrefab : PackedScene = preload("res://scenes/ui_components/action_but
 
 func _ready():
 	construct_buildings();
+	
+	# Clear out the Labels
+	_bname.text = "";
+	_desc.text = "";
 	pass;
 
 # TODO Make Buttons expand to fit parent
@@ -27,5 +31,8 @@ func construct_buildings() -> void:
 
 func build_callback(building : Tile_Database.Structure) -> void:
 	_builder.start_build_action(building);
-	print("Button Called Back");
+	_bname.text = building.bname;
+	_desc.text = building.desc;
+	visible = false;
+	print_rich("[color=pink]Button Called Back[/color]");
 	pass

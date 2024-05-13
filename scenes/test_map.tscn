@@ -20,11 +20,12 @@ world_size = Vector2i(256, 256)
 noise_scaling = 1.25
 sea_level = -0.25
 
+[node name="Builder Node" parent="." instance=ExtResource("4_kglqv")]
+
 [node name="Game Camera" parent="." instance=ExtResource("3_h4kp3")]
+zoom = Vector2(4, 4)
 zoom_min = 0.5
 cam_speed = 250.0
 cam_speed_multiplier = 3.0
-
-[node name="Builder Node" parent="." instance=ExtResource("4_kglqv")]
 
 [node name="Pause" parent="." instance=ExtResource("5_y4e8x")]

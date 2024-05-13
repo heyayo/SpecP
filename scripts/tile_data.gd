@@ -8,19 +8,15 @@ class TileInfo:
 	func _init(n : String, d : String):
 		tile_name = n;
 		desc = d;
-		pass
 
 class Structure:
 	var bname : String;
-	var pattern : TileMapPattern;
-	var cost : int;
-	var build_time : float;
-	func _init(n : String, p : TileMapPattern, c : int, t : float):
+	var desc : String;
+	var prefab : PackedScene;
+	func _init(n : String, d : String, p : PackedScene):
 		bname = n;
-		pattern = p;
-		cost = c;
-		build_time = t;
-		pass
+		desc = d;
+		prefab = p;
 
 var TILE_INFO_LOOKUP = {
 	"dirt":TileInfo.new("Dirt","This is Dirt"),
@@ -29,5 +25,6 @@ var TILE_INFO_LOOKUP = {
 }
 
 var BUILDINGS_LIST = [
-	Structure.new("Room",_tileSet.get_pattern(0),10,5),
+	Structure.new("House", "A Basic House for 4 People", preload("res://buildings/house.tscn")),
+	Structure.new("Bank", "Stores the Colony's Gold", preload("res://buildings/bank.tscn")),
 ];

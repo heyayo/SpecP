@@ -38,7 +38,7 @@ func generate_world():
 			
 			set_cell(Layers.Ground,tile_pos,0,grass_patches(noise_value));
 
-# TODO
+# TODO Redo Grass Patches Generation
 func grass_patches(level : float) -> Vector2:
 	return tile_grass;
 	pass

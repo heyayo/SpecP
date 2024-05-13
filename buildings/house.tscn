@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgft0idoad8bs"]
+
+[ext_resource type="Script" path="res://scripts/buildings/housing.gd" id="1_e4gq1"]
+[ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="1_mh8lm"]
+[ext_resource type="PackedScene" uid="uid://bdvtuwf8nd4rh" path="res://buildings/construction_mark.tscn" id="3_3itoa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07roi"]
+size = Vector2(48, 48)
+
+[node name="House" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_e4gq1")
+time = 2.0
+tile_size = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_07roi")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(-24, 24)
+tile_set = ExtResource("1_mh8lm")
+format = 2
+layer_0/tile_data = PackedInt32Array(-196608, 0, 4, -131072, 0, 5, -65536, 0, 6, -196607, 65536, 4, -131071, 65536, 5, -65535, 65536, 7, -196606, 131072, 4, -131070, 131072, 5, -65534, 196608, 6)
+
+[node name="Construction Mark" parent="." instance=ExtResource("3_3itoa")]
+position = Vector2(0, 48)

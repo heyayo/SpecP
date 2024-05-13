@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtak2egvhoi6w"]
+
+[ext_resource type="Script" path="res://scripts/buildings/storage.gd" id="1_i8byw"]
+[ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="2_epum4"]
+[ext_resource type="PackedScene" uid="uid://bdvtuwf8nd4rh" path="res://buildings/construction_mark.tscn" id="3_kdv8k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07roi"]
+size = Vector2(48, 48)
+
+[node name="Bank" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_i8byw")
+time = 8.0
+tile_size = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_07roi")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(-24, 24)
+tile_set = ExtResource("2_epum4")
+format = 2
+layer_0/tile_data = PackedInt32Array(-196609, 0, 8, 3, 131072, 10, -262141, 131072, 8, -262144, 65536, 8, -262143, 65536, 8, -262142, 65536, 8, -196605, 131072, 9, -131069, 131072, 9, -65533, 131072, 9, 0, 65536, 10, 1, 65536, 10, 2, 65536, 10, -196608, 65536, 9, -131072, 65536, 9, -65536, 65536, 9, -65535, 65536, 9, -65534, 65536, 9, -131070, 65536, 9, -196606, 65536, 9, -196607, 65536, 9, -131071, 65536, 9, -131073, 0, 9, -65537, 0, 9, -1, 0, 9, 65535, 0, 10)
+
+[node name="Construction Mark" parent="." instance=ExtResource("3_kdv8k")]
+position = Vector2(0, 64)
