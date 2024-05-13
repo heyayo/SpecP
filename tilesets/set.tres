@@ -1,14 +1,15 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bslh4lsa477sk"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bslh4lsa477sk"]
+
+[ext_resource type="Texture2D" uid="uid://wuj8evisudja" path="res://sprites/kenney_tiny-town/Tilemap/tilemap_packed.png" id="1_p1d3u"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_1ck7y"]
 tile_data = PackedInt32Array(0, 0, 4, 65536, 0, 5, 131072, 0, 6, 1, 65536, 4, 65537, 65536, 5, 131073, 65536, 7, 2, 131072, 4, 65538, 131072, 5, 131074, 196608, 6)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_begte"]
 resource_name = "Environment"
+texture = ExtResource("1_p1d3u")
 0:0/0 = 0
-0:0/0/custom_data_0 = "grass"
 1:0/0 = 0
-1:0/0/custom_data_0 = "grass"
 2:0/0 = 0
 3:0/0 = 0
 4:0/0 = 0
@@ -33,7 +34,6 @@ resource_name = "Environment"
 11:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
-1:2/0/custom_data_0 = "dirt"
 2:2/0 = 0
 3:2/0 = 0
 4:2/0 = 0
@@ -52,7 +52,6 @@ resource_name = "Environment"
 5:3/0 = 0
 6:3/0 = 0
 7:3/0 = 0
-7:3/0/custom_data_0 = "cobble"
 8:3/0 = 0
 9:3/0 = 0
 10:3/0 = 0
