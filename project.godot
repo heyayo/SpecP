@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Tile_Database="*res://scripts/tile_data.gd"
 Common="*res://scripts/common.gd"
+WorldStorage="*res://scripts/world_storage.gd"
 
 [editor_plugins]
 

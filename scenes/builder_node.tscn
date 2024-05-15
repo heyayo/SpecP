@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxw8rk2ph6pv3"]
+[gd_scene load_steps=5 format=3 uid="uid://bxw8rk2ph6pv3"]
 
 [ext_resource type="Script" path="res://scripts/building_node.gd" id="1_i7c5b"]
 [ext_resource type="Texture2D" uid="uid://darhcekjclnx2" path="res://sprites/selects/PNG/White/crosshair026.png" id="2_pe6kf"]
 [ext_resource type="Script" path="res://scripts/info_panel.gd" id="3_5re8v"]
 [ext_resource type="Script" path="res://scripts/build_menu.gd" id="3_kl0cm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_41035"]
-size = Vector2(16, 16)
 
 [node name="Builder Node" type="Node2D"]
 script = ExtResource("1_i7c5b")
@@ -24,6 +21,20 @@ position = Vector2(2.38419e-07, 7.15256e-07)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_pe6kf")
 region_rect = Rect2(71, 280, 56, 56)
+
+[node name="DragSelection" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.988235, 0, 0.156863, 0.588235)
 
 [node name="Menu" type="CanvasLayer" parent="."]
 
@@ -174,12 +185,5 @@ offset_right = 120.0
 offset_bottom = 40.0
 grow_vertical = 2
 text = "Buildings"
-
-[node name="Space Checker" type="Area2D" parent="."]
-collision_layer = 0
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Space Checker"]
-shape = SubResource("RectangleShape2D_41035")
 
 [connection signal="pressed" from="Menu/Bar/Buildings" to="." method="_on_buildings_pressed"]

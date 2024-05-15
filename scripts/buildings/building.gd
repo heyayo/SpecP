@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 
 class_name Building;
 
@@ -11,3 +11,7 @@ class_name Building;
 
 @export_category("Selection Properties")
 @export var tile_size : int;
+
+func _notification(what):
+	if (what == NOTIFICATION_PREDELETE):
+		WorldStorage.unregister_structure(global_position);

@@ -16,5 +16,6 @@ func _process(delta):
 
 func _on_button_pressed():
 	# TODO Replace with return to main menu
+	# TODO Differentiate Buttons
 	get_tree().quit();
 	pass

@@ -21,6 +21,7 @@ noise_scaling = 1.25
 sea_level = -0.25
 
 [node name="Builder Node" parent="." instance=ExtResource("4_kglqv")]
+unique_name_in_owner = true
 
 [node name="Game Camera" parent="." instance=ExtResource("3_h4kp3")]
 zoom = Vector2(4, 4)
