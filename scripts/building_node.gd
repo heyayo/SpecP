@@ -16,6 +16,8 @@ var _constructionMark : PackedScene = preload("res://buildings/construction_mark
 @onready var _dragSelection : ColorRect = $DragSelection;
 @onready var _buildMenu : Control = $"Menu/Build Menu";
 @onready var _infoPanel : Info_Panel = $"Menu/Info Panel";
+@onready var _dragCount : Label = $Menu/Stats/SelectionCount;
+@onready var _dragCollections : Node2D = $"Drag Collections";
 @onready var _tileMap : TileMap = get_tree().root.get_node("World");
 
 var _cAction : ACTIONS = ACTIONS.NONE;
@@ -45,7 +47,12 @@ func _ready():
 	_selectSprite.visible = hasSelected;
 	_infoPanel.visible = false;
 	_buildMenu.visible = false;
+	_dragSelection.visible = false;
+	_dragCollections.visible = false;
 	hasSelected = false;
+	isDragging = false;
+	
+	_dragCount.text = "";
 
 func _process(delta):
 	# Click Processing
@@ -118,6 +125,7 @@ func deselect_tile() -> void:
 	_selectSprite.visible = hasSelected;
 	_dragSelection.visible = false;
 	_infoPanel.visible = false;
+	clear_dragged();
 
 func do_drag(distance : Vector2i) -> void:
 	isDragging = true;
@@ -139,6 +147,22 @@ func collect_dragged() -> void:
 		for y in range(_originalTilePosition.y,_tilePos.y + dir):
 			if (WorldStorage.register.has(Vector2i(x,y))):
 				_collectedStructures.push_back(WorldStorage.register.get(Vector2i(x,y)));
+
+func highlight_dragged() -> void:
+	for i : Node2D in _collectedStructures:
+		var highlight : Sprite2D = _highlightSprite.duplicate();
+		_dragCollections.add_child(highlight);
+		highlight.global_position = i.global_position;
+		if (i is Building):
+			highlight.scale *= Vector2(i.tile_size,i.tile_size);
+	_dragCount.visible = true;
+	_dragCount.text = "%s Objects Selected" % _collectedStructures.size();
+
+func clear_dragged() -> void:
+	_collectedStructures.clear();
+	for highlights : Node2D in _dragCollections.get_children():
+		highlights.queue_free();
+	_dragCount.visible = false;
 
 #region Click Handles
 func left_click_handle(hover_pos : Vector2i, tile_pos : Vector2i) -> void:
@@ -178,6 +202,7 @@ func left_drag_end_handle() -> void:
 	stop_drag();
 	_collectedStructures.clear();
 	collect_dragged();
+	highlight_dragged();
 	print(_collectedStructures);
 #endregion
 

@@ -186,4 +186,26 @@ offset_bottom = 40.0
 grow_vertical = 2
 text = "Buildings"
 
+[node name="Stats" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="SelectionCount" type="Label" parent="Menu/Stats"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_bottom = 32.0
+grow_horizontal = 0
+text = "TESTTEST"
+horizontal_alignment = 2
+
+[node name="Drag Collections" type="Node2D" parent="."]
+
 [connection signal="pressed" from="Menu/Bar/Buildings" to="." method="_on_buildings_pressed"]
