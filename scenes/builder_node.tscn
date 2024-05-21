@@ -1,40 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxw8rk2ph6pv3"]
+[gd_scene load_steps=8 format=3 uid="uid://bxw8rk2ph6pv3"]
 
 [ext_resource type="Script" path="res://scripts/building_node.gd" id="1_i7c5b"]
 [ext_resource type="Texture2D" uid="uid://darhcekjclnx2" path="res://sprites/selects/PNG/White/crosshair026.png" id="2_pe6kf"]
 [ext_resource type="Script" path="res://scripts/info_panel.gd" id="3_5re8v"]
 [ext_resource type="Script" path="res://scripts/build_menu.gd" id="3_kl0cm"]
+[ext_resource type="Script" path="res://scripts/selector.gd" id="5_on3lo"]
+[ext_resource type="Texture2D" uid="uid://bo7cl3kgk0iti" path="res://sprites/blank.jpg" id="6_lrg40"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dhki"]
+size = Vector2(16, 16)
 
 [node name="Builder Node" type="Node2D"]
 script = ExtResource("1_i7c5b")
 
-[node name="Select" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(2.38419e-07, 7.15256e-07)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_pe6kf")
-region_rect = Rect2(71, 280, 56, 56)
-
 [node name="Highlight" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(2.38419e-07, 7.15256e-07)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_pe6kf")
 region_rect = Rect2(71, 280, 56, 56)
-
-[node name="DragSelection" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.988235, 0, 0.156863, 0.588235)
 
 [node name="Menu" type="CanvasLayer" parent="."]
 
@@ -206,6 +189,22 @@ grow_horizontal = 0
 text = "TESTTEST"
 horizontal_alignment = 2
 
-[node name="Drag Collections" type="Node2D" parent="."]
+[node name="Selector" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("5_on3lo")
+
+[node name="Selection Area" type="CollisionShape2D" parent="Selector"]
+shape = SubResource("RectangleShape2D_2dhki")
+
+[node name="Visible Area" type="Sprite2D" parent="Selector"]
+modulate = Color(0.5, 0.65, 1, 0.6)
+z_index = 5
+position = Vector2(-2.38419e-07, 2.38419e-07)
+scale = Vector2(16, 16)
+texture = ExtResource("6_lrg40")
+
+[node name="Highlights" type="Node2D" parent="."]
 
 [connection signal="pressed" from="Menu/Bar/Buildings" to="." method="_on_buildings_pressed"]
+[connection signal="body_entered" from="Selector" to="Selector" method="_on_body_entered"]
+[connection signal="body_exited" from="Selector" to="Selector" method="_on_body_exited"]

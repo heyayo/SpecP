@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://btuge7ek766cb"]
+[gd_scene load_steps=8 format=3 uid="uid://btuge7ek766cb"]
 
 [ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="1_d1qqc"]
 [ext_resource type="Script" path="res://scripts/world_generator.gd" id="2_uo8gq"]
 [ext_resource type="PackedScene" uid="uid://bcdlppkrq0bm6" path="res://scenes/game_camera.tscn" id="3_h4kp3"]
 [ext_resource type="PackedScene" uid="uid://bxw8rk2ph6pv3" path="res://scenes/builder_node.tscn" id="4_kglqv"]
 [ext_resource type="PackedScene" uid="uid://ckqhwsdgj5wtq" path="res://scenes/pause.tscn" id="5_y4e8x"]
+[ext_resource type="PackedScene" uid="uid://bgft0idoad8bs" path="res://buildings/house.tscn" id="6_mmc4r"]
+[ext_resource type="PackedScene" uid="uid://dtak2egvhoi6w" path="res://buildings/bank.tscn" id="7_x43oa"]
 
 [node name="World" type="TileMap"]
 position = Vector2(-1, 0)
@@ -22,6 +24,7 @@ sea_level = -0.25
 
 [node name="Builder Node" parent="." instance=ExtResource("4_kglqv")]
 unique_name_in_owner = true
+position = Vector2(1, 0)
 
 [node name="Game Camera" parent="." instance=ExtResource("3_h4kp3")]
 zoom = Vector2(4, 4)
@@ -30,3 +33,12 @@ cam_speed = 250.0
 cam_speed_multiplier = 3.0
 
 [node name="Pause" parent="." instance=ExtResource("5_y4e8x")]
+
+[node name="House" parent="." instance=ExtResource("6_mmc4r")]
+position = Vector2(-31, 32)
+
+[node name="House2" parent="." instance=ExtResource("6_mmc4r")]
+position = Vector2(33, 32)
+
+[node name="Bank" parent="." instance=ExtResource("7_x43oa")]
+position = Vector2(-47, 96)

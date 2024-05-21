@@ -29,14 +29,15 @@ func generate_world():
 	noise_gen.seed = 1;
 	noise_gen.noise_type = FastNoiseLite.TYPE_PERLIN;
 	
+	# TODO World Generation
 	var world_x_half = world_size.x/2;
 	var world_y_half = world_size.y/2;
 	for x in range(-world_x_half, world_x_half):
 		for y in range(-world_y_half,world_y_half):
-			var noise_value = noise_gen.get_noise_2d(x / noise_scaling,y / noise_scaling);
+			#var noise_value = noise_gen.get_noise_2d(x / noise_scaling,y / noise_scaling);
 			var tile_pos = Vector2i(x,y);
 			
-			set_cell(Layers.Ground,tile_pos,0,grass_patches(noise_value));
+			set_cell(Layers.Ground,tile_pos,0,grass_patches(0));
 
 # TODO Redo Grass Patches Generation
 func grass_patches(level : float) -> Vector2:
