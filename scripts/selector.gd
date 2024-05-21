@@ -5,6 +5,7 @@ class_name Selector;
 @onready var _collection : Node2D = $"../Highlights";
 @onready var _highlight : Sprite2D = $"../Highlight";
 @onready var _collision_shape : CollisionShape2D = $"Selection Area";
+@onready var _stat : Label = $"../Menu/Stats/SelectionCount";
 
 var start_position : Vector2;
 
@@ -13,6 +14,7 @@ var selection : Array:
 
 func _ready():
 	enable();
+	_stat.text = "0 Selected";
 
 func enable():
 	visible = true;
@@ -35,7 +37,7 @@ func do_selection(hover : Vector2) -> void:
 	global_position = start_position + distance/2;
 
 func highlight_selection() -> void:
-	print("Selected Count %s" % selection.size());
+	_stat.text = "%s Selected" % selection.size();
 	for s : Building in selection:
 		var dupe = _highlight.duplicate();
 		_collection.add_child(dupe);

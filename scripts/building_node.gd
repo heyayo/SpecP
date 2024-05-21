@@ -13,7 +13,6 @@ var _constructionMark : PackedScene = preload("res://buildings/construction_mark
 
 @onready var _buildMenu : Control = $"Menu/Build Menu";
 @onready var _infoPanel : Info_Panel = $"Menu/Info Panel";
-@onready var _dragCount : Label = $Menu/Stats/SelectionCount;
 @onready var _highlightSprite : Sprite2D = $Highlight;
 @onready var _dragSelector : Selector = $Selector;
 @onready var _tileMap : TileMap = get_tree().root.get_node("World");
@@ -37,7 +36,6 @@ func _ready():
 	_buildMenu.visible = false;
 	hasSelected = false;
 	
-	_dragCount.text = "";
 	_dragSelector.disable();
 
 func _process(delta):
