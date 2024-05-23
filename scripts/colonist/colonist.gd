@@ -33,6 +33,11 @@ func _physics_process(_delta):
 func interact():
 	_halt = true;
 	_anim.interact();
+	_worker.interact();
 
 func _on_animated_sprite_2d_animation_finished():
 	_halt = false;
+
+# TODO LIST
+# Inventory System
+# State Machine

@@ -16,6 +16,7 @@ var bad_color : Color = Color(1,0,0,0.5);
 func build_structure(structure : Construct, pos : Vector2i) -> void:
 	var ns : Building = template.instantiate().make(structure);
 	var mark : Construction_Mark = construction_mark.instantiate();
+	var wt : Work_Target = ns.get_node("Work Target").make(Callable(mark,"tick_construction"));
 	ns.add_child(mark);
 	add_child(ns);
 	ns.global_position = pos;

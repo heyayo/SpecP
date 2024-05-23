@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Construct" load_steps=3 format=3 uid="uid://cdp6nb7ks4ewr"]
+[gd_resource type="Resource" script_class="Construct" load_steps=4 format=3 uid="uid://cdp6nb7ks4ewr"]
 
 [ext_resource type="Script" path="res://buildings/scripts/construct.gd" id="1_sf4ms"]
+[ext_resource type="Script" path="res://buildings/scripts/housing.gd" id="2_br78f"]
 [ext_resource type="Texture2D" uid="uid://cxfv45spjfkgj" path="res://tools/res/output.png" id="2_v47ut"]
 
 [resource]
@@ -9,4 +10,5 @@ structure_name = "Small Home"
 structure_description = "A Small Home for your colonist"
 tile_size = 3
 texture = ExtResource("2_v47ut")
-build_cost = 300
+script_type = ExtResource("2_br78f")
+build_cost = 15

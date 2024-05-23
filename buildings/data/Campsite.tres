@@ -9,4 +9,4 @@ structure_name = "Campsite"
 structure_description = "A small campfire meant for cooking and resting"
 tile_size = 5
 texture = ExtResource("2_7y6pl")
-build_cost = 120
+build_cost = 4

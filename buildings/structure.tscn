@@ -1,14 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2p2u8xjmjd6a"]
+[gd_scene load_steps=4 format=3 uid="uid://d2p2u8xjmjd6a"]
 
 [ext_resource type="Script" path="res://buildings/scripts/structure.gd" id="1_bnbys"]
+[ext_resource type="PackedScene" uid="uid://bbhsgdm58okqc" path="res://scenes/work_target.tscn" id="2_orw8q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bxbs"]
 size = Vector2(16, 16)
 
-[node name="Structure" type="StaticBody2D"]
+[node name="Structure" type="StaticBody2D" groups=["Structure"]]
 script = ExtResource("1_bnbys")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1bxbs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Work Target" parent="." instance=ExtResource("2_orw8q")]

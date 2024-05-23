@@ -30,7 +30,7 @@ func tick_construction(w : int = 1):
 func finish_construction():
 	building.remove_from_group(Common.group_construction);
 	building.add_to_group(Common.group_structure);
-	# TODO Call Structure's Script to finish
+	building.construct();
 
 func update_ui(p : float):
 	progress.scale = Vector2(p,1);

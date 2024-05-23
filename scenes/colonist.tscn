@@ -381,10 +381,13 @@ script = ExtResource("3_1flqx")
 
 [node name="Reach" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Reach"]
 shape = SubResource("CircleShape2D_h7u60")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Reach" to="Worker" method="in_range"]
+[connection signal="area_exited" from="Reach" to="Worker" method="out_range"]
 [connection signal="body_entered" from="Reach" to="Worker" method="in_range"]
 [connection signal="body_exited" from="Reach" to="Worker" method="out_range"]
