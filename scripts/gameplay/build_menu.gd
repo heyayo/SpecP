@@ -6,7 +6,6 @@ extends Control
 @onready var _desc : Label = $Options/Description
 @onready var _bname : Label = $Options/Name
 @onready var _preview : TextureRect = $Options/Preview;
-# TODO Preview Picture
 
 # TODO Check if a prefab is needed instead of a normal node creation
 var _buttonPrefab : PackedScene = preload("res://scenes/ui_components/action_button.tscn");

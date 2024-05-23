@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bxw8rk2ph6pv3"]
 
-[ext_resource type="Script" path="res://scripts/building_node.gd" id="1_i7c5b"]
+[ext_resource type="Script" path="res://scripts/gameplay/building_node.gd" id="1_i7c5b"]
 [ext_resource type="Texture2D" uid="uid://darhcekjclnx2" path="res://sprites/selects/PNG/White/crosshair026.png" id="2_pe6kf"]
-[ext_resource type="Script" path="res://scripts/info_panel.gd" id="3_5re8v"]
-[ext_resource type="Script" path="res://scripts/build_menu.gd" id="3_kl0cm"]
-[ext_resource type="Script" path="res://scripts/selector.gd" id="5_on3lo"]
+[ext_resource type="Script" path="res://scripts/gameplay/info_panel.gd" id="3_5re8v"]
+[ext_resource type="Script" path="res://scripts/gameplay/build_menu.gd" id="3_kl0cm"]
+[ext_resource type="Script" path="res://scripts/gameplay/selector.gd" id="5_on3lo"]
 [ext_resource type="Texture2D" uid="uid://bo7cl3kgk0iti" path="res://sprites/blank.jpg" id="6_lrg40"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dhki"]

@@ -1,5 +1,7 @@
 extends Camera2D
 
+class_name Camera_Controller;
+
 @export_category("ZOOM Controls")
 @export var zoom_max : float = 4;
 @export var zoom_min : float = 1;
@@ -11,6 +13,7 @@ extends Camera2D
 @export var cam_speed_multiplier : float = 2;
 
 var zoom_value : float = 1;
+var locked : bool = false;
 
 func _ready():
 	zoom_value = (zoom_max - zoom_min) / 2;
@@ -26,6 +29,7 @@ func _process(delta):
 	if (Input.is_action_pressed("ZoomOut")):
 		adjust_zoom(-zoom_value);
 	
+	if (locked): return;
 	var adjusted_speed = cam_speed * delta / zoom_value;
 	if (Input.is_action_pressed("Sprint")):
 		adjusted_speed *= cam_speed_multiplier;

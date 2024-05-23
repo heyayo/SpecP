@@ -75,7 +75,6 @@ func do_build_action() -> void:
 
 #region Tile Select Functions
 func select_tile(hover_pos : Vector2, tile_pos) -> void:
-	# TODO Intercept Buildings
 	_dragSelector.begin_selection(get_global_mouse_position());
 	_dragSelector.enable();
 	
@@ -97,7 +96,6 @@ func left_click_handle(hover_pos : Vector2i, tile_pos : Vector2i) -> void:
 	_highlightSprite.visible = false;
 	match (_cAction):
 		ACTIONS.BUILD:
-			# TODO BUILD ACTION
 			if (_buildingManager.good()):
 				_buildingManager.build_structure(_structure,hover_pos);
 				stop_action();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://btuge7ek766cb"]
+[gd_scene load_steps=10 format=3 uid="uid://btuge7ek766cb"]
 
 [ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="1_d1qqc"]
 [ext_resource type="Script" path="res://scripts/world_generator.gd" id="2_uo8gq"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d2p2u8xjmjd6a" path="res://buildings/structure.tscn" id="7_coptu"]
 [ext_resource type="Resource" uid="uid://cdp6nb7ks4ewr" path="res://buildings/data/Small Home.tres" id="8_4q03t"]
 [ext_resource type="PackedScene" uid="uid://dg5nhs2wjaxri" path="res://scenes/building_manager.tscn" id="8_xx6ew"]
+[ext_resource type="PackedScene" uid="uid://c7t0cjtqhe45b" path="res://scenes/colonist.tscn" id="9_o5oi1"]
 
 [node name="World" type="TileMap"]
 position = Vector2(-1, 0)
@@ -29,6 +30,7 @@ unique_name_in_owner = true
 position = Vector2(1, 0)
 
 [node name="Game Camera" parent="." instance=ExtResource("3_h4kp3")]
+unique_name_in_owner = true
 zoom = Vector2(4, 4)
 zoom_min = 0.5
 cam_speed = 250.0
@@ -45,3 +47,7 @@ structure_data = ExtResource("8_4q03t")
 [node name="Structure2" parent="Building Manager" instance=ExtResource("7_coptu")]
 position = Vector2(25, 24)
 structure_data = ExtResource("8_4q03t")
+
+[node name="Colonist" parent="." instance=ExtResource("9_o5oi1")]
+position = Vector2(-63, 8)
+speed = 50.0

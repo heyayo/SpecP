@@ -18,11 +18,14 @@ func _ready():
 	body.collision_mask = 0;
 	update_ui(0);
 
-func tick_construction():
-	work = clamp(work + 1,0,building.structure_data.build_cost);
+func tick_construction(w : int = 1):
+	work = clamp(work + w,0,building.structure_data.build_cost);
 	var p : float = work as float / building.structure_data.build_cost as float;
 	p = clamp(p,0,1);
 	update_ui(p);
+	if (work >= building.structure_data.build_cost):
+		finish_construction();
+		queue_free();
 
 func finish_construction():
 	building.remove_from_group(Common.group_construction);

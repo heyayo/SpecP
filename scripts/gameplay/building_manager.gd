@@ -50,11 +50,9 @@ var _overlaps : Array[Node2D] = [];
 func preview_enter(body):
 	if (_overlaps.find(body) >= 0): return;
 	_overlaps.push_back(body);
-	print("ENTER: %s" % body);
 
 func preview_exit(body):
 	var index : int = _overlaps.find(body);
 	if (index < 0): return;
 	_overlaps.remove_at(index);
-	print("LEAVE: %s" % body);
 #endregion
