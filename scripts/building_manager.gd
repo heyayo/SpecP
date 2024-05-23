@@ -27,13 +27,14 @@ func preview_structure(structure : Construct) -> void:
 	preview_sprite.texture = structure.texture;
 	var size = 16 * structure.tile_size;
 	var rect : RectangleShape2D = collision_shape.shape;
+	size -= 1;
 	rect.size = Vector2(size,size);
 	preview.visible = true;
-	collision_shape.disabled = false;
+	collision_shape.set_deferred("disabled",false);
 
 func end_preview() -> void:
 	preview.visible = false;
-	collision_shape.disabled = true;
+	collision_shape.set_deferred("disabled",true);
 
 func update_preview(pos : Vector2i):
 	preview.global_position = pos;
@@ -47,11 +48,13 @@ func _ready():
 var _overlaps : Array[Node2D] = [];
 
 func preview_enter(body):
-	if (_overlaps.find(body)): return;
+	if (_overlaps.find(body) >= 0): return;
 	_overlaps.push_back(body);
+	print("ENTER: %s" % body);
 
 func preview_exit(body):
 	var index : int = _overlaps.find(body);
 	if (index < 0): return;
 	_overlaps.remove_at(index);
+	print("LEAVE: %s" % body);
 #endregion

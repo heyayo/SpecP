@@ -9,8 +9,10 @@ size = Vector2(16, 16)
 script = ExtResource("1_3hmkq")
 
 [node name="Preview" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Preview"]
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Preview"]
 shape = SubResource("RectangleShape2D_npoho")
