@@ -10,6 +10,10 @@ const _badColor = Color(1,0,0,0.5);
 
 var _overlaps : Array;
 
+func make(builder : Builder, size : Vector2):
+	builder_node = builder;
+	scale = size;
+
 func _ready():
 	building.modulate = _goodColor;
 

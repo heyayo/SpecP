@@ -5,8 +5,10 @@ extends Control
 @onready var _actions : VBoxContainer = $Options/Actions/Contents
 @onready var _desc : Label = $Options/Description
 @onready var _bname : Label = $Options/Name
+@onready var _preview : TextureRect = $Options/Preview;
 # TODO Preview Picture
 
+# TODO Check if a prefab is needed instead of a normal node creation
 var _buttonPrefab : PackedScene = preload("res://scenes/ui_components/action_button.tscn");
 
 func _ready():
@@ -19,20 +21,19 @@ func _ready():
 
 # TODO Make Buttons expand to fit parent
 func construct_buildings() -> void:
-	var buildings_num : int = Tile_Database.BUILDINGS_LIST.size();
-	for i in range(buildings_num):
-		var data : Tile_Database.Structure = Tile_Database.BUILDINGS_LIST[i];
+	for data : Construct in Common.Buildings:
 		var button : Button = _buttonPrefab.instantiate();
-		button.text = data.bname;
+		button.text = data.structure_name;
 		_actions.add_child(button);
 		button.connect("pressed",build_callback.bind(data));
-		pass
-	pass;
+		button.connect("mouse_entered",hover_callback.bind(data));
 
-func build_callback(building : Tile_Database.Structure) -> void:
+func build_callback(building : Construct) -> void:
 	_builder.start_build_action(building);
-	_bname.text = building.bname;
-	_desc.text = building.desc;
 	visible = false;
 	print_rich("[color=pink]Button Called Back[/color]");
-	pass
+
+func hover_callback(c : Construct) -> void:
+	_bname.text = c.structure_name;
+	_desc.text = c.structure_description;
+	_preview.texture = c.texture;

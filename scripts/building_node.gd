@@ -15,22 +15,19 @@ var _constructionMark : PackedScene = preload("res://buildings/construction_mark
 @onready var _infoPanel : Info_Panel = $"Menu/Info Panel";
 @onready var _highlightSprite : Sprite2D = $Highlight;
 @onready var _dragSelector : Selector = $Selector;
+@onready var _buildingManager : Build_Manager = $"../Building Manager"
 @onready var _tileMap : TileMap = get_tree().root.get_node("World");
 
 var _cAction : ACTIONS = ACTIONS.NONE;
 var hasSelected : bool = false;
-
-#region BUILD Action Variables
-var _structure : Tile_Database.Structure;
-var _activeStructure : Building;
-var _follower : Cursor_Follower;
-#endregion
+var _structure : Construct;
 
 const _tileSize : int = 16;
 
 var _hoverPos : Vector2i; # The center of the tile hovered by the mouse
 var _tilePos : Vector2i; # The position of the mouse on the TileMap
 
+#region GODOT Callbacks
 func _ready():
 	_infoPanel.visible = false;
 	_buildMenu.visible = false;
@@ -51,10 +48,12 @@ func _process(delta):
 		left_drag_end_handle();
 	if (Input.is_action_pressed("Left_Click") and hasSelected):
 		left_drag_handle();
+	_buildingManager.update_preview(_hoverPos);
 
 func _unhandled_input(event):
 	if (Input.is_action_just_pressed("Left_Click")):
 		left_click_handle(_hoverPos, _tilePos);
+#endregion
 
 #region ACTION Functions
 func start_action(type : ACTIONS) -> void:
@@ -63,31 +62,15 @@ func start_action(type : ACTIONS) -> void:
 
 func stop_action() -> void:
 	_cAction = ACTIONS.NONE;
-	_structure = null;
-	if (_activeStructure != null):
-		_activeStructure.queue_free();
-		_activeStructure = null;
+	_buildingManager.end_preview();
 
-func start_build_action(structure : Tile_Database.Structure):
+func start_build_action(structure : Construct) -> void:
 	_cAction = ACTIONS.BUILD;
+	_buildingManager.preview_structure(structure);
 	_structure = structure;
-	_activeStructure = _structure.prefab.instantiate();
-	get_tree().root.add_child(_activeStructure);
-	_follower = _cursorFollower.instantiate();
-	_activeStructure.add_child(_follower);
-	_follower.builder_node = self;
-	_follower.scale = Vector2(_activeStructure.tile_size,_activeStructure.tile_size);
 
 func do_build_action() -> void:
-	_activeStructure.add_child(_constructionMark.instantiate());
-	_activeStructure.get_node("Cursor Follower").queue_free();
-	_activeStructure.modulate = Color(1,1,1,1);
-	_activeStructure.global_position = _hoverPos;
-	var structure_tile = _tileMap.local_to_map(_activeStructure.global_position);
-	WorldStorage.register_structure(structure_tile,_activeStructure);
-	print("Structure Built on %s" % structure_tile);
-	_activeStructure = null;
-	_follower = null;
+	_buildingManager.build_structure(_structure, Vector2i(0,0));
 #endregion
 
 #region Tile Select Functions
@@ -114,10 +97,10 @@ func left_click_handle(hover_pos : Vector2i, tile_pos : Vector2i) -> void:
 	_highlightSprite.visible = false;
 	match (_cAction):
 		ACTIONS.BUILD:
-			if (_activeStructure != null):
-				if (!_follower.cannot_build()):
-					do_build_action();
-					stop_action();
+			# TODO BUILD ACTION
+			if (_buildingManager.good()):
+				_buildingManager.build_structure(_structure,hover_pos);
+				stop_action();
 		ACTIONS.ZONE:
 			# TODO Add Zoning Action
 			pass;

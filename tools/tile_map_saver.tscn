@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bylquf8432xd2"]
+
+[ext_resource type="Script" path="res://tools/tile_map_saver.gd" id="1_0jhrb"]
+[ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="2_3xsul"]
+[ext_resource type="Resource" uid="uid://cdp6nb7ks4ewr" path="res://buildings/data/Small Home.tres" id="2_bmvbd"]
+
+[node name="TileMap Saver" type="Node2D"]
+script = ExtResource("1_0jhrb")
+building = ExtResource("2_bmvbd")
+output_dir = "res://tools/res"
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(8, 8)
+tile_set = ExtResource("2_3xsul")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65538, 0, 4, -2, 0, 5, 65534, 0, 6, -65537, 65536, 4, -1, 65536, 5, 65535, 65536, 7, -131072, 131072, 4, -65536, 131072, 5, 0, 196608, 6)
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg5nhs2wjaxri"]
+
+[ext_resource type="Script" path="res://scripts/building_manager.gd" id="1_3hmkq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npoho"]
+size = Vector2(16, 16)
+
+[node name="Building Manager" type="Node2D"]
+script = ExtResource("1_3hmkq")
+
+[node name="Preview" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Preview"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Preview"]
+shape = SubResource("RectangleShape2D_npoho")
+
+[connection signal="body_entered" from="Preview" to="." method="preview_enter"]
+[connection signal="body_exited" from="Preview" to="." method="preview_exit"]

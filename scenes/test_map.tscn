@@ -1,18 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://btuge7ek766cb"]
+[gd_scene load_steps=9 format=3 uid="uid://btuge7ek766cb"]
 
 [ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="1_d1qqc"]
 [ext_resource type="Script" path="res://scripts/world_generator.gd" id="2_uo8gq"]
 [ext_resource type="PackedScene" uid="uid://bcdlppkrq0bm6" path="res://scenes/game_camera.tscn" id="3_h4kp3"]
 [ext_resource type="PackedScene" uid="uid://bxw8rk2ph6pv3" path="res://scenes/builder_node.tscn" id="4_kglqv"]
 [ext_resource type="PackedScene" uid="uid://ckqhwsdgj5wtq" path="res://scenes/pause.tscn" id="5_y4e8x"]
-[ext_resource type="PackedScene" uid="uid://bgft0idoad8bs" path="res://buildings/house.tscn" id="6_mmc4r"]
-[ext_resource type="PackedScene" uid="uid://dtak2egvhoi6w" path="res://buildings/bank.tscn" id="7_x43oa"]
+[ext_resource type="PackedScene" uid="uid://d2p2u8xjmjd6a" path="res://buildings/structure.tscn" id="7_coptu"]
+[ext_resource type="Resource" uid="uid://cdp6nb7ks4ewr" path="res://buildings/data/Small Home.tres" id="8_4q03t"]
+[ext_resource type="PackedScene" uid="uid://dg5nhs2wjaxri" path="res://scenes/building_manager.tscn" id="8_xx6ew"]
 
 [node name="World" type="TileMap"]
 position = Vector2(-1, 0)
 tile_set = ExtResource("1_d1qqc")
 format = 2
 layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(65533, 0, 1, 131069, 0, 2, 196605, 0, 3, 65534, 65536, 1, 131070, 65536, 2, 196606, 65536, 3, 65535, 131072, 1, 131071, 131072, 2, 196607, 131072, 3, -131075, 0, 1, -65539, 0, 2, -3, 0, 3, -131074, 65536, 1, -65538, 65536, 2, -2, 65536, 3, -131073, 131072, 1, -65537, 131072, 2, -1, 131072, 3, -196608, 0, 1, -131072, 0, 2, -65536, 0, 3, -196607, 65536, 1, -131071, 65536, 2, -65535, 65536, 3, -196606, 131072, 1, -131070, 131072, 2, -65534, 131072, 3, 0, 0, 1, 65536, 0, 2, 131072, 0, 3, 1, 65536, 1, 65537, 65536, 2, 131073, 65536, 3, 2, 131072, 1, 65538, 131072, 2, 131074, 131072, 3, 65530, 0, 1, 131066, 0, 2, 196602, 0, 3, 65531, 65536, 1, 131067, 65536, 2, 196603, 65536, 3, 65532, 131072, 1, 131068, 131072, 2, 196604, 131072, 3, -131078, 0, 1, -65542, 0, 2, -6, 0, 3, -131077, 65536, 1, -65541, 65536, 2, -5, 65536, 3, -131076, 131072, 1, -65540, 131072, 2, -4, 131072, 3, -327686, 0, 1, -262150, 0, 2, -196614, 0, 3, -327685, 65536, 1, -262149, 65536, 2, -196613, 65536, 3, -327684, 131072, 1, -262148, 131072, 2, -196612, 131072, 3, -327683, 0, 1, -262147, 0, 2, -196611, 0, 3, -327682, 65536, 1, -262146, 65536, 2, -196610, 65536, 3, -327681, 131072, 1, -262145, 131072, 2, -196609, 131072, 3, -393216, 0, 1, -327680, 0, 2, -262144, 0, 3, -393215, 65536, 1, -327679, 65536, 2, -262143, 65536, 3, -393214, 131072, 1, -327678, 131072, 2, -262142, 131072, 3, -393213, 0, 1, -327677, 0, 2, -262141, 0, 3, -393212, 65536, 1, -327676, 65536, 2, -262140, 65536, 3, -393211, 131072, 1, -327675, 131072, 2, -262139, 131072, 3, -196605, 0, 1, -131069, 0, 2, -65533, 0, 3, -196604, 65536, 1, -131068, 65536, 2, -65532, 65536, 3, -196603, 131072, 1, -131067, 131072, 2, -65531, 131072, 3, 3, 0, 1, 65539, 0, 2, 131075, 0, 3, 4, 65536, 1, 65540, 65536, 2, 131076, 65536, 3, 5, 131072, 1, 65541, 131072, 2, 131077, 131072, 3, 196611, 0, 1, 262147, 0, 2, 327683, 0, 3, 196612, 65536, 1, 262148, 65536, 2, 327684, 65536, 3, 196613, 131072, 1, 262149, 131072, 2, 327685, 131072, 3, 196608, 0, 1, 262144, 0, 2, 327680, 0, 3, 196609, 65536, 1, 262145, 65536, 2, 327681, 65536, 3, 196610, 131072, 1, 262146, 131072, 2, 327682, 131072, 3, 262141, 0, 1, 327677, 0, 2, 393213, 0, 3, 262142, 65536, 1, 327678, 65536, 2, 393214, 65536, 3, 262143, 131072, 1, 327679, 131072, 2, 393215, 131072, 3, 262138, 0, 1, 327674, 0, 2, 393210, 0, 3, 262139, 65536, 1, 327675, 65536, 2, 393211, 65536, 3, 262140, 131072, 1, 327676, 131072, 2, 393212, 131072, 3)
 layer_1/name = "Foliage"
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Structure"
@@ -34,11 +36,12 @@ cam_speed_multiplier = 3.0
 
 [node name="Pause" parent="." instance=ExtResource("5_y4e8x")]
 
-[node name="House" parent="." instance=ExtResource("6_mmc4r")]
-position = Vector2(-31, 32)
+[node name="Building Manager" parent="." instance=ExtResource("8_xx6ew")]
 
-[node name="House2" parent="." instance=ExtResource("6_mmc4r")]
-position = Vector2(33, 32)
+[node name="Structure" parent="Building Manager" instance=ExtResource("7_coptu")]
+position = Vector2(-23, 24)
+structure_data = ExtResource("8_4q03t")
 
-[node name="Bank" parent="." instance=ExtResource("7_x43oa")]
-position = Vector2(-47, 96)
+[node name="Structure2" parent="Building Manager" instance=ExtResource("7_coptu")]
+position = Vector2(25, 24)
+structure_data = ExtResource("8_4q03t")

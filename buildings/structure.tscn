@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2p2u8xjmjd6a"]
+
+[ext_resource type="Script" path="res://buildings/scripts/structure.gd" id="1_bnbys"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bxbs"]
+size = Vector2(16, 16)
+
+[node name="Structure" type="StaticBody2D"]
+script = ExtResource("1_bnbys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1bxbs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

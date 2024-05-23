@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca7ecjk68fedc"]
+
+[ext_resource type="Script" path="res://buildings/scripts/visible_production.gd" id="1_5i8py"]
+[ext_resource type="Resource" uid="uid://36l2xk6sdfbx" path="res://buildings/data/Campsite.tres" id="2_8kmad"]
+[ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="3_s38f0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07roi"]
+size = Vector2(80, 80)
+
+[node name="Campsite" type="StaticBody2D" node_paths=PackedStringArray("work_positions") groups=["Structure"]]
+collision_mask = 0
+script = ExtResource("1_5i8py")
+work_positions = [NodePath("Use Area")]
+max_capacity = 1
+structure_data = ExtResource("2_8kmad")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_07roi")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(-24, 24)
+tile_set = ExtResource("3_s38f0")
+format = 2
+layer_0/tile_data = PackedInt32Array(-196607, 524288, 7, -131071, 524288, 8)
+
+[node name="Use Area" type="Node2D" parent="."]
+position = Vector2(0, 24)

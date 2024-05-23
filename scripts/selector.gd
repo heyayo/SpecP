@@ -42,7 +42,7 @@ func highlight_selection() -> void:
 		var dupe = _highlight.duplicate();
 		_collection.add_child(dupe);
 		dupe.global_position = s.global_position;
-		var hsize = s.tile_size * 0.25;
+		var hsize = s.structure_data.tile_size * 0.25;
 		dupe.scale = Vector2(hsize,hsize);
 		dupe.visible = true;
 

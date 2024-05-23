@@ -1,21 +1,23 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgft0idoad8bs"]
 
-[ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="1_mh8lm"]
-[ext_resource type="Script" path="res://buildings/scripts/housing.gd" id="1_pfrjl"]
-[ext_resource type="Resource" uid="uid://cdp6nb7ks4ewr" path="res://buildings/data/Small Home.tres" id="2_icm0x"]
+[ext_resource type="Script" path="res://buildings/scripts/housing.gd" id="1_m4e8a"]
+[ext_resource type="Resource" uid="uid://cdp6nb7ks4ewr" path="res://buildings/data/Small Home.tres" id="2_bfjuh"]
+[ext_resource type="TileSet" uid="uid://bslh4lsa477sk" path="res://tilesets/set.tres" id="3_i2j1b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07roi"]
 size = Vector2(48, 48)
 
-[node name="House" type="StaticBody2D"]
-script = ExtResource("1_pfrjl")
-structure_data = ExtResource("2_icm0x")
+[node name="Small Home" type="StaticBody2D" groups=["Structure"]]
+collision_mask = 0
+script = ExtResource("1_m4e8a")
+max_capacity = 2
+structure_data = ExtResource("2_bfjuh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_07roi")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-24, 24)
-tile_set = ExtResource("1_mh8lm")
+tile_set = ExtResource("3_i2j1b")
 format = 2
 layer_0/tile_data = PackedInt32Array(-196608, 0, 4, -131072, 0, 5, -65536, 0, 6, -196607, 65536, 4, -131071, 65536, 5, -65535, 65536, 7, -196606, 131072, 4, -131070, 131072, 5, -65534, 196608, 6)

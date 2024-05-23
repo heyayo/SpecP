@@ -21,7 +21,8 @@ enum Layers {
 }
 
 func _ready():
-	generate_world();
+	pass;
+	#generate_world();
 
 func generate_world():
 	var noise_gen = FastNoiseLite.new();

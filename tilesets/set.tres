@@ -142,7 +142,5 @@ texture = ExtResource("1_p1d3u")
 11:10/0 = 0
 
 [resource]
-custom_data_layer_0/name = "names"
-custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_begte")
 pattern_0 = SubResource("TileMapPattern_1ck7y")
