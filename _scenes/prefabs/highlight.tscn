@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dod0kprxjhuxk"]
+
+[ext_resource type="Texture2D" uid="uid://g4q51jv85q3w" path="res://_sprites/highlight.png" id="1_hp5gs"]
+[ext_resource type="Script" path="res://_scenes/prefabs/highlight.gd" id="2_uslx3"]
+
+[node name="Highlight" type="Sprite2D"]
+position = Vector2(0, -1.90735e-06)
+scale = Vector2(0.222222, 0.222222)
+texture = ExtResource("1_hp5gs")
+script = ExtResource("2_uslx3")

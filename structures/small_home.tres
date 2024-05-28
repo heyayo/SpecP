@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Construct" load_steps=2 format=3 uid="uid://danmlf7j6e4bp"]
+
+[ext_resource type="Script" path="res://_scripts/resources/construct.gd" id="1_0rcwb"]
+
+[resource]
+script = ExtResource("1_0rcwb")
+name = "Small Home"
+desc = "A Small Home for Two"
+tile_size = 3

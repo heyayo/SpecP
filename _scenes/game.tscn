@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpeampwpg2mi4"]
+
+[ext_resource type="Script" path="res://_scripts/Colony.gd" id="1_akawn"]
+[ext_resource type="Script" path="res://_scripts/Structures.gd" id="2_pl2v5"]
+[ext_resource type="Script" path="res://_scripts/Selector.gd" id="3_y6ca4"]
+[ext_resource type="Texture2D" uid="uid://crpy06mncl4ws" path="res://_sprites/blank.jpg" id="4_6751o"]
+[ext_resource type="Script" path="res://_scripts/Highlighter.gd" id="4_nnxs7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kakmw"]
+size = Vector2(1, 1)
+
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="Overseer" type="Node2D" parent="."]
+script = ExtResource("1_akawn")
+
+[node name="Structures" type="Node2D" parent="."]
+script = ExtResource("2_pl2v5")
+
+[node name="Selector" type="Area2D" parent="."]
+script = ExtResource("3_y6ca4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
+shape = SubResource("RectangleShape2D_kakmw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Selector"]
+modulate = Color(0, 0.588235, 0, 0.392157)
+texture = ExtResource("4_6751o")
+
+[node name="Highlighter" type="Node2D" parent="."]
+script = ExtResource("4_nnxs7")
+
+[connection signal="body_entered" from="Selector" to="Selector" method="_enter_area"]
+[connection signal="body_exited" from="Selector" to="Selector" method="_exit_area"]
+[connection signal="sig_select" from="Selector" to="Highlighter" method="on_select"]
