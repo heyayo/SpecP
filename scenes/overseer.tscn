@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d16elwbjx46gq"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/overseer.gd" id="1_v301g"]
+
+[node name="Overseer" type="Node2D"]
+script = ExtResource("1_v301g")

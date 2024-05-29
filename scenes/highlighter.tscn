@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ng4oyw3rraj1"]
+
+[ext_resource type="Texture2D" uid="uid://4ujkpnsbv3nh" path="res://sprites/selects/PNG/Outline/crosshair026.png" id="2_1knqp"]
+
+[node name="Highlighter" type="Node2D"]
+
+[node name="Base Highlight" type="Sprite2D" parent="."]
+z_index = 5
+scale = Vector2(0.222222, 0.222222)
+texture = ExtResource("2_1knqp")
+
+[node name="Additional" type="Node2D" parent="."]

@@ -1,0 +1,192 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4q75hkmnv7oh"]
+
+[ext_resource type="Script" path="res://scripts/interface.gd" id="1_agfvo"]
+[ext_resource type="Script" path="res://scripts/gameplay/build_menu.gd" id="1_vamuy"]
+[ext_resource type="Script" path="res://scripts/gameplay/info_panel.gd" id="2_330qp"]
+
+[node name="Interface" type="CanvasLayer"]
+script = ExtResource("1_agfvo")
+
+[node name="Build Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vamuy")
+
+[node name="Options" type="Panel" parent="Build Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -150.0
+offset_right = 256.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Actions" type="ScrollContainer" parent="Build Menu/Options"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 128.0
+offset_bottom = 150.0
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Contents" type="VBoxContainer" parent="Build Menu/Options/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Description" type="Label" parent="Build Menu/Options"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -247.0
+offset_right = 64.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"
+autowrap_mode = 2
+clip_text = true
+
+[node name="Name" type="Label" parent="Build Menu/Options"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_right = 64.0
+offset_bottom = 53.0
+grow_horizontal = 2
+text = "TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Preview" type="TextureRect" parent="Build Menu/Options"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -92.0
+offset_right = -8.0
+offset_bottom = 84.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Info Panel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("2_330qp")
+
+[node name="ColorRect" type="ColorRect" parent="Info Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -125.0
+offset_bottom = 245.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.14902, 0.14902, 0.14902, 1)
+
+[node name="Tile Name" type="Label" parent="Info Panel/ColorRect"]
+layout_mode = 0
+offset_right = 198.0
+offset_bottom = 86.0
+text = "TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Tile Description" type="Label" parent="Info Panel/ColorRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 86.0
+offset_right = 184.0
+offset_bottom = 317.0
+text = "TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL TEST LABEL "
+autowrap_mode = 2
+clip_text = true
+
+[node name="Bar" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -80.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Buildings" type="Button" parent="Bar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_right = 120.0
+offset_bottom = 40.0
+grow_vertical = 2
+text = "Buildings"
+
+[node name="Stats" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="SelectionCount" type="Label" parent="Stats"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_bottom = 32.0
+grow_horizontal = 0
+text = "TESTTEST"
+horizontal_alignment = 2
+
+[connection signal="pressed" from="Bar/Buildings" to="." method="on_buildings_pressed"]

@@ -20,7 +20,7 @@ var _halt : bool = false;
 
 func _process(_delta):
 	_camera.global_position = global_position;
-	if (Input.is_action_just_pressed("Interact") and not _halt):
+	if (Input.is_action_pressed("Interact") and not _halt):
 		interact();
 
 func _physics_process(_delta):

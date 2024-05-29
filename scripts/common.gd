@@ -7,6 +7,5 @@ var cLayer_buildings : int = 0b00000000_00000000_00000000_00000001;
 var cLayer_work_targets : int = 0b00000000_00000000_00000000_00000010;
 
 var Buildings : Array[Construct] = [
-	preload("res://buildings/data/Small Home.tres"),
-	preload("res://buildings/data/Campsite.tres")
+	preload("res://buildings/data/Home.tres")
 ];

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bxw8rk2ph6pv3" path="res://scenes/builder_node.tscn" id="4_kglqv"]
 [ext_resource type="PackedScene" uid="uid://ckqhwsdgj5wtq" path="res://scenes/pause.tscn" id="5_y4e8x"]
 [ext_resource type="PackedScene" uid="uid://d2p2u8xjmjd6a" path="res://buildings/structure.tscn" id="7_coptu"]
-[ext_resource type="Resource" uid="uid://cdp6nb7ks4ewr" path="res://buildings/data/Small Home.tres" id="8_4q03t"]
+[ext_resource type="Resource" uid="uid://2l68x63oq11o" path="res://buildings/data/Home.tres" id="8_4y3uj"]
 [ext_resource type="PackedScene" uid="uid://dg5nhs2wjaxri" path="res://scenes/building_manager.tscn" id="8_xx6ew"]
 [ext_resource type="PackedScene" uid="uid://c7t0cjtqhe45b" path="res://scenes/colonist.tscn" id="9_o5oi1"]
 [ext_resource type="Script" path="res://tools/structure_autocomplete.gd" id="10_l87n8"]
@@ -43,11 +43,11 @@ cam_speed_multiplier = 3.0
 
 [node name="Structure" parent="Building Manager" instance=ExtResource("7_coptu")]
 position = Vector2(-23, 24)
-structure_data = ExtResource("8_4q03t")
+structure_data = ExtResource("8_4y3uj")
 
 [node name="Structure2" parent="Building Manager" instance=ExtResource("7_coptu")]
 position = Vector2(25, 24)
-structure_data = ExtResource("8_4q03t")
+structure_data = ExtResource("8_4y3uj")
 
 [node name="Colonist" parent="." instance=ExtResource("9_o5oi1")]
 position = Vector2(-63, 8)
