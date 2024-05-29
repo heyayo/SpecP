@@ -1,5 +1,8 @@
 class_name Tracker
 
+# Collision Tracker Class
+# A Structure for keeping track of unique collision objects
+
 var collection : Array = [];
 
 func track(object) -> void:

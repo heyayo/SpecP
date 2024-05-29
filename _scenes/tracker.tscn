@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwv7axdqksx0s"]
+
+[sub_resource type="GDScript" id="GDScript_wbgrm"]
+script/source = "extends Area2D
+
+class_name Tracker_Node
+
+signal sig_changed(collection : Array[Node2D]);
+
+var tracker : Tracker = Tracker.new();
+
+func _on_body_entered(body):
+	tracker.track(body);
+
+func _on_body_exited(body):
+	tracker.untrack(body);
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3v6l"]
+size = Vector2(16, 16)
+
+[node name="Tracker" type="Area2D"]
+script = SubResource("GDScript_wbgrm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g3v6l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

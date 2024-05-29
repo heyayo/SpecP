@@ -24,3 +24,5 @@ func on_select(selection : Array) -> void:
 	for s in selection:
 		if (not s is Structure): continue;
 		highlight_structure(s);
+
+# TODO Test Highlighter

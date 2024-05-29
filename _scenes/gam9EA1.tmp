@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=13 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/Colony.gd" id="1_akawn"]
 [ext_resource type="Script" path="res://_scenes/game.gd" id="1_lvycr"]
@@ -11,16 +11,9 @@
 [ext_resource type="Script" path="res://_scripts/gameplay/Actioner.gd" id="8_2m7a4"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Actions Menu.gd" id="9_31up8"]
 [ext_resource type="Script" path="res://_scripts/sprite_preview.gd" id="9_84yhf"]
-[ext_resource type="Texture2D" uid="uid://g4q51jv85q3w" path="res://_sprites/highlight.png" id="13_pwhir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kakmw"]
 size = Vector2(1, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h575e"]
-size = Vector2(16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxpkv"]
-size = Vector2(16, 16)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lvycr")
@@ -57,11 +50,6 @@ script = ExtResource("8_2m7a4")
 
 [node name="Preview" type="Sprite2D" parent="Actioner"]
 script = ExtResource("9_84yhf")
-
-[node name="Area2D" type="Area2D" parent="Actioner/Preview"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Actioner/Preview/Area2D"]
-shape = SubResource("RectangleShape2D_h575e")
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
@@ -139,21 +127,8 @@ offset_bottom = 25.0
 grow_vertical = 2
 text = "Buildings"
 
-[node name="Debug" type="StaticBody2D" parent="."]
-position = Vector2(91, 35)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Debug"]
-shape = SubResource("RectangleShape2D_bxpkv")
-
-[node name="Sprite2D" type="Sprite2D" parent="Debug"]
-position = Vector2(9.53674e-07, 9.53674e-07)
-scale = Vector2(0.222222, 0.222222)
-texture = ExtResource("13_pwhir")
-
 [connection signal="body_entered" from="Selector" to="Selector" method="_enter_area"]
 [connection signal="body_exited" from="Selector" to="Selector" method="_exit_area"]
 [connection signal="sig_select" from="Selector" to="Highlighter" method="on_select"]
-[connection signal="body_entered" from="Actioner/Preview/Area2D" to="Actioner/Preview" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Actioner/Preview/Area2D" to="Actioner/Preview" method="_on_area_2d_body_exited"]
 [connection signal="sig_action_pressed" from="Interface/Action Menu" to="Actioner" method="callback_action_pressed"]
 [connection signal="pressed" from="Interface/Bar/Buildings" to="Interface/Action Menu" method="toggle"]

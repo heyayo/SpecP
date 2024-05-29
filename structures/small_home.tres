@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Construct" load_steps=2 format=3 uid="uid://danmlf7j6e4bp"]
+[gd_resource type="Resource" script_class="Construct" load_steps=3 format=3 uid="uid://danmlf7j6e4bp"]
 
 [ext_resource type="Script" path="res://_scripts/resources/construct.gd" id="1_0rcwb"]
+[ext_resource type="Texture2D" uid="uid://cxfv45spjfkgj" path="res://_sprites/structures/small_home.png" id="2_uci42"]
 
 [resource]
 script = ExtResource("1_0rcwb")
 name = "Small Home"
 desc = "A Small Home for Two"
 tile_size = 3
+sprite = ExtResource("2_uci42")
