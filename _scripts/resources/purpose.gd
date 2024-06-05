@@ -7,9 +7,8 @@ class_name Purpose
 
 var target : Structure = null;
 
-func make() -> void:
-	
-	pass
+func make() -> Purpose:
+	return self;
 
 func interact() -> void:
 	pass;

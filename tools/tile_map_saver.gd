@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var building : Construct;
+@export var tile_size : Vector2i;
 @export_dir var output_dir : String;
 
 var tilemap : TileMap;
@@ -13,12 +13,8 @@ func _ready():
 		printerr("No TileMap");
 		get_tree().quit();
 		return;
-	if (building == null):
-		printerr("No Building");
-		get_tree().quit();
-		return;
 	window = get_window();
-	window.min_size = Vector2(16,16);
+	window.min_size = Vector2(15,15);
 	viewport = tilemap.get_viewport();
 	resize_window();
 
@@ -28,8 +24,9 @@ func _process(_delta):
 		get_tree().quit();
 
 func resize_window():
-	var size = building.tile_size * 16;
-	window.size = Vector2(size,size);
+	var size = tile_size * 16;
+	window.size = size;
+	print("Resizing: %s | %s" % [tile_size, size]);
 
 func save_viewport():
 	var image : Image = viewport.get_texture().get_image();

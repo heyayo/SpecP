@@ -28,6 +28,14 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://_resources/": "blue",
+"res://_scenes/": "green",
+"res://_sprites/": "pink"
+}
+
 [input]
 
 Left_Click={
@@ -67,6 +75,12 @@ Right={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
 ]
 }
+
+[memory]
+
+limits/handheld/orientation=0
+limits/stretch/aspect="keep"
+limits/stretch/mode="disabled"
 
 [rendering]
 

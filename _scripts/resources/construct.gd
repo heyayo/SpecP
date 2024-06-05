@@ -9,3 +9,4 @@ class_name Construct
 @export_category("Blueprint")
 @export var tile_size : int = 1;
 @export var sprite : Texture = null;
+@export var work_cost : int = 1;

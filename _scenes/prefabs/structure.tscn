@@ -12,3 +12,5 @@ script = ExtResource("1_5ck0e")
 shape = SubResource("RectangleShape2D_3yl6n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]

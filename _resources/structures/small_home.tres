@@ -9,3 +9,4 @@ name = "Small Home"
 desc = "A Small Home for Two"
 tile_size = 3
 sprite = ExtResource("2_uci42")
+work_cost = 5

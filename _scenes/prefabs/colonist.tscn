@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5svxbmajet7c"]
+
+[ext_resource type="Script" path="res://_scripts/colonist/colonist.gd" id="1_eyk4p"]
+[ext_resource type="SpriteFrames" uid="uid://ds8ldlvwl6ece" path="res://_resources/colonist_frames.tres" id="1_myui4"]
+[ext_resource type="Script" path="res://_scripts/colonist/anim.gd" id="2_hjuo4"]
+[ext_resource type="Script" path="res://_scripts/colonist/nav.gd" id="5_dvj3c"]
+[ext_resource type="Script" path="res://_scripts/colonist/tasker.gd" id="5_o3gdp"]
+[ext_resource type="Script" path="res://_scripts/colonist/Interact Range.gd" id="6_03cld"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ompxg"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_imcd7"]
+radius = 32.0
+
+[node name="Colonist" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_eyk4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ompxg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_myui4")
+animation = &"still"
+script = ExtResource("2_hjuo4")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 8.0
+debug_enabled = true
+script = ExtResource("5_dvj3c")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Tasks" type="Node2D" parent="."]
+script = ExtResource("5_o3gdp")
+
+[node name="Interact Range" type="Area2D" parent="."]
+script = ExtResource("6_03cld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact Range"]
+shape = SubResource("CircleShape2D_imcd7")
+
+[node name="Build Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Harvest Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Interact Range" to="Interact Range" method="_on_body_entered"]
+[connection signal="body_exited" from="Interact Range" to="Interact Range" method="_on_body_exited"]
+[connection signal="timeout" from="Build Timer" to="." method="_on_build_timer_timeout"]
+[connection signal="timeout" from="Harvest Timer" to="." method="_on_harvest_timer_timeout"]

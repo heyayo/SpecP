@@ -1,16 +1,20 @@
-[gd_scene load_steps=16 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=21 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/Colony.gd" id="1_akawn"]
-[ext_resource type="Script" path="res://_scenes/game.gd" id="1_lvycr"]
+[ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Structures.gd" id="2_pl2v5"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Selector.gd" id="3_y6ca4"]
 [ext_resource type="Texture2D" uid="uid://crpy06mncl4ws" path="res://_sprites/blank.jpg" id="4_6751o"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Highlighter.gd" id="4_nnxs7"]
-[ext_resource type="Script" path="res://_scripts/camera.gd" id="7_e0ybk"]
+[ext_resource type="Script" path="res://_scripts/gameplay/harvest_manager.gd" id="5_vy8oq"]
+[ext_resource type="PackedScene" uid="uid://dvf27frnrxii8" path="res://_scenes/prefabs/harvestable.tscn" id="6_jrpyk"]
+[ext_resource type="Resource" uid="uid://dc18vva4uk223" path="res://_resources/harvestables/tree.tres" id="7_1gkbs"]
+[ext_resource type="Script" path="res://_scripts/gameplay/camera.gd" id="7_e0ybk"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Actioner.gd" id="8_2m7a4"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Actions Menu.gd" id="9_31up8"]
 [ext_resource type="Script" path="res://_scripts/sprite_preview.gd" id="9_84yhf"]
+[ext_resource type="Script" path="res://_scripts/gameplay/interact_menu.gd" id="12_h4pq2"]
 [ext_resource type="Texture2D" uid="uid://g4q51jv85q3w" path="res://_sprites/highlight.png" id="13_pwhir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kakmw"]
@@ -18,6 +22,10 @@ size = Vector2(1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h575e"]
 size = Vector2(16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qgx27"]
+line_spacing = -10.0
+font_size = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxpkv"]
 size = Vector2(16, 16)
@@ -33,8 +41,18 @@ layer_0/tile_data = PackedInt32Array(-327688, 131072, 0, -262152, 131072, 0, -19
 [node name="Overseer" type="Node2D" parent="."]
 script = ExtResource("1_akawn")
 
+[node name="Debug_Target" type="Node2D" parent="Overseer"]
+position = Vector2(-154, 116)
+
 [node name="Structures" type="Node2D" parent="."]
 script = ExtResource("2_pl2v5")
+
+[node name="Harvestables" type="Node2D" parent="."]
+script = ExtResource("5_vy8oq")
+
+[node name="Harvestable" parent="Harvestables" instance=ExtResource("6_jrpyk")]
+position = Vector2(-96, 82)
+data = ExtResource("7_1gkbs")
 
 [node name="Selector" type="Area2D" parent="."]
 script = ExtResource("3_y6ca4")
@@ -44,6 +62,7 @@ shape = SubResource("RectangleShape2D_kakmw")
 
 [node name="Sprite2D" type="Sprite2D" parent="Selector"]
 modulate = Color(0, 0.588235, 0, 0.392157)
+z_index = 5
 texture = ExtResource("4_6751o")
 
 [node name="Highlighter" type="Node2D" parent="."]
@@ -77,7 +96,7 @@ offset_right = 250.0
 offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.431373, 0.686275, 1, 0.784314)
 script = ExtResource("9_31up8")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Interface/Action Menu"]
@@ -126,7 +145,7 @@ anchor_bottom = 1.0
 offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.356863, 0.356863, 0.356863, 0.784314)
+color = Color(0.431373, 0.686275, 1, 0.784314)
 
 [node name="Buildings" type="Button" parent="Interface/Bar"]
 layout_mode = 1
@@ -139,6 +158,69 @@ offset_bottom = 25.0
 grow_vertical = 2
 text = "Buildings"
 
+[node name="Interact" type="ColorRect" parent="Interface"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.429699, 0.687848, 1, 0.784314)
+script = ExtResource("12_h4pq2")
+
+[node name="Title" type="Label" parent="Interface/Interact"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Summary"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Summary" type="Label" parent="Interface/Interact"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -177.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "test 
+test"
+label_settings = SubResource("LabelSettings_qgx27")
+clip_text = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/Interact"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="Produce" type="Button" parent="Interface/Interact/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "TEST"
+
+[node name="Harvest" type="Button" parent="Interface/Interact/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Harvest"
+
 [node name="Debug" type="StaticBody2D" parent="."]
 position = Vector2(91, 35)
 
@@ -150,10 +232,20 @@ position = Vector2(9.53674e-07, 9.53674e-07)
 scale = Vector2(0.222222, 0.222222)
 texture = ExtResource("13_pwhir")
 
+[connection signal="sig_add_structure" from="Structures" to="Overseer" method="callback_request_build"]
+[connection signal="sig_remove_harvest" from="Harvestables" to="Highlighter" method="callback_harvestables_remove"]
+[connection signal="sig_harvest" from="Harvestables/Harvestable" to="Harvestables" method="callback_extend_harvest"]
 [connection signal="body_entered" from="Selector" to="Selector" method="_enter_area"]
 [connection signal="body_exited" from="Selector" to="Selector" method="_exit_area"]
+[connection signal="sig_deselect" from="Selector" to="Interface/Interact" method="callback_selector_deselect"]
 [connection signal="sig_select" from="Selector" to="Highlighter" method="on_select"]
+[connection signal="sig_select" from="Selector" to="Interface/Interact" method="callback_selector_select"]
+[connection signal="sig_construct" from="Actioner" to="Structures" method="callback_construct"]
+[connection signal="sig_start" from="Actioner" to="Selector" method="disable"]
+[connection signal="sig_stop" from="Actioner" to="Selector" method="enable"]
 [connection signal="body_entered" from="Actioner/Preview/Area2D" to="Actioner/Preview" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Actioner/Preview/Area2D" to="Actioner/Preview" method="_on_area_2d_body_exited"]
 [connection signal="sig_action_pressed" from="Interface/Action Menu" to="Actioner" method="callback_action_pressed"]
 [connection signal="pressed" from="Interface/Bar/Buildings" to="Interface/Action Menu" method="toggle"]
+[connection signal="sig_ext_harvest" from="Interface/Interact" to="Overseer" method="callback_request_harvests"]
+[connection signal="pressed" from="Interface/Interact/VBoxContainer/Harvest" to="Interface/Interact" method="callback_extend_harvest_pressed"]

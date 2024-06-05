@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://beieescgua68c"]
+
+[ext_resource type="Script" path="res://_scripts/resources/item.gd" id="1_06fv4"]
+[ext_resource type="Texture2D" uid="uid://cmact2gnh301p" path="res://_sprites/Food/Bread.png" id="2_pbsgj"]
+
+[resource]
+script = ExtResource("1_06fv4")
+name = "Wood"
+desc = "A common material harvested from trees"
+sprite = ExtResource("2_pbsgj")

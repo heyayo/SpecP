@@ -24,6 +24,8 @@ func resize_area(size : int) -> void:
 	shape.size = Vector2(s,s);
 func update_modulate() -> void:
 	modulate = Color(0,1,0,0.5) if tracker.collection.is_empty() else Color(1,0,0,0.5);
+func good() -> bool:
+	return tracker.collection.is_empty();
 
 func _on_area_2d_body_entered(body):
 	tracker.track(body);
