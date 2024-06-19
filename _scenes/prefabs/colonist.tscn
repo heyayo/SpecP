@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://_scripts/colonist/anim.gd" id="2_hjuo4"]
 [ext_resource type="Script" path="res://_scripts/colonist/nav.gd" id="5_dvj3c"]
 [ext_resource type="Script" path="res://_scripts/colonist/tasker.gd" id="5_o3gdp"]
-[ext_resource type="Script" path="res://_scripts/colonist/Interact Range.gd" id="6_03cld"]
+[ext_resource type="Script" path="res://_scripts/colonist/detection_range.gd" id="6_03cld"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ompxg"]
 radius = 8.0

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyv0nsifb7s0r"]
+
+[ext_resource type="Script" path="res://_scripts/structures/resource_structure.gd" id="1_vout1"]
+[ext_resource type="Resource" uid="uid://bdpoc16c6hcs5" path="res://_resources/object data/wood_mill.tres" id="2_njmr8"]
+[ext_resource type="Texture2D" uid="uid://bguqeh7v7p5xx" path="res://_sprites/structures/wood_mill.png" id="2_sbg37"]
+[ext_resource type="PackedScene" uid="uid://nlup42k1sgdo" path="res://_scenes/prefabs/selectable.tscn" id="3_faskx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mitmy"]
+size = Vector2(48, 64)
+
+[node name="Wood Mill" type="StaticBody2D"]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("1_vout1")
+harvest_range = 5
+harvest_rate = 5
+object_data = ExtResource("2_njmr8")
+stone = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sbg37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mitmy")
+
+[node name="Selectable" parent="." instance=ExtResource("3_faskx")]
+scale = Vector2(3, 4)
+
+[node name="Resource Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Resource Timer" to="." method="_timeout_from_resource_timer"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsbt72e0uiehs"]
+
+[ext_resource type="Script" path="res://_scripts/structures/resource_structure.gd" id="1_do786"]
+[ext_resource type="Texture2D" uid="uid://4ll7qoq8t2re" path="res://_sprites/structures/mason_hut.png" id="2_g7vtd"]
+[ext_resource type="Script" path="res://_scripts/world_object.gd" id="2_i5fla"]
+[ext_resource type="PackedScene" uid="uid://nlup42k1sgdo" path="res://_scenes/prefabs/selectable.tscn" id="3_wkd1y"]
+
+[sub_resource type="Resource" id="Resource_x4tf8"]
+script = ExtResource("2_i5fla")
+name = ""
+desc = ""
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mitmy"]
+size = Vector2(48, 64)
+
+[node name="Mason Hut" type="StaticBody2D"]
+collision_layer = 16384
+collision_mask = 0
+script = ExtResource("1_do786")
+resource_type = 2
+harvest_range = 5
+harvest_rate = 5
+object_data = SubResource("Resource_x4tf8")
+wood = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_g7vtd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mitmy")
+
+[node name="Selectable" parent="." instance=ExtResource("3_wkd1y")]
+scale = Vector2(3, 4)
+
+[node name="Resource Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Resource Timer" to="." method="_timeout_from_resource_timer"]

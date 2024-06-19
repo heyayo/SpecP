@@ -19,7 +19,6 @@ texture = ExtResource("1_hnl0d")
 2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pb5ym")
 3:0/0 = 0
 3:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pb5ym")
-4:0/0 = 0
 5:0/0 = 0
 6:0/0 = 0
 7:0/0 = 0
@@ -34,7 +33,6 @@ texture = ExtResource("1_hnl0d")
 2:1/0 = 0
 2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pb5ym")
 3:1/0 = 0
-4:1/0 = 0
 5:1/0 = 0
 6:1/0 = 0
 7:1/0 = 0
@@ -156,6 +154,8 @@ texture = ExtResource("1_hnl0d")
 9:10/0 = 0
 10:10/0 = 0
 11:10/0 = 0
+4:0/0 = 0
+4:1/0 = 0
 
 [resource]
 navigation_layer_0/layers = 1

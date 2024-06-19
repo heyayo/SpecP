@@ -16,7 +16,9 @@ func _ready():
 	window = get_window();
 	window.min_size = Vector2(15,15);
 	viewport = tilemap.get_viewport();
+	window.borderless = true;
 	resize_window();
+	#window.size = Vector2i(100,100);
 
 func _process(_delta):
 	if (Input.is_key_pressed(KEY_SPACE)):

@@ -1,59 +1,59 @@
-extends ColorRect
+extends Control
 
 class_name InteractMenu
 
-signal sig_ext_harvest(harvests : Array[Harvestable]);
-signal sig_ext_produce;
+@onready var structure_actions : ColorRect = $"Structure Actions"
+@onready var harvest_actions : ColorRect = $"Harvest Actions"
 
-@onready var harvest_bn : Button = $VBoxContainer/Harvest;
-@onready var produce_bn : Button = $VBoxContainer/Produce;
-@onready var desc : Label = $Summary;
+func _ready() -> void:
+	hide_actions();
 
-var harvestables : Array[Harvestable];
-var structures : Array[Structure];
-var colonists : Array[Colonist];
-
-func _ready():
-	visible = false;
-	harvest_bn.visible = false;
-	produce_bn.visible = false;
-
-#region Allocations
-func allocate_resources(selection : Array) -> void:
-	harvestables.clear();
-	structures.clear();
-	colonists.clear();
-	for s in selection:
-		if (s is Structure):
-			structures.push_back(s);
+func hide_actions() -> void:
+	structure_actions.visible = false;
+	harvest_actions.visible = false;
+func show_actions(selection : Array) -> void:
+	hide_actions();
+	for n in selection:
+		var o = n.get_parent();
+		if (o is Structure):
+			structure_actions.visible = true;
 			continue;
-		if (s is Colonist):
-			colonists.push_back(s);
+		if (o is WorldResource):
+			harvest_actions.visible = true;
 			continue;
-		if (s is Harvestable):
-			harvestables.push_back(s);
-			continue;
-func allocate_desc() -> void:
-	desc.text = "
-	Harvestables: %s\n
-	Structures: %s\n
-	Colonists: %s\n
-	" % [harvestables.size(), structures.size(), colonists.size()];
-func allocate_buttons() -> void:
-	produce_bn.visible = !structures.is_empty();
-	harvest_bn.visible = !harvestables.is_empty();
-#endregion
 
-#region Signals
-func callback_selector_select(selection):
-	if (selection.is_empty()): return;
-	print(selection);
-	allocate_resources(selection);
-	allocate_desc();
-	allocate_buttons();
-	visible = true;
-func callback_selector_deselect():
-	visible = false;
-func callback_extend_harvest_pressed():
-	sig_ext_harvest.emit(harvestables);
+#region BACKUP
+#@onready var multiple_selection : Control = $"Multiple Selection"
+##region Filters
+#@onready var filter_structures : Button = $"Multiple Selection/Filter Buttons/Filter Structures"
+#@onready var filter_harvestables : Button = $"Multiple Selection/Filter Buttons/Filter Harvestables"
+#@onready var filter_colonists : Button = $"Multiple Selection/Filter Buttons/Filter Colonists"
+##endregion
+##region Action Containers
+#@onready var structure_actions : Button = $"Single Selection/Actions/Structure Actions"
+#@onready var harvestable_actions : Button = $"Single Selection/Actions/Harvestable Actions"
+##endregion
+#
+#func _sig_select_from_selector(selection : Array):
+	#var multiple : bool = determine_multiple(selection);
+	#multiple_selection.visible = multiple;
+#
+#func determine_multiple(selection : Array) -> bool:
+	#var types : int = 0;
+	#for n in selection:
+		#if (n is Structure and not filter_structures.visible):
+			#filter_structures.visible = true;
+			#types += 1;
+			#continue;
+		#if (n is WorldResource and not filter_harvestables.visible):
+			#filter_harvestables.visible = true;
+			#types += 1;
+			#continue;
+		## TODO Filter Colonists
+	#return types > 1;
+#
+#func _pressed_from_filter_structures():
+	#structure_actions.visible = true;
+#func _pressed_from_filter_harvestables():
+	#harvestable_actions.visible = true;
 #endregion

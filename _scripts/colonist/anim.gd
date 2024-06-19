@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 
-class_name C_Anim;
+## Attached to a Worker's AnimatedSprite2D
+class_name CAnim;
 
 enum ANIMATIONS
 {

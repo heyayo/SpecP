@@ -4,32 +4,23 @@ class_name ConstructionMark
 
 @onready var bg_progress : ColorRect = $BG_Progress;
 @onready var fg_progress : ColorRect = $FG_Progress;
+@onready var timer = $Timer
 
-var data : Construct = null;
-var progress : int = 0;
+var cost : int = 10;
 
 func _ready() -> void:
-	resize_bar();
+	resize_bar(0);
 	get_parent().add_to_group(Common.group_construction);
-
-func make(blueprint : Construct) -> ConstructionMark:
-	data = blueprint;
-	return self;
-
-func tick_progress(amount : int) -> void:
-	progress += amount;
-	progress = clamp(progress,0,data.work_cost);
-	resize_bar();
-	if (progress >= data.work_cost):
-		finish();
-		queue_free();
-func resize_bar() -> void:
-	var perc : float = progress as float / data.work_cost as float;
+	timer.wait_time = cost;
+	timer.start();
+	get_parent().get_node("Sprite2D").self_modulate = Color.DEEP_PINK;
+func _process(_delta) -> void:
+	resize_bar(cost as float - timer.time_left);
+func resize_bar(progress : float) -> void:
+	var perc : float = progress / cost as float;
 	fg_progress.scale = Vector2(perc,1);
-
-func finish() -> void:
-	# TODO Spawn Purpose
-	pass;
-
-func interact() -> void:
-	pass
+func _timeout_from_timer():
+	var structure : Structure = get_parent();
+	structure.get_node("Sprite2D").self_modulate = Color.WHITE;
+	structure.finish_construction();
+	queue_free();

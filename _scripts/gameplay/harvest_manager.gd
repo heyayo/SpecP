@@ -19,7 +19,7 @@ func remove_harvestable(harvestable : Harvestable) -> void:
 	harvestable.queue_free();
 func harvest(harvestable : Harvestable) -> void:
 	for drop in harvestable.data.drops:
-		# TODO Drop items on harvest
+		# TODO Drop items on harvest LEGACY
 		break;
 	remove_harvestable(harvestable);
 

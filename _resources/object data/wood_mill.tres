@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WorldObject" load_steps=2 format=3 uid="uid://bdpoc16c6hcs5"]
+
+[ext_resource type="Script" path="res://_scripts/world_object.gd" id="1_7ors6"]
+
+[resource]
+script = ExtResource("1_7ors6")
+name = "Wood Mill"
+desc = "Harvests Wood from surrounding trees"
