@@ -4,7 +4,9 @@ extends Node
 const group_structure : StringName = "Structure";
 const group_construction : StringName = "Construction";
 const group_resource : StringName = "Resource";
-const group_unit : StringName = "Unit";
+const group_faction_friendly : StringName = "FN Friendly";
+const group_faction_wild : StringName = "FN Wild";
+const group_faction_bandit : StringName = "FN Bandit"
 #endregion
 #region Collision Layer Constants
 const layer_selectable : int = 16;

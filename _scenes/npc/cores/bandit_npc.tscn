@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://comlb41utkawe"]
+
+[ext_resource type="Script" path="res://_scenes/npc/cores/bandit_npc.gd" id="1_terk3"]
+[ext_resource type="PackedScene" uid="uid://bu8fvflbob7sy" path="res://_scenes/prefabs/range.tscn" id="2_j1sao"]
+
+[node name="BanditNPC" type="Node2D"]
+script = ExtResource("1_terk3")
+
+[node name="Sight" parent="." instance=ExtResource("2_j1sao")]
+collision_mask = 4096

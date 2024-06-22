@@ -2,6 +2,7 @@ class_name Tracker
 
 # Collision Tracker Class
 # A Structure for keeping track of unique collision objects
+## Should probably combine with [Detection] class
 
 var collection : Array = [];
 

@@ -26,7 +26,7 @@ func _unhandled_input(_event : InputEvent) -> void:
 		selecting = false;
 		reset_selector();
 		interact_menu.show_actions(persist.collection);
-		overseer.units = get_units();
+		overseer.units = get_friendly_units();
 	if (Input.is_action_just_pressed("Left_Click")):
 		clear_highlights();
 		persist.collection.clear();
@@ -104,10 +104,19 @@ func _pressed_from_bills():
 func get_units() -> Array[Unit]:
 	var array : Array[Unit] = [];
 	for n in persist.collection:
+		if (!is_instance_valid(n)): continue;
 		var o = n.get_parent();
 		if (o is Unit):
 			array.push_back(o);
 	return array;
+func get_friendly_units() -> Array[Unit]:
+	var friendly : Array[Unit] = [];
+	for n in persist.collection:
+		if (!is_instance_valid(n)): continue;
+		var o = n.get_parent();
+		if (o.is_in_group(Common.group_faction_friendly)):
+			friendly.push_back(o);
+	return friendly;
 func get_structures() -> Array[Structure]:
 	var array : Array[Structure] = [];
 	for n in persist.collection:

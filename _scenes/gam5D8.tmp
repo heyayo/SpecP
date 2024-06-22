@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://_scenes/overseer.gd" id="4_6rlxo"]
 [ext_resource type="Texture2D" uid="uid://crpy06mncl4ws" path="res://_sprites/blank.jpg" id="4_6751o"]
 [ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="5_dabfu"]
-[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="6_cqo5o"]
+[ext_resource type="PackedScene" uid="uid://bsdwi70107p8w" path="res://_scenes/npc/cores/friendly_npc.tscn" id="6_jkl02"]
 [ext_resource type="Script" path="res://_scripts/gameplay/camera.gd" id="7_e0ybk"]
 [ext_resource type="Script" path="res://_scripts/gameplay/action_menu.gd" id="9_31up8"]
 [ext_resource type="Texture2D" uid="uid://cf1co6dtcf0ig" path="res://_sprites/resource_icons/Material/Wood Log.png" id="10_51fdt"]
@@ -63,40 +63,14 @@ collision_mask = 4096
 [node name="Click Area" type="CollisionShape2D" parent="Overseer/Click Detect"]
 shape = SubResource("RectangleShape2D_00bmb")
 
-[node name="Swordsman" parent="Overseer" groups=["FN Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(104, 32)
-collision_layer = 1
-collision_mask = 1
+[node name="Swordsman" parent="Overseer" node_paths=PackedStringArray("npc") groups=["FN Friendly"] instance=ExtResource("5_dabfu")]
+position = Vector2(96, 24)
+npc = NodePath("FriendlyNPC")
 
-[node name="Swordsman3" parent="Overseer" groups=["FN Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(80, -8)
-collision_layer = 1
-collision_mask = 1
-
-[node name="Swordsman4" parent="Overseer" groups=["FN Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(64, 56)
-collision_layer = 1
-collision_mask = 1
-
-[node name="Swordsman5" parent="Overseer" groups=["FN Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(136, 32)
-collision_layer = 1
-collision_mask = 1
-
-[node name="Swordsman6" parent="Overseer" groups=["FN Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(120, 72)
-collision_layer = 1
-collision_mask = 1
+[node name="FriendlyNPC" parent="Overseer/Swordsman" instance=ExtResource("6_jkl02")]
 
 [node name="Swordsman2" parent="Overseer" groups=["FN Bandit"] instance=ExtResource("5_dabfu")]
-position = Vector2(128, -120)
-collision_layer = 1
-collision_mask = 1
-base_speed = 5.0
-slowdown = 2.0
-base_damage = 50.0
-
-[node name="BanditNPC" parent="Overseer/Swordsman2" instance=ExtResource("6_cqo5o")]
+position = Vector2(128, -32)
 
 [node name="Selector" type="Area2D" parent="." node_paths=PackedStringArray("interact_menu", "bills", "overseer")]
 collision_layer = 0
