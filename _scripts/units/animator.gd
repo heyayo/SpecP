@@ -33,6 +33,9 @@ func reset() -> void:
 	else:
 		set_anim(ANIMS.idle);
 	attacking = false;
+func get_preview_texture() -> Texture:
+	var texture : Texture = sprite_frames.get_frame_texture("idle",0);
+	return texture;
 
 func _on_animation_finished():
 	attacking = false;

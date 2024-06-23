@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="HostileStats" load_steps=2 format=3 uid="uid://5sxq1ppndxll"]
+
+[ext_resource type="Script" path="res://_scripts/resources/hostile_stats.gd" id="1_sobqy"]
+
+[resource]
+script = ExtResource("1_sobqy")
+aggro_range = 10

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StructureData" load_steps=2 format=3 uid="uid://c2gd44l0bqvp4"]
+
+[ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="1_gegrr"]
+
+[resource]
+script = ExtResource("1_gegrr")
+name = "Wood Mill"
+desc = "Harvests Trees from the surroundings"
+work = 1
+wood = 0
+food = 0
+stone = 100
+metal = 0

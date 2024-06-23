@@ -4,7 +4,6 @@ class_name Game
 
 @onready var tilemap : TileMap = $TileMap;
 @onready var resources : MResource = $Resources
-@onready var overseer : Overseer = $Overseer
 
 const tile_size = 16;
 func get_hover_position() -> Vector2i:
@@ -24,6 +23,8 @@ func give_resource(type : Common.RESOURCE_TYPE, amount : int) -> void:
 			resources.food += amount;
 		Common.RESOURCE_TYPE.STONE:
 			resources.stone += amount;
+		Common.RESOURCE_TYPE.METAL:
+			resources.metal += amount;
 func deduct_resource(type : Common.RESOURCE_TYPE, amount : int) -> void:
 	match (type):
 		Common.RESOURCE_TYPE.WOOD:
@@ -32,12 +33,22 @@ func deduct_resource(type : Common.RESOURCE_TYPE, amount : int) -> void:
 			resources.food -= amount;
 		Common.RESOURCE_TYPE.STONE:
 			resources.stone -= amount;
-func adjust_resources(wood : int, food : int, stone : int) -> void:
+		Common.RESOURCE_TYPE.METAL:
+			resources.metal -= amount;
+func adjust_resources(wood : int, food : int, stone : int, metal : int) -> void:
 	resources.wood += wood;
 	resources.food += food;
 	resources.stone += stone;
+	resources.metal += metal;
+func adjust_structure_cost(cost : StructureData) -> void:
+	resources.wood -= cost.wood;
+	resources.food -= cost.food;
+	resources.stone -= cost.stone;
+	resources.metal -= cost.metal;
 #endregion
 #region Units
 func spawn_unit(unit : Unit) -> void:
-	overseer.add_child(unit);
+	add_child(unit);
+func spawn_friendly(unit : Unit) -> void:
+	add_child(unit);
 #endregion

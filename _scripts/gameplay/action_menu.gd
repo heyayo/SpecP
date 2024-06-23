@@ -16,7 +16,7 @@ class_name ActionsMenu
 func _ready():
 	fill_actions();
 	visible = false;
-	cost_preview(0,0,0);
+	cost_preview(StructureData.new());
 func _input(_event : InputEvent) -> void:
 	if (Input.is_action_just_pressed("Right_Click")):
 		disable();
@@ -34,29 +34,31 @@ func fill_actions() -> void:
 		button.mouse_entered.connect(hover_details.bind(wo)); ## Display Structure on Hover
 		button.pressed.connect(action_pressed.bind(wo)); ## Send Build Request onclick
 #region Action Button Callbacks
-func hover_details(object : Structure) -> void:
+func hover_details(structure : Structure) -> void:
 	## Sets Identification Labels
-	name_label.text = object.object_data.name;
-	desc_label.text = object.object_data.desc;
-	cost_preview(object.wood,object.food,object.stone); ## Sets Cost Label
-	sprite_preview(object);
+	name_label.text = structure.data.name;
+	desc_label.text = structure.data.desc;
+	cost_preview(structure.data); ## Sets Cost Label
+	sprite_preview(structure);
 func action_pressed(object : Structure) -> void:
 	# TODO UI for deny
 	if (not cost_check(object)): return; ## Denies Build Request if they cannot afford it
 	builder.start_preview(object); ## Begins Build Request
 	visible = false; ## Hides Menu
 func cost_check(structure : Structure) -> bool:
-	if (structure.wood > resources.wood): return false;
-	if (structure.food > resources.food): return false;
-	if (structure.stone > resources.stone): return false;
+	var cost : StructureData = structure.data;
+	if (cost.wood > resources.wood): return false;
+	if (cost.food > resources.food): return false;
+	if (cost.stone > resources.stone): return false;
+	if (cost.metal > resources.metal): return false;
 	return true;
 # TODO Fourth Resource
-func cost_preview(wood : int, food: int, stone: int) -> void:
+func cost_preview(costs : StructureData) -> void:
 	costs_label.text = "
 	Wood: %s
 	Food: %s
 	Stone: %s
-	" % [wood,food,stone];
+	" % [costs.wood,costs.food,costs.stone];
 func sprite_preview(structure : Structure) -> void:
 	var sprite : Texture = structure.get_node("Sprite2D").texture;
 	sprite_textrect.texture = sprite;

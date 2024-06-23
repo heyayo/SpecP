@@ -20,6 +20,7 @@ func _input(_event : InputEvent) -> void:
 			move_units();
 
 func move_units() -> void:
+	#get_tree().call_group(Common.group_controllable,"move_unit",get_global_mouse_position());
 	var dead : Array[Unit] = [];
 	for u : Unit in units:
 		if (!is_instance_valid(u)):
@@ -33,7 +34,7 @@ func attack_units(target : Unit) -> void:
 		u.force_attack(target); ## TODO Normal Attack
 func is_over_hostile() -> Unit:
 	for u in detect.collection:
-		if (u is Unit and !u.is_in_group(Common.group_faction_friendly)):
+		if (u is Unit and !u.is_in_group(Common.group_friendly)):
 			return u;
 			break;
 	return null;

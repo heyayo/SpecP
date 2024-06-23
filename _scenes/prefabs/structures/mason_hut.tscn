@@ -1,37 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsbt72e0uiehs"]
+[gd_scene load_steps=7 format=3 uid="uid://c3agpxcpq858p"]
 
 [ext_resource type="Script" path="res://_scripts/structures/resource_structure.gd" id="1_do786"]
+[ext_resource type="PackedScene" uid="uid://br5pqkvwr7yj3" path="res://_scenes/prefabs/structures/template_structure.tscn" id="1_phuoy"]
 [ext_resource type="Texture2D" uid="uid://4ll7qoq8t2re" path="res://_sprites/structures/mason_hut.png" id="2_g7vtd"]
-[ext_resource type="Script" path="res://_scripts/world_object.gd" id="2_i5fla"]
-[ext_resource type="PackedScene" uid="uid://nlup42k1sgdo" path="res://_scenes/prefabs/selectable.tscn" id="3_wkd1y"]
+[ext_resource type="Resource" uid="uid://6a5rgp3li4kb" path="res://_resources/structure data/mason_hut.tres" id="3_e002f"]
+[ext_resource type="Resource" uid="uid://cs6bqwqy6ytru" path="res://_resources/structure data/harvest stats/mason_hut.tres" id="3_e745o"]
 
-[sub_resource type="Resource" id="Resource_x4tf8"]
-script = ExtResource("2_i5fla")
-name = ""
-desc = ""
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mitmy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2h45g"]
 size = Vector2(48, 64)
 
-[node name="Mason Hut" type="StaticBody2D"]
-collision_layer = 16384
-collision_mask = 0
+[node name="Mason Hut" instance=ExtResource("1_phuoy")]
 script = ExtResource("1_do786")
-resource_type = 2
-harvest_range = 5
-harvest_rate = 5
-object_data = SubResource("Resource_x4tf8")
-wood = 100
+stats = ExtResource("3_e745o")
+data = ExtResource("3_e002f")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_g7vtd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_mitmy")
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_2h45g")
 
-[node name="Selectable" parent="." instance=ExtResource("3_wkd1y")]
+[node name="Selectable" parent="." index="2"]
 scale = Vector2(3, 4)
-
-[node name="Resource Timer" type="Timer" parent="."]
-
-[connection signal="timeout" from="Resource Timer" to="." method="_timeout_from_resource_timer"]

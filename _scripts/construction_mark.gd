@@ -10,7 +10,6 @@ var cost : int = 10;
 
 func _ready() -> void:
 	resize_bar(0);
-	get_parent().add_to_group(Common.group_construction);
 	timer.wait_time = cost;
 	timer.start();
 	get_parent().get_node("Sprite2D").self_modulate = Color.DEEP_PINK;

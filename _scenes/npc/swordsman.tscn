@@ -1,15 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://yspwggco06v7"]
+[gd_scene load_steps=3 format=3 uid="uid://yspwggco06v7"]
 
 [ext_resource type="PackedScene" uid="uid://l2qsl86i3nn6" path="res://_scenes/npc/template_unit.tscn" id="1_mwmob"]
-[ext_resource type="Script" path="res://_scripts/world_object.gd" id="2_cfqbo"]
-
-[sub_resource type="Resource" id="Resource_cc34v"]
-script = ExtResource("2_cfqbo")
-name = "Swordsman"
-desc = ""
+[ext_resource type="Resource" uid="uid://bcjxf15ntcwo4" path="res://_resources/unit_data/friendly/swordsman.tres" id="2_h7l17"]
 
 [node name="Swordsman" instance=ExtResource("1_mwmob")]
-object_data = SubResource("Resource_cc34v")
+data = ExtResource("2_h7l17")
 
 [node name="Animator" parent="." index="1"]
 scale = Vector2(0.681818, 0.681818)

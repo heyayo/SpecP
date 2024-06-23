@@ -53,9 +53,6 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("18_h4vt7")
 labels = NodePath("../Interface/Resources")
 
-[node name="Timer" type="Timer" parent="Resources"]
-autostart = true
-
 [node name="Overseer" type="Node2D" parent="."]
 script = ExtResource("4_6rlxo")
 
@@ -118,7 +115,7 @@ game = NodePath("..")
 
 [node name="PreviewArea" type="Area2D" parent="Builder"]
 collision_layer = 0
-collision_mask = 16384
+collision_mask = 32768
 
 [node name="PreviewShape" type="CollisionShape2D" parent="Builder/PreviewArea"]
 shape = SubResource("RectangleShape2D_61juq")
@@ -533,10 +530,7 @@ clip_text = true
 position = Vector2(-85, 50)
 
 [node name="Base" parent="." instance=ExtResource("16_rh54v")]
-collision_layer = 1
-collision_mask = 1
 
-[connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="body_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]
 [connection signal="body_exited" from="Overseer/Click Detect" to="Overseer" method="_body_exited_from_click_detect"]
 [connection signal="area_entered" from="Selector" to="Selector" method="_enter_area"]

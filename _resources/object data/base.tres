@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="WorldObject" load_steps=2 format=3 uid="uid://bvda5dbajbs62"]
-
-[ext_resource type="Script" path="res://_scripts/world_object.gd" id="1_jswx8"]
-
-[resource]
-script = ExtResource("1_jswx8")
-name = "Base"
-desc = "A Base for all your soldiers"

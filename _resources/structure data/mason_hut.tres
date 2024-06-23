@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StructureData" load_steps=2 format=3 uid="uid://6a5rgp3li4kb"]
+
+[ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="1_ywxjf"]
+
+[resource]
+script = ExtResource("1_ywxjf")
+name = "Mason Hut"
+desc = "Mines Stone from surroundings"
+work = 1
+wood = 100
+food = 0
+stone = 0
+metal = 0

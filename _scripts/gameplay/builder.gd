@@ -1,7 +1,7 @@
 extends Node2D
 
 class_name Builder
-
+## TODO Prevent Out of Bounds Building
 var con_mark : PackedScene = preload("res://_scenes/prefabs/construction_mark.tscn")
 
 #region Children
@@ -43,14 +43,14 @@ func place_building() -> void: ## Places the building in the world and begins it
 	b.global_position = game.get_hover_position();
 	## Add Construction Mark
 	var mark : ConstructionMark = con_mark.instantiate();
-	mark.cost = b.work_cost;
+	mark.cost = b.data.work;
 	b.add_child(mark);
 	## Resource Building Signal Connection
 	if (b is ResourceStructure):
 		var res_struct : ResourceStructure = b as ResourceStructure;
 		res_struct.sig_harvest.connect(game.give_resource);
 	## Deduct Resources
-	game.adjust_resources(-b.wood,-b.food,-b.stone);
+	game.adjust_structure_cost(b.data);
 #region Preview Functions
 func start_preview(building : Structure) -> void: ## Prepare the Build Preview
 	selector.disable(); ## Disable Selector
@@ -58,16 +58,14 @@ func start_preview(building : Structure) -> void: ## Prepare the Build Preview
 	## Set Preview Texture
 	var bSprite : Sprite2D = building.get_node("Sprite2D");
 	preview_sprite.texture = bSprite.texture;
-	## Set Preview Collision Size
-	var shape : RectangleShape2D = preview_shape.shape;
-	var size : Vector2i = bSprite.texture.get_size();
-	size -= Vector2i(1,1);
-	shape.size = size;
+	resize_preview(bSprite.texture.get_size());
 	## Make Preview Visible and Sets Initial Color
 	preview_area.visible = true;
-	resource_area.visible = true;
 	update_preview_modulation();
-	## Enables Builder Functions
+	## Resource Structure Preview
+	if (building is ResourceStructure):
+		resource_area.visible = true;
+		update_resource_modulation();
 	enable();
 func stop_preview() -> void:
 	selector.enable(); ## Enable Selector
@@ -75,6 +73,14 @@ func stop_preview() -> void:
 	preview_area.visible = false; ## Hides Preview Sprite
 	resource_area.visible = false;
 	disable();
+#endregion
+#region Preview Preparation
+func resize_preview(size : Vector2i) -> void:
+	var shape : RectangleShape2D = preview_shape.shape;
+	size -= Vector2i(1,1);
+	shape.size = size;
+#endregion
+#region Modulation
 func update_preview_modulation() -> void:
 	preview_sprite.modulate = Color.GREEN if preview_track.collection.is_empty() else Color.RED;
 func update_resource_modulation() -> void:

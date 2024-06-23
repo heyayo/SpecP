@@ -3,14 +3,14 @@ extends Area2D
 class_name Selector
 
 #region External
-@export var interact_menu : InteractMenu;
-@export var bills : Bills;
-@export var overseer : Overseer;
-#endregion
+@onready var interact_menu : InteractMenu = $"../Interface/Interact Menu"
+@onready var overseer : Overseer = $"../Overseer"
+@onready var bills : Bills = $"../Interface/Bills"
 @onready var base = $"../Base"
+#endregion
 
 var tracker : Tracker = Tracker.new();
-var persist : Tracker = Tracker.new();
+var selection : Array = [];
 var selecting : bool = false;
 # FIXME Selection Glitches | Selection sometimes unresponsive, demolish button double takes
 func _ready() -> void:
@@ -20,27 +20,27 @@ func _input(_event : InputEvent) -> void:
 		resize_selector();
 func _unhandled_input(_event : InputEvent) -> void:
 	if (Input.is_action_just_released("Left_Click")):
-		persist.collection = tracker.collection.duplicate();
+		selection = tracker.collection.duplicate();
 		highlight_selected();
-		visible = false;
-		selecting = false;
 		reset_selector();
-		interact_menu.show_actions(persist.collection);
+		
+		interact_menu.show_actions(selection);
 		overseer.units = get_friendly_units();
 	if (Input.is_action_just_pressed("Left_Click")):
 		clear_highlights();
-		persist.collection.clear();
-		visible = true;
-		selecting = true;
+		selection.clear();
 		start_selector();
+		
 		interact_menu.hide_actions();
 #region Highlighting
 func highlight_selected() -> void:
-	for n : Selectable in persist.collection:
+	for n : Selectable in selection:
+		print(n.get_parent());
 		n.enable();
 func clear_highlights() -> void:
-	for n : Selectable in persist.collection:
-		n.disable();
+	get_tree().call_group(Common.group_selectable,"disable");
+	#for n : Selectable in selection:
+		#n.disable();
 #endregion
 #region Selector Functions
 const min_drag_distance : int = 8;
@@ -56,9 +56,13 @@ func resize_selector() -> void:
 	scale = diff;
 func reset_selector() -> void:
 	scale = Vector2(1,1);
+	visible = false;
+	selecting = false;
 func start_selector() -> void:
 	global_position = get_global_mouse_position();
 	start_position = global_position;
+	visible = true;
+	selecting = true;
 #endregion
 #region Area2D Signals
 func _enter_area(body):
@@ -77,33 +81,22 @@ func disable() -> void:
 #endregion
 #region Action Button Callbacks
 func _pressed_from_demolish():
-	var duplicate : Array = persist.collection.duplicate();
+	var duplicate : Array = selection.duplicate();
 	for n in duplicate:
 		var o = n.get_parent();
 		if (o is Structure):
 			if (o == base):
-				print("%s | Cannot Demolish" % o.object_data.name);
+				print("%s | Cannot Demolish" % o.data.name);
 				# TODO UI Notifications
 				continue;
 			o.queue_free();
-			persist.collection.erase(n);
-			interact_menu.show_actions(persist.collection);
-func _pressed_from_bills():
-	if (bills.visible):
-		bills.disable();
-		return;
-	bills.enable();
-	bills.clear_bills();
-	for n in persist.collection:
-		var o = n.get_parent();
-		if (o is UnitStructure):
-			var unit_struct : UnitStructure = o as UnitStructure;
-			bills.build_bills(unit_struct.units, unit_struct);
+			selection.erase(n);
+			interact_menu.show_actions(selection);
 #endregion
 #region Filters
 func get_units() -> Array[Unit]:
 	var array : Array[Unit] = [];
-	for n in persist.collection:
+	for n in selection:
 		if (!is_instance_valid(n)): continue;
 		var o = n.get_parent();
 		if (o is Unit):
@@ -111,15 +104,15 @@ func get_units() -> Array[Unit]:
 	return array;
 func get_friendly_units() -> Array[Unit]:
 	var friendly : Array[Unit] = [];
-	for n in persist.collection:
+	for n in selection:
 		if (!is_instance_valid(n)): continue;
 		var o = n.get_parent();
-		if (o.is_in_group(Common.group_faction_friendly)):
+		if (o.is_in_group(Common.group_friendly)):
 			friendly.push_back(o);
 	return friendly;
 func get_structures() -> Array[Structure]:
 	var array : Array[Structure] = [];
-	for n in persist.collection:
+	for n in selection:
 		var o = n.get_parent();
 		if (o is Structure):
 			array.push_back(o);

@@ -2,6 +2,10 @@ extends ColorRect
 
 class_name Bills
 
+#region Modules
+@onready var selector : Selector = $"../../Selector"
+#endregion
+
 #region Preview
 @onready var unit_name = $Preview/Title
 @onready var unit_description = $Preview/Description
@@ -29,7 +33,7 @@ func build_bills(units : Array[PackedScene], origin : UnitStructure) -> void:
 	for u in units:
 		var unit : Unit = u.instantiate();
 		var b : Button = Button.new();
-		b.text = unit.object_data.name;
+		b.text = unit.data.name;
 		b.clip_text = true;
 		buttons.add_child(b);
 		b.custom_minimum_size = Vector2(buttons_parent.size.x,25);
@@ -39,10 +43,10 @@ func build_bills(units : Array[PackedScene], origin : UnitStructure) -> void:
 #endregion
 #region Signal Callbacks
 func bill_hovered(unit : Unit, origin : UnitStructure) -> void:
-	unit_name.text = unit.object_data.name;
-	unit_description.text = unit.object_data.desc;
-	unit_origin.text = "Originates From\n%s" % origin.object_data.name;
-	unit_preview.texture = unit.get_node("Sprite2D").texture;
+	unit_name.text = unit.data.name;
+	unit_description.text = unit.data.desc;
+	unit_origin.text = "Originates From\n%s" % origin.data.name;
+	unit_preview.texture = unit.get_node("Animator").get_preview_texture();
 func bill_pressed(unit : Unit, origin : UnitStructure) -> void:
 	origin.queue_training(unit);
 #endregion
@@ -57,3 +61,16 @@ func disable() -> void:
 	set_process_input(false);
 	visible = false;
 #endregion
+
+func _pressed_from_bills():
+	if (visible):
+		disable();
+		return;
+	enable();
+	clear_bills();
+	var selection = selector.selection;
+	for n in selection:
+		var o = n.get_parent();
+		if (o is UnitStructure):
+			var unit_struct : UnitStructure = o as UnitStructure;
+			build_bills(unit_struct.units, unit_struct);

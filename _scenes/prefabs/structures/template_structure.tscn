@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://br5pqkvwr7yj3"]
+
+[ext_resource type="PackedScene" uid="uid://nlup42k1sgdo" path="res://_scenes/prefabs/selectable.tscn" id="1_fkfts"]
+
+[node name="TemplateStructure" type="Area2D" groups=["Structure"]]
+collision_layer = 4096
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Selectable" parent="." instance=ExtResource("1_fkfts")]
