@@ -2,6 +2,9 @@ extends Area2D
 
 class_name Selectable
 
+signal sig_enable;
+signal sig_disable;
+
 func _ready() -> void:
 	collision_layer = 0;
 	collision_mask = 0;
@@ -12,6 +15,8 @@ func _ready() -> void:
 #region Enable/Disable
 func enable() -> void:
 	visible = true;
+	sig_enable.emit();
 func disable() -> void:
 	visible = false;
+	sig_disable.emit();
 #endregion

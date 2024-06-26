@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WorldConfiguration" load_steps=2 format=3 uid="uid://koit31muys02"]
+
+[ext_resource type="Script" path="res://_scripts/resources/world_configuration.gd" id="1_5yygh"]
+
+[resource]
+script = ExtResource("1_5yygh")
+world_size = Vector2i(250, 250)
+tree_frequency = 0.0
+stone_frequency = 0.0

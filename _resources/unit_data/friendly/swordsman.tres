@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="UnitStats" load_steps=2 format=3 uid="uid://bcjxf15ntcwo4"]
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://bcjxf15ntcwo4"]
 
 [ext_resource type="Script" path="res://_scripts/resources/unit_stats.gd" id="1_1tdj7"]
+[ext_resource type="Texture2D" uid="uid://ysu0yhmffrk2" path="res://_sprites/colonist/sword/Attack/Warrior_Attack_3.png" id="1_eqf84"]
 
 [resource]
 script = ExtResource("1_1tdj7")
 name = "Swordsman"
 desc = "A Swordsman"
+preview = ExtResource("1_eqf84")
 training_time = 1
 health = 100.0
 damage = 50.0
@@ -14,3 +16,4 @@ max_health = 100.0
 range = 3
 alert_range = 5
 slowdown = 2.0
+cooldown = 0.1

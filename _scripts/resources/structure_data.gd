@@ -12,3 +12,6 @@ class_name StructureData
 @export var stone : int = 0;
 @export var metal : int = 0;
 #endregion
+#region Stats
+@export var max_health : int = 100;
+#endregion

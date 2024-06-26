@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://77tuq5wky1j2"]
+
+[ext_resource type="Texture2D" uid="uid://cy5cwt5q6m6ln" path="res://_sprites/colonist/archer/idle/idle_1.png" id="1_wcolf"]
+[ext_resource type="Script" path="res://_scripts/resources/unit_stats.gd" id="2_2uqc6"]
+
+[resource]
+script = ExtResource("2_2uqc6")
+name = "Archer"
+desc = ""
+preview = ExtResource("1_wcolf")
+training_time = 1
+damage = 25.0
+speed = 8.0
+max_health = 75.0
+range = 25
+slowdown = 1.5
+cooldown = 0.75

@@ -49,6 +49,8 @@ func adjust_structure_cost(cost : StructureData) -> void:
 #region Units
 func spawn_unit(unit : Unit) -> void:
 	add_child(unit);
+	unit.add_to_group(Common.group_unit);
 func spawn_friendly(unit : Unit) -> void:
 	add_child(unit);
+	unit.add_to_group(Common.group_friendly);
 #endregion

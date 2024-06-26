@@ -7,3 +7,4 @@ script = ExtResource("1_73yio")
 type = 0
 range = 5
 amount = 10
+required_amount = 10

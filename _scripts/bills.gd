@@ -46,7 +46,10 @@ func bill_hovered(unit : Unit, origin : UnitStructure) -> void:
 	unit_name.text = unit.data.name;
 	unit_description.text = unit.data.desc;
 	unit_origin.text = "Originates From\n%s" % origin.data.name;
-	unit_preview.texture = unit.get_node("Animator").get_preview_texture();
+	if (unit.data.preview != null):
+		unit_preview.texture = unit.data.preview;
+	else:
+		unit_preview.texture = unit.get_node("Animator").get_preview_texture();
 func bill_pressed(unit : Unit, origin : UnitStructure) -> void:
 	origin.queue_training(unit);
 #endregion

@@ -2,6 +2,7 @@ extends Node2D
 
 @export var tile_size : Vector2i;
 @export_dir var output_dir : String;
+@export var output_name : String;
 
 var tilemap : TileMap;
 var window : Window;
@@ -32,5 +33,5 @@ func resize_window():
 
 func save_viewport():
 	var image : Image = viewport.get_texture().get_image();
-	image.save_png(output_dir + "/output.png");
+	image.save_png(output_dir + "/%s.png" % output_name);
 	print("Saved Viewport to %s" % output_dir);

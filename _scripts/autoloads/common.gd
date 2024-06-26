@@ -1,7 +1,6 @@
 extends Node
 
 #region Group Constants
-const group_controllable : StringName = "Controllable";
 const group_friendly : StringName = "Friendly";
 const group_hostile : StringName = "Hostile";
 const group_unit : StringName = "Unit";
@@ -13,6 +12,15 @@ const layer_selectable : int = 16;
 const layer_structure : int = 15;
 const layer_resource : int = 14;
 const layer_unit : int = 13;
+#endregion
+
+#region Render Ordering
+## Basic | 0
+## Selector Highlight | 8
+## Preview Sprite | 2
+## Resource Sprite | 1
+## Units | 4
+## Resources and Structures | 3
 #endregion
 
 ## ARRAY of All Structures in the game

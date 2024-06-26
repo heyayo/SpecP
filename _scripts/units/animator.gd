@@ -13,6 +13,8 @@ enum ANIMS
 var c_anim : ANIMS = ANIMS.idle;
 var attacking : bool = false;
 
+func _ready() -> void:
+	animation = "idle";
 func _process(_delta) -> void:
 	var v : Vector2 = body.velocity;
 	flip_h = false if v.x > 0 else true;

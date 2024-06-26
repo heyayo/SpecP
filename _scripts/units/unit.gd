@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 class_name Unit
 
 #region Modules
@@ -7,6 +6,7 @@ class_name Unit
 @onready var sprite : Animator = $Animator;
 @onready var walk_area : Detection = $"Walk Area";
 @onready var attack_area : Detection = $"Attack Area";
+@onready var attack_node = $Attack;
 #endregion
 
 @export_category("Unit Info")
@@ -17,10 +17,21 @@ var health : float :
 	get: return health;
 	set(value):
 		health = value;
-		health = clamp(health,0,data.health);
+		health = clamp(health,0,data.max_health);
 		if (health <= 0):
 			queue_free();
-var target : Unit = null;
+var target = null;
+
+## TODO
+# Rewrite Pathing with Passive/Aggressive Toggle
+# Passive | Attack only on specified
+# Aggressive | Attack all in range
+# Specified Attack | Chase on exit
+# Stop chasing when target is dead
+#region NEW Pathing
+var desired_target = null; ## The attacking target
+var desired_position : Vector2;
+#endregion
 
 func _ready() -> void:
 	set_collision_layer_value(Common.layer_unit,true);
@@ -29,10 +40,14 @@ func _ready() -> void:
 	attack_area.scale = data.unitrange();
 	## Apply Defaults
 	speed = data.speed;
-	health = data.health;
+	health = data.max_health;
+	attack_node.cooldown = data.cooldown;
 func _physics_process(_delta) -> void:
 	if (nav_agent.is_navigation_finished()): return;
-	apply_velocity();
+	if (sprite.attacking or attack_area.is_in_range(target)):
+		velocity = Vector2.ZERO;
+	else:
+		apply_velocity();
 func _process(_delta) -> void:
 	apply_slowdown();
 	if (!is_instance_valid(target)): target = null;
@@ -42,14 +57,19 @@ func _process(_delta) -> void:
 #region Behaviours
 func attack_bev() -> void:
 	if (attack_area.is_in_range(target)):
-		sprite.attack();
+		if (!attack_node.on_cooldown):
+			sprite.attack();
+			attack_node.attack(target,data.damage);
 	else:
 		move_to(target.global_position);
 #endregion
 #region External
 func move_to(pos : Vector2) -> void:
 	nav_agent.target_position = pos;
-func force_attack(unit : Unit) -> void:
+func stop_move_to(pos : Vector2) -> void:
+	move_to(pos);
+	target = null;
+func force_attack(unit) -> void:
 	sprite.reset();
 	apply_target(unit);
 #endregion
@@ -57,7 +77,7 @@ func force_attack(unit : Unit) -> void:
 func apply_null_target() -> void:
 	target = null;
 	move_to(global_position);
-func apply_target(unit : Unit) -> void:
+func apply_target(unit) -> void:
 	if (target == unit): return;
 	target = unit;
 	move_to(target.global_position);
@@ -72,9 +92,10 @@ func apply_slowdown() -> void:
 		speed = data.speed / data.slowdown;
 #endregion
 func _velocity_computed_from_navigation_agent_2d(safe_velocity):
+	if (sprite.attacking): return;
 	velocity = safe_velocity;
 	move_and_slide();
 
 func _animation_finished_from_animator():
-	if (target):
+	if (is_instance_valid(target)):
 		target.health -= data.damage;

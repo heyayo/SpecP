@@ -1,10 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://yspwggco06v7"]
+[gd_scene load_steps=6 format=3 uid="uid://yspwggco06v7"]
 
 [ext_resource type="PackedScene" uid="uid://l2qsl86i3nn6" path="res://_scenes/npc/template_unit.tscn" id="1_mwmob"]
 [ext_resource type="Resource" uid="uid://bcjxf15ntcwo4" path="res://_resources/unit_data/friendly/swordsman.tres" id="2_h7l17"]
+[ext_resource type="SpriteFrames" uid="uid://cn0scshye0j51" path="res://_resources/animations/swordsman.tres" id="3_h6cn2"]
+[ext_resource type="Script" path="res://_scripts/units/attack_cores/unit_melee.gd" id="4_ek1fj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0x7qb"]
 
 [node name="Swordsman" instance=ExtResource("1_mwmob")]
 data = ExtResource("2_h7l17")
 
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_0x7qb")
+
 [node name="Animator" parent="." index="1"]
+position = Vector2(3, -3)
 scale = Vector2(0.681818, 0.681818)
+sprite_frames = ExtResource("3_h6cn2")
+animation = &"attack"
+frame = 11
+frame_progress = 1.0
+
+[node name="Attack" type="Timer" parent="." index="6"]
+script = ExtResource("4_ek1fj")

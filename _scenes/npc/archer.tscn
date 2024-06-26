@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfxsv8w1mvndx"]
+
+[ext_resource type="PackedScene" uid="uid://l2qsl86i3nn6" path="res://_scenes/npc/template_unit.tscn" id="1_e18rq"]
+[ext_resource type="SpriteFrames" uid="uid://cfytftoxxx62k" path="res://_resources/animations/archer.tres" id="2_ju3vp"]
+[ext_resource type="Resource" uid="uid://77tuq5wky1j2" path="res://_resources/unit_data/friendly/archer.tres" id="2_memh8"]
+[ext_resource type="Script" path="res://_scripts/units/attack_cores/unit_ranged.gd" id="4_m4ydw"]
+[ext_resource type="PackedScene" uid="uid://cdfqpdghsaux" path="res://_scenes/prefabs/projectiles/arrow.tscn" id="5_r420b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xw2hx"]
+radius = 12.0
+
+[node name="Archer" instance=ExtResource("1_e18rq")]
+data = ExtResource("2_memh8")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_xw2hx")
+
+[node name="Animator" parent="." index="1"]
+position = Vector2(-4.03897e-28, -22)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("2_ju3vp")
+animation = &"attack"
+frame = 14
+frame_progress = 1.0
+
+[node name="Walk Area" parent="." index="2"]
+scale = Vector2(1.48, 1.48)
+
+[node name="Attack" type="Timer" parent="." index="6"]
+script = ExtResource("4_m4ydw")
+projectile = ExtResource("5_r420b")

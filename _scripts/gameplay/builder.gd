@@ -10,6 +10,7 @@ var con_mark : PackedScene = preload("res://_scenes/prefabs/construction_mark.ts
 @onready var preview_shape : CollisionShape2D = $PreviewArea/PreviewShape
 @onready var resource_area = $ResourceArea
 @onready var resource_shape = $ResourceArea/ResourceShape
+@onready var resource_sprite = $ResourceArea/ResourceSprite
 #endregion
 #region External
 @export var selector : Selector;
@@ -19,9 +20,7 @@ var con_mark : PackedScene = preload("res://_scenes/prefabs/construction_mark.ts
 var preview_track : Tracker = Tracker.new();
 var resource_track : Tracker = Tracker.new();
 var to_build : Structure = null;
-# TODO Display Requirements UI
-var req_range : int;
-var req_types : Array[Common.RESOURCE_TYPE];
+var is_obstructed : bool = false;
 
 func _ready() -> void:
 	stop_preview();
@@ -33,10 +32,10 @@ func _input(_event : InputEvent) -> void:
 	if (Input.is_action_just_pressed("Right_Click")):
 		stop_preview();
 	if (Input.is_action_just_pressed("Left_Click")):
-		if (not preview_track.collection.is_empty()): return;
+		if (not is_obstructed): return;
 		place_building();
-	if (Input.is_action_just_released("Left_Click")):
-		call_deferred("stop_preview");
+	#if (Input.is_action_just_released("Left_Click")):
+		#call_deferred("stop_preview");
 func place_building() -> void: ## Places the building in the world and begins its construction
 	var b : Structure = to_build.duplicate();
 	add_child(b);
@@ -61,11 +60,12 @@ func start_preview(building : Structure) -> void: ## Prepare the Build Preview
 	resize_preview(bSprite.texture.get_size());
 	## Make Preview Visible and Sets Initial Color
 	preview_area.visible = true;
-	update_preview_modulation();
 	## Resource Structure Preview
 	if (building is ResourceStructure):
+		var res_struct : ResourceStructure = building;
 		resource_area.visible = true;
-		update_resource_modulation();
+		resize_resource_preview(res_struct.stats.rangevec2(),bSprite.texture.get_size());
+	update_preview_modulation();
 	enable();
 func stop_preview() -> void:
 	selector.enable(); ## Enable Selector
@@ -79,13 +79,29 @@ func resize_preview(size : Vector2i) -> void:
 	var shape : RectangleShape2D = preview_shape.shape;
 	size -= Vector2i(1,1);
 	shape.size = size;
+func resize_resource_preview(size : Vector2i, structure_size : Vector2i) -> void:
+	var shape : RectangleShape2D = resource_shape.shape;
+	size *= 16;
+	size += structure_size;
+	shape.size = size;
+	resource_sprite.scale = size;
 #endregion
 #region Modulation
 func update_preview_modulation() -> void:
-	preview_sprite.modulate = Color.GREEN if preview_track.collection.is_empty() else Color.RED;
-func update_resource_modulation() -> void:
-	if (req_range > 0):
-		preview_sprite.modulate = Color.GREEN if not resource_track.collection.is_empty() else Color.RED;
+	var have_resources : bool = false;
+	if (to_build is ResourceStructure):
+		var count : int = 0;
+		for res in resource_track.collection:
+			if (not res is WorldResource):
+				break;
+			var resource : WorldResource = res;
+			if (resource.type == to_build.stats.type):
+				count += 1;
+				if (count >= to_build.stats.required_amount):
+					have_resources = true;
+					break;
+	is_obstructed = preview_track.collection.is_empty() and have_resources;
+	preview_sprite.modulate = Color.GREEN if is_obstructed else Color.RED;
 func update_preview_position() -> void:
 	preview_area.global_position = game.get_hover_position();
 func update_resource_position() -> void:
@@ -108,8 +124,8 @@ func _exit_preview(node) -> void:
 	update_preview_modulation();
 func _area_entered_from_resource_area(area):
 	resource_track.track(area);
-	update_resource_modulation();
+	update_preview_modulation();
 func _area_exited_from_resource_area(area):
 	resource_track.untrack(area);
-	update_resource_modulation();
+	update_preview_modulation();
 #endregion

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx1gegd7uj7j3"]
+
+[ext_resource type="PackedScene" uid="uid://b3njmx28vnemh" path="res://_scenes/prefabs/resources/template_resource.tscn" id="1_ocs7s"]
+[ext_resource type="Texture2D" uid="uid://cqjtejilj8dcs" path="res://_sprites/world/Decorations.png" id="2_d6ffe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61ipn"]
+size = Vector2(32, 32)
+
+[node name="Stone" instance=ExtResource("1_ocs7s")]
+type = 2
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(1.39286, 1.39286)
+texture = ExtResource("2_d6ffe")
+region_enabled = true
+region_rect = Rect2(228, 133, 23, 21)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_61ipn")

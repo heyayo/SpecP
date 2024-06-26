@@ -113,6 +113,7 @@ func get_friendly_units() -> Array[Unit]:
 func get_structures() -> Array[Structure]:
 	var array : Array[Structure] = [];
 	for n in selection:
+		if (!is_instance_valid(n)): continue;
 		var o = n.get_parent();
 		if (o is Structure):
 			array.push_back(o);

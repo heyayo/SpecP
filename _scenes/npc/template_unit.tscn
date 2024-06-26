@@ -1,34 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://l2qsl86i3nn6"]
+[gd_scene load_steps=6 format=3 uid="uid://l2qsl86i3nn6"]
 
 [ext_resource type="Script" path="res://_scripts/units/unit.gd" id="1_65gav"]
-[ext_resource type="SpriteFrames" uid="uid://cn0scshye0j51" path="res://_resources/animations/swordsman.tres" id="2_k6xjo"]
 [ext_resource type="Script" path="res://_scripts/units/animator.gd" id="3_t5blr"]
 [ext_resource type="PackedScene" uid="uid://bu8fvflbob7sy" path="res://_scenes/prefabs/range.tscn" id="4_iedq0"]
 [ext_resource type="Script" path="res://_scripts/units/unit_navigator.gd" id="5_kh5hf"]
 [ext_resource type="PackedScene" uid="uid://nlup42k1sgdo" path="res://_scenes/prefabs/selectable.tscn" id="6_xj5cv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ky00g"]
-radius = 8.0
-
-[node name="TemplateUnit" type="CharacterBody2D"]
+[node name="TemplateUnit" type="CharacterBody2D" groups=["Unit"]]
+z_index = 4
 collision_layer = 4096
 collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_65gav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ky00g")
 
 [node name="Animator" type="AnimatedSprite2D" parent="."]
-z_index = 3
-sprite_frames = ExtResource("2_k6xjo")
-animation = &"attack"
+z_index = 4
+animation = &""
 script = ExtResource("3_t5blr")
 
 [node name="Walk Area" parent="." instance=ExtResource("4_iedq0")]
 collision_mask = 24576
 
 [node name="Attack Area" parent="." instance=ExtResource("4_iedq0")]
-collision_mask = 4096
+collision_mask = 20480
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

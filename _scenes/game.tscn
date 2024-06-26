@@ -1,9 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=30 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
+[ext_resource type="Script" path="res://_scenes/worldgen.gd" id="3_fjm8q"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Selector.gd" id="3_y6ca4"]
-[ext_resource type="Script" path="res://_scenes/overseer.gd" id="4_6rlxo"]
+[ext_resource type="Resource" uid="uid://koit31muys02" path="res://_resources/worldconfig.tres" id="4_4c83m"]
+[ext_resource type="Script" path="res://_scripts/gameplay/overseer.gd" id="4_6rlxo"]
 [ext_resource type="Texture2D" uid="uid://crpy06mncl4ws" path="res://_sprites/blank.jpg" id="4_6751o"]
 [ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="5_dabfu"]
 [ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="6_cqo5o"]
@@ -15,10 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://c43pc8cpkjx4v" path="res://_sprites/resource_icons/Ore & Gem/Obsidian.png" id="12_kxb3b"]
 [ext_resource type="Script" path="res://_scripts/gameplay/builder.gd" id="13_f5c5u"]
 [ext_resource type="Script" path="res://_scripts/bills.gd" id="14_q6f14"]
-[ext_resource type="PackedScene" uid="uid://b57b7lptnh54s" path="res://_scenes/prefabs/resources/tree.tscn" id="15_swkb6"]
 [ext_resource type="Script" path="res://_scripts/gameplay/resource_labels.gd" id="16_ah8rg"]
 [ext_resource type="PackedScene" uid="uid://dc8608qo3vmbi" path="res://_scenes/prefabs/structures/base.tscn" id="16_rh54v"]
+[ext_resource type="Texture2D" uid="uid://ysu0yhmffrk2" path="res://_sprites/colonist/sword/Attack/Warrior_Attack_3.png" id="18_avx15"]
 [ext_resource type="Script" path="res://_scripts/gameplay/m_resource.gd" id="18_h4vt7"]
+[ext_resource type="PackedScene" uid="uid://cu4lvhv0xyep8" path="res://_scenes/prefabs/structures/bandit/bandit_output.tscn" id="20_lyb75"]
+[ext_resource type="PackedScene" uid="uid://bfxsv8w1mvndx" path="res://_scenes/npc/archer.tscn" id="21_omxwq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -48,6 +52,8 @@ layer_0/tile_data = PackedInt32Array(-327688, 131072, 0, -262152, 131072, 0, -19
 layer_1/name = "Foliage"
 layer_1/z_index = 2
 layer_1/tile_data = PackedInt32Array()
+script = ExtResource("3_fjm8q")
+config = ExtResource("4_4c83m")
 
 [node name="Resources" type="Node2D" parent="." node_paths=PackedStringArray("labels")]
 script = ExtResource("18_h4vt7")
@@ -61,42 +67,51 @@ script = ExtResource("4_6rlxo")
 
 [node name="Click Detect" type="Area2D" parent="Overseer"]
 collision_layer = 0
-collision_mask = 4096
+collision_mask = 20480
 
 [node name="Click Area" type="CollisionShape2D" parent="Overseer/Click Detect"]
 shape = SubResource("RectangleShape2D_00bmb")
 
-[node name="Swordsman" parent="Overseer" groups=["Controllable", "Friendly", "Unit"] instance=ExtResource("5_dabfu")]
+[node name="Swordsman" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
+z_index = 0
 position = Vector2(104, 32)
 collision_layer = 1
 collision_mask = 1
+motion_mode = 0
 
-[node name="Swordsman3" parent="Overseer" groups=["Controllable", "Friendly", "Unit"] instance=ExtResource("5_dabfu")]
-position = Vector2(88, -24)
+[node name="Swordsman3" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
+position = Vector2(-128, -40)
 collision_layer = 1
 collision_mask = 1
+motion_mode = 0
 
-[node name="Swordsman4" parent="Overseer" groups=["Controllable", "Friendly", "Unit"] instance=ExtResource("5_dabfu")]
+[node name="Swordsman4" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
 position = Vector2(64, 56)
 collision_layer = 1
 collision_mask = 1
+motion_mode = 0
 
-[node name="Swordsman5" parent="Overseer" groups=["Controllable", "Friendly", "Unit"] instance=ExtResource("5_dabfu")]
+[node name="Swordsman5" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
 position = Vector2(136, 32)
 collision_layer = 1
 collision_mask = 1
+motion_mode = 0
 
-[node name="Swordsman6" parent="Overseer" groups=["Controllable", "Friendly", "Unit"] instance=ExtResource("5_dabfu")]
+[node name="Swordsman6" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
 position = Vector2(120, 72)
 collision_layer = 1
 collision_mask = 1
+motion_mode = 0
 
-[node name="Swordsman2" parent="Overseer" groups=["Hostile", "Unit"] instance=ExtResource("5_dabfu")]
+[node name="Swordsman2" parent="Overseer" groups=["Hostile"] instance=ExtResource("5_dabfu")]
 position = Vector2(128, -120)
 collision_layer = 1
 collision_mask = 1
 
 [node name="BanditNPC" parent="Overseer/Swordsman2" instance=ExtResource("6_cqo5o")]
+
+[node name="Archer" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("21_omxwq")]
+position = Vector2(-32, 88)
 
 [node name="Selector" type="Area2D" parent="."]
 collision_layer = 0
@@ -124,15 +139,23 @@ collision_mask = 16384
 shape = SubResource("RectangleShape2D_61juq")
 
 [node name="PreviewSprite" type="Sprite2D" parent="Builder/PreviewArea"]
-z_index = 5
+z_index = 2
 
 [node name="ResourceArea" type="Area2D" parent="Builder"]
+collision_layer = 0
+collision_mask = 8192
 
 [node name="ResourceShape" type="CollisionShape2D" parent="Builder/ResourceArea"]
 shape = SubResource("RectangleShape2D_4j70q")
 
+[node name="ResourceSprite" type="Sprite2D" parent="Builder/ResourceArea"]
+modulate = Color(0.911862, 0.857629, 0.40441, 0.858824)
+z_index = 1
+texture = ExtResource("4_6751o")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_e0ybk")
+min_zoom = 0.1
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
@@ -510,6 +533,7 @@ offset_left = -120.0
 offset_top = -128.0
 grow_horizontal = 0
 grow_vertical = 0
+texture = ExtResource("18_avx15")
 
 [node name="Origin" type="Label" parent="Interface/Bills/Preview"]
 layout_mode = 1
@@ -529,14 +553,16 @@ label_settings = SubResource("LabelSettings_rh7af")
 autowrap_mode = 2
 clip_text = true
 
-[node name="Tree" parent="." instance=ExtResource("15_swkb6")]
-position = Vector2(-85, 50)
-
 [node name="Base" parent="." instance=ExtResource("16_rh54v")]
-collision_layer = 1
-collision_mask = 1
+units = Array[PackedScene]([ExtResource("5_dabfu"), ExtResource("21_omxwq")])
+
+[node name="Bandit Outpost" parent="." instance=ExtResource("20_lyb75")]
+z_index = 0
+position = Vector2(-128, -104)
 
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
+[connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]
+[connection signal="area_exited" from="Overseer/Click Detect" to="Overseer" method="_body_exited_from_click_detect"]
 [connection signal="body_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]
 [connection signal="body_exited" from="Overseer/Click Detect" to="Overseer" method="_body_exited_from_click_detect"]
 [connection signal="area_entered" from="Selector" to="Selector" method="_enter_area"]
