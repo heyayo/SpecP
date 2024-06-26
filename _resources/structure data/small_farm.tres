@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StructureData" load_steps=2 format=3 uid="uid://lpkbi4suioe4"]
+
+[ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="1_cpqri"]
+
+[resource]
+script = ExtResource("1_cpqri")
+name = "Small Farm"
+desc = "A small piece of farmland for farming food"
+work = 1
+wood = 100
+food = 0
+stone = 50
+metal = 0
+max_health = 10

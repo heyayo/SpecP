@@ -27,6 +27,7 @@ const layer_unit : int = 13;
 var structures : Array[PackedScene] = [
 	preload("res://_scenes/prefabs/structures/wood_mill.tscn"),
 	preload("res://_scenes/prefabs/structures/mason_hut.tscn"),
+	preload("res://_scenes/prefabs/structures/small_farm.tscn"),
 ];
 
 ## Resource Types

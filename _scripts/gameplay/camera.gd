@@ -3,7 +3,7 @@ extends Camera2D
 class_name Camera
 
 @export_category("Zoom")
-@export var min_zoom : float = 2;
+@export var min_zoom : float = 1;
 @export var max_zoom : float = 5;
 @export var step_zoom : float = 0.25;
 @export_category("Movement")

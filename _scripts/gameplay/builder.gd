@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Builder
 ## TODO Prevent Out of Bounds Building
+## TODO Oneshot place buildings or determine resource requirements per
+## TODO MINOR | Cleanup code
 var con_mark : PackedScene = preload("res://_scenes/prefabs/construction_mark.tscn")
 
 #region Children
@@ -34,7 +36,7 @@ func _input(_event : InputEvent) -> void:
 	if (Input.is_action_just_pressed("Left_Click")):
 		if (not is_obstructed): return;
 		place_building();
-	#if (Input.is_action_just_released("Left_Click")):
+	#if (Input.is_action_just_re5leased("Left_Click")):
 		#call_deferred("stop_preview");
 func place_building() -> void: ## Places the building in the world and begins its construction
 	var b : Structure = to_build.duplicate();
@@ -60,7 +62,7 @@ func start_preview(building : Structure) -> void: ## Prepare the Build Preview
 	resize_preview(bSprite.texture.get_size());
 	## Make Preview Visible and Sets Initial Color
 	preview_area.visible = true;
-	## Resource Structure Preview
+	## Resource Structure Previe5w
 	if (building is ResourceStructure):
 		var res_struct : ResourceStructure = building;
 		resource_area.visible = true;
@@ -92,14 +94,15 @@ func update_preview_modulation() -> void:
 	if (to_build is ResourceStructure):
 		var count : int = 0;
 		for res in resource_track.collection:
+			## Skip Non Resources
 			if (not res is WorldResource):
-				break;
+				continue;
+			## Check Resource Type
 			var resource : WorldResource = res;
 			if (resource.type == to_build.stats.type):
 				count += 1;
-				if (count >= to_build.stats.required_amount):
-					have_resources = true;
-					break;
+		if (count >= to_build.stats.required_amount):
+			have_resources = true;
 	is_obstructed = preview_track.collection.is_empty() and have_resources;
 	preview_sprite.modulate = Color.GREEN if is_obstructed else Color.RED;
 func update_preview_position() -> void:

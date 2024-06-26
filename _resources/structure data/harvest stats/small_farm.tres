@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HarvestStats" load_steps=2 format=3 uid="uid://evhcikghjuj0"]
+
+[ext_resource type="Script" path="res://_scripts/resources/harvest_stats.gd" id="1_nteoo"]
+
+[resource]
+script = ExtResource("1_nteoo")
+type = 1
+range = 0
+amount = 5
+required_amount = 0

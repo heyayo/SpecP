@@ -5,15 +5,14 @@
 
 [node name="Saver" type="Node2D"]
 script = ExtResource("1_b865t")
-tile_size = Vector2i(3, 5)
+tile_size = Vector2i(3, 3)
 output_dir = "res://tools/output"
-output_name = "small_castle"
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-24, 40)
 tile_set = ExtResource("1_82uwa")
 format = 2
-layer_0/tile_data = PackedInt32Array(-262144, 0, 9, -196608, 0, 10, -131072, 262144, 6, -65536, 262144, 6, -262143, 65536, 9, -196607, 65536, 10, -131071, 327680, 6, -65535, 327680, 7, -327680, 0, 8, -327679, 65536, 8, -327678, 131072, 8, -262142, 131072, 9, -196606, 131072, 10, -131070, 458752, 6, -65534, 458752, 6)
-layer_1/tile_data = PackedInt32Array()
+layer_0/tile_data = PackedInt32Array(-262144, 0, 1, -196608, 0, 2, -131072, 0, 3, -262143, 65536, 1, -196607, 65536, 2, -131071, 65536, 3, -262142, 131072, 1, -196606, 131072, 2, -131070, 131072, 3)
+layer_1/tile_data = PackedInt32Array(-262143, 589824, 3, -196608, 524288, 4, -196606, 655360, 4, -262144, 524288, 3, -131070, 655360, 5, -262142, 655360, 3, -131072, 524288, 5, -131071, 589824, 3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
