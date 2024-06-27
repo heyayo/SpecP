@@ -13,15 +13,12 @@ func _input(_event : InputEvent) -> void:
 	if (Input.is_action_just_pressed("Right_Click")):
 		var target = is_over_hostile_unit();
 		if (target != null):
-			print("Attacking Unit");
 			attack_units(target);
 		else:
 			target = is_over_hostile_structure();
 			if (target != null):
-				print("Attacking Structure");
 				attack_units(target);
 			else:
-				print("Moving Units");
 				move_units();
 
 func move_units() -> void:

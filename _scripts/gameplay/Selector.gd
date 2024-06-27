@@ -35,7 +35,6 @@ func _unhandled_input(_event : InputEvent) -> void:
 #region Highlighting
 func highlight_selected() -> void:
 	for n : Selectable in selection:
-		print(n.get_parent());
 		n.enable();
 func clear_highlights() -> void:
 	get_tree().call_group(Common.group_selectable,"disable");

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=29 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://_scripts/gameplay/overseer.gd" id="4_6rlxo"]
 [ext_resource type="Texture2D" uid="uid://crpy06mncl4ws" path="res://_sprites/blank.jpg" id="4_6751o"]
 [ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="5_dabfu"]
-[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="6_cqo5o"]
 [ext_resource type="Script" path="res://_scripts/gameplay/camera.gd" id="7_e0ybk"]
 [ext_resource type="Script" path="res://_scripts/gameplay/action_menu.gd" id="9_31up8"]
 [ext_resource type="Texture2D" uid="uid://cf1co6dtcf0ig" path="res://_sprites/resource_icons/Material/Wood Log.png" id="10_51fdt"]
@@ -79,12 +78,6 @@ collision_layer = 1
 collision_mask = 1
 motion_mode = 0
 
-[node name="Swordsman3" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(-128, -40)
-collision_layer = 1
-collision_mask = 1
-motion_mode = 0
-
 [node name="Swordsman4" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
 position = Vector2(64, 56)
 collision_layer = 1
@@ -102,13 +95,6 @@ position = Vector2(120, 72)
 collision_layer = 1
 collision_mask = 1
 motion_mode = 0
-
-[node name="Swordsman2" parent="Overseer" groups=["Hostile"] instance=ExtResource("5_dabfu")]
-position = Vector2(128, -120)
-collision_layer = 1
-collision_mask = 1
-
-[node name="BanditNPC" parent="Overseer/Swordsman2" instance=ExtResource("6_cqo5o")]
 
 [node name="Archer" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("21_omxwq")]
 position = Vector2(-32, 88)

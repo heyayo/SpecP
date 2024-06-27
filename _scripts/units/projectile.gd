@@ -4,11 +4,13 @@ class_name Projectile
 @export var speed : float = 1;
 var damage : int = 1;
 var target : Node2D = null;
+var owner : Unit = null;
 
-func setup(d : int, t : Node2D) -> void:
+func setup(d : int, t : Node2D, o : Unit) -> void:
 	damage = d;
 	target = t;
-	print("Fired Projectile | Speed: %s | Damage: %s | Target: %s" % [speed,damage,target.name]);
+	owner = o;
+	#print("Fired Projectile | Speed: %s | Damage: %s | Target: %s" % [speed,damage,target.name]);
 
 func _process(_delta) -> void:
 	if (!is_instance_valid(target)):

@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cu4lvhv0xyep8"]
+[gd_scene load_steps=10 format=3 uid="uid://cu4lvhv0xyep8"]
 
 [ext_resource type="PackedScene" uid="uid://br5pqkvwr7yj3" path="res://_scenes/prefabs/structures/template_structure.tscn" id="1_l022r"]
 [ext_resource type="Script" path="res://_scripts/structures/structure.gd" id="2_2hn6i"]
 [ext_resource type="Texture2D" uid="uid://corrtirfvasw8" path="res://_sprites/structures/small_castle.png" id="2_48s4h"]
 [ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="3_hoii2"]
+[ext_resource type="Script" path="res://_scripts/structures/hostile_spawner.gd" id="5_q08rd"]
+[ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="6_kwvhi"]
+[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="7_7yvno"]
 
 [sub_resource type="Resource" id="Resource_0pwl8"]
 script = ExtResource("3_hoii2")
@@ -31,3 +34,8 @@ shape = SubResource("RectangleShape2D_dlwx1")
 
 [node name="Selectable" parent="." index="2"]
 scale = Vector2(3, 5)
+
+[node name="Spawner" type="Node2D" parent="." index="3"]
+script = ExtResource("5_q08rd")
+unit = ExtResource("6_kwvhi")
+core = ExtResource("7_7yvno")

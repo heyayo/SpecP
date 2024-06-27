@@ -11,6 +11,6 @@ func attack(target, damage : int) -> void:
 	if (!is_instance_valid(target)): return;
 	var proj : Projectile = projectile.instantiate();
 	game.add_child(proj);
-	proj.setup(damage, target);
+	proj.setup(damage, target, parent);
 	proj.global_position = parent.global_position;
 	start();

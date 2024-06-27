@@ -91,11 +91,12 @@ func apply_slowdown() -> void:
 	else:
 		speed = data.speed / data.slowdown;
 #endregion
+#region Signal Callbacks
 func _velocity_computed_from_navigation_agent_2d(safe_velocity):
 	if (sprite.attacking): return;
 	velocity = safe_velocity;
 	move_and_slide();
-
 func _animation_finished_from_animator():
 	if (is_instance_valid(target)):
 		target.health -= data.damage;
+#endregion
