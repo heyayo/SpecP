@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4p0o5v3pc6pg"]
+
+[ext_resource type="Script" path="res://_scripts/units/projectile.gd" id="1_3x6rw"]
+[ext_resource type="Texture2D" uid="uid://cpmm8wf6np704" path="res://_sprites/resource_icons/Monster Part/Monster Eye.png" id="1_5m3kk"]
+
+[node name="Fireball" type="Node2D"]
+script = ExtResource("1_3x6rw")
+speed = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_5m3kk")

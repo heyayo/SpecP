@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=30 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -20,8 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://dc8608qo3vmbi" path="res://_scenes/prefabs/structures/base.tscn" id="16_rh54v"]
 [ext_resource type="Texture2D" uid="uid://ysu0yhmffrk2" path="res://_sprites/colonist/sword/Attack/Warrior_Attack_3.png" id="18_avx15"]
 [ext_resource type="Script" path="res://_scripts/gameplay/m_resource.gd" id="18_h4vt7"]
-[ext_resource type="PackedScene" uid="uid://cu4lvhv0xyep8" path="res://_scenes/prefabs/structures/bandit/bandit_output.tscn" id="20_lyb75"]
 [ext_resource type="PackedScene" uid="uid://bfxsv8w1mvndx" path="res://_scenes/npc/archer.tscn" id="21_omxwq"]
+[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="23_d7c0e"]
+[ext_resource type="PackedScene" uid="uid://c7hn6hmdjaq2y" path="res://_scenes/npc/wizard.tscn" id="23_dl5vl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -70,34 +71,6 @@ collision_mask = 20480
 
 [node name="Click Area" type="CollisionShape2D" parent="Overseer/Click Detect"]
 shape = SubResource("RectangleShape2D_00bmb")
-
-[node name="Swordsman" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
-z_index = 0
-position = Vector2(104, 32)
-collision_layer = 1
-collision_mask = 1
-motion_mode = 0
-
-[node name="Swordsman4" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(64, 56)
-collision_layer = 1
-collision_mask = 1
-motion_mode = 0
-
-[node name="Swordsman5" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(136, 32)
-collision_layer = 1
-collision_mask = 1
-motion_mode = 0
-
-[node name="Swordsman6" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("5_dabfu")]
-position = Vector2(120, 72)
-collision_layer = 1
-collision_mask = 1
-motion_mode = 0
-
-[node name="Archer" parent="Overseer" groups=["Controllable", "Friendly"] instance=ExtResource("21_omxwq")]
-position = Vector2(-32, 88)
 
 [node name="Selector" type="Area2D" parent="."]
 collision_layer = 0
@@ -541,9 +514,13 @@ clip_text = true
 [node name="Base" parent="." instance=ExtResource("16_rh54v")]
 units = Array[PackedScene]([ExtResource("5_dabfu"), ExtResource("21_omxwq")])
 
-[node name="Bandit Outpost" parent="." instance=ExtResource("20_lyb75")]
-z_index = 0
-position = Vector2(-128, -104)
+[node name="Wizard" parent="." groups=["Friendly"] instance=ExtResource("23_dl5vl")]
+position = Vector2(-96, 48)
+
+[node name="Wizard2" parent="." groups=["Hostile"] instance=ExtResource("23_dl5vl")]
+position = Vector2(144, 112)
+
+[node name="HostileNPC" parent="Wizard2" instance=ExtResource("23_d7c0e")]
 
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]

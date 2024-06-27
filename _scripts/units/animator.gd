@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 class_name Animator
 
-@onready var body : Unit = get_parent();
+@onready var body = get_parent();
 
 enum ANIMS
 {

@@ -4,7 +4,7 @@ class_name Overseer
 
 @onready var click_detect : Area2D = $"Click Detect"
 
-var units : Array[Unit];
+var units : Array;
 var detect : Tracker = Tracker.new();
 
 func _process(_delta) -> void:
@@ -23,17 +23,19 @@ func _input(_event : InputEvent) -> void:
 
 func move_units() -> void:
 	var dead : Array[Unit] = [];
-	for u : Unit in units:
+	for u in units:
 		if (!is_instance_valid(u)):
 			dead.push_back(u);
 			continue;
-		u.stop_move_to(get_global_mouse_position());
+		u.move_action(get_global_mouse_position());
+		#u.stop_move_to(get_global_mouse_position());
 	for d in dead:
 		units.erase(d);
 func attack_units(target) -> void:
 	if (!is_instance_valid(target)): return;
-	for u : Unit in units:
-		u.force_attack(target); ## TODO Normal Attack
+	for u in units:
+		u.attack_action(target);
+		#u.force_attack(target); ## TODO Normal Attack
 func is_over_hostile_unit() -> Unit:
 	for u in detect.collection:
 		if (u is Unit and !u.is_in_group(Common.group_friendly)):

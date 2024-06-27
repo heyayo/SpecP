@@ -4,12 +4,12 @@ class_name Projectile
 @export var speed : float = 1;
 var damage : int = 1;
 var target : Node2D = null;
-var owner : Unit = null;
+var source = null;
 
-func setup(d : int, t : Node2D, o : Unit) -> void:
+func setup(d : int, t : Node2D, o) -> void:
 	damage = d;
 	target = t;
-	owner = o;
+	source = o;
 	#print("Fired Projectile | Speed: %s | Damage: %s | Target: %s" % [speed,damage,target.name]);
 
 func _process(_delta) -> void:
@@ -22,5 +22,5 @@ func _physics_process(delta):
 	global_position = global_position.move_toward(target.global_position,speed);
 	var diff : Vector2 = target.global_position - global_position;
 	if (diff.abs() <= Vector2(1,1)):
-		target.health -= damage;
+		target.apply_damage(damage,source);
 		queue_free();

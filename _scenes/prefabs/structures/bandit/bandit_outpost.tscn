@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://cu4lvhv0xyep8"]
+
+[ext_resource type="PackedScene" uid="uid://br5pqkvwr7yj3" path="res://_scenes/prefabs/structures/template_structure.tscn" id="1_tdb6n"]
+[ext_resource type="Script" path="res://_scripts/structures/structure.gd" id="2_c51v6"]
+[ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="3_ftb7t"]
+[ext_resource type="Texture2D" uid="uid://corrtirfvasw8" path="res://_sprites/structures/small_castle.png" id="4_quapn"]
+[ext_resource type="Script" path="res://_scripts/structures/hostile_spawner.gd" id="5_3w446"]
+[ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="6_nyojo"]
+[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="7_gjitk"]
+
+[sub_resource type="Resource" id="Resource_0pwl8"]
+script = ExtResource("3_ftb7t")
+name = "Bandit Outpost"
+desc = "Where all the bandits live"
+work = 1
+wood = 0
+food = 0
+stone = 0
+metal = 0
+max_health = 1000
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlwx1"]
+size = Vector2(48, 80)
+
+[node name="Bandit Outpost" groups=["Hostile"] instance=ExtResource("1_tdb6n")]
+script = ExtResource("2_c51v6")
+data = SubResource("Resource_0pwl8")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("4_quapn")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_dlwx1")
+
+[node name="Selectable" parent="." index="2"]
+scale = Vector2(3, 5)
+
+[node name="Spawner" type="Node2D" parent="." index="3"]
+script = ExtResource("5_3w446")
+unit = ExtResource("6_nyojo")
+core = ExtResource("7_gjitk")

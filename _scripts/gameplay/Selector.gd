@@ -93,16 +93,16 @@ func _pressed_from_demolish():
 			interact_menu.show_actions(selection);
 #endregion
 #region Filters
-func get_units() -> Array[Unit]:
-	var array : Array[Unit] = [];
+func get_units() -> Array:
+	var array : Array = [];
 	for n in selection:
 		if (!is_instance_valid(n)): continue;
 		var o = n.get_parent();
 		if (o is Unit):
 			array.push_back(o);
 	return array;
-func get_friendly_units() -> Array[Unit]:
-	var friendly : Array[Unit] = [];
+func get_friendly_units() -> Array:
+	var friendly : Array = [];
 	for n in selection:
 		if (!is_instance_valid(n)): continue;
 		var o = n.get_parent();
