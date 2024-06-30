@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=29 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://_scripts/gameplay/overseer.gd" id="4_6rlxo"]
 [ext_resource type="Texture2D" uid="uid://crpy06mncl4ws" path="res://_sprites/blank.jpg" id="4_6751o"]
 [ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="5_dabfu"]
+[ext_resource type="PackedScene" uid="uid://s8q6nha8tudh" path="res://_scenes/prefabs/boss_list.tscn" id="5_fle47"]
 [ext_resource type="Script" path="res://_scripts/gameplay/camera.gd" id="7_e0ybk"]
 [ext_resource type="Script" path="res://_scripts/gameplay/action_menu.gd" id="9_31up8"]
 [ext_resource type="Texture2D" uid="uid://cf1co6dtcf0ig" path="res://_sprites/resource_icons/Material/Wood Log.png" id="10_51fdt"]
@@ -21,8 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://ysu0yhmffrk2" path="res://_sprites/colonist/sword/Attack/Warrior_Attack_3.png" id="18_avx15"]
 [ext_resource type="Script" path="res://_scripts/gameplay/m_resource.gd" id="18_h4vt7"]
 [ext_resource type="PackedScene" uid="uid://bfxsv8w1mvndx" path="res://_scenes/npc/archer.tscn" id="21_omxwq"]
-[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="23_d7c0e"]
-[ext_resource type="PackedScene" uid="uid://c7hn6hmdjaq2y" path="res://_scenes/npc/wizard.tscn" id="23_dl5vl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -55,6 +54,9 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("3_fjm8q")
 config = ExtResource("4_4c83m")
 
+[node name="BossList" parent="." instance=ExtResource("5_fle47")]
+world_config = ExtResource("4_4c83m")
+
 [node name="Resources" type="Node2D" parent="." node_paths=PackedStringArray("labels")]
 script = ExtResource("18_h4vt7")
 labels = NodePath("../Interface/Resources")
@@ -82,7 +84,7 @@ shape = SubResource("RectangleShape2D_kakmw")
 
 [node name="Sprite2D" type="Sprite2D" parent="Selector"]
 modulate = Color(0, 0.588235, 0, 0.392157)
-z_index = 5
+z_index = 8
 texture = ExtResource("4_6751o")
 
 [node name="Builder" type="Node2D" parent="." node_paths=PackedStringArray("selector", "game")]
@@ -375,38 +377,36 @@ text = "Demolish"
 layout_mode = 2
 text = "Bills"
 
-[node name="Harvest Actions" type="ColorRect" parent="Interface/Interact Menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -64.0
-offset_right = 96.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Unit Info" type="ColorRect" parent="Interface/Interact Menu"]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 320.0
 color = Color(0.431373, 0.686275, 1, 0.784314)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface/Interact Menu/Harvest Actions"]
+[node name="Title" type="Label" parent="Interface/Interact Menu/Unit Info"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 23.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Title" type="Label" parent="Interface/Interact Menu/Harvest Actions/VBoxContainer"]
-layout_mode = 2
-text = "Harvest Actions"
+text = "Unit Info"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
 
-[node name="Harvest" type="Button" parent="Interface/Interact Menu/Harvest Actions/VBoxContainer"]
-layout_mode = 2
-text = "Harvest"
+[node name="Behaviour" type="Label" parent="Interface/Interact Menu/Unit Info"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Behaviour:"
 
 [node name="Bills" type="ColorRect" parent="Interface"]
 anchors_preset = 8
@@ -514,13 +514,8 @@ clip_text = true
 [node name="Base" parent="." instance=ExtResource("16_rh54v")]
 units = Array[PackedScene]([ExtResource("5_dabfu"), ExtResource("21_omxwq")])
 
-[node name="Wizard" parent="." groups=["Friendly"] instance=ExtResource("23_dl5vl")]
-position = Vector2(-96, 48)
-
-[node name="Wizard2" parent="." groups=["Hostile"] instance=ExtResource("23_dl5vl")]
-position = Vector2(144, 112)
-
-[node name="HostileNPC" parent="Wizard2" instance=ExtResource("23_d7c0e")]
+[node name="Archer" parent="." groups=["Friendly"] instance=ExtResource("21_omxwq")]
+position = Vector2(136, 48)
 
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]

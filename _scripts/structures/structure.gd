@@ -16,5 +16,5 @@ func _ready() -> void:
 	health = data.max_health;
 func finish_construction() -> void:
 	print("%s | Constructed" % name);
-func apply_damage(damage : float, source : UnitRewrite) -> void:
+func apply_damage(damage : float, source : Unit) -> void:
 	health -= damage;

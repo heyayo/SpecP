@@ -1,102 +1,152 @@
 extends CharacterBody2D
-class_name Unit
-
+class_name Unit ## TODO Rename
 #region Modules
-@onready var nav_agent : UnitNavigator = $NavigationAgent2D;
 @onready var sprite : Animator = $Animator;
+@onready var nav : UnitNavigator = $NavigationAgent2D;
 @onready var walk_area : Detection = $"Walk Area";
 @onready var attack_area : Detection = $"Attack Area";
-@onready var attack_node = $Attack;
+@onready var attack_node : UnitAttack = $Attack;
+@onready var path_timer : Timer = $"Path Timer"
 #endregion
-
-@export_category("Unit Info")
+#region Stores
+enum BEHAVIOUR
+{
+	PASSIVE, ## Only attacks when requested to
+	DEFENSIVE, ## Attacks Enemies in Range
+	AGGRESSIVE ## Chases Enemies past Range
+}
 @export var data : UnitStats;
-
-var speed : float;
-var health : float :
+var lock_move : bool = false;
+var speed : float = 5;
+var health : float = 100 :
 	get: return health;
 	set(value):
 		health = value;
 		health = clamp(health,0,data.max_health);
 		if (health <= 0):
 			queue_free();
-var target = null;
-
-## TODO
-# Rewrite Pathing with Passive/Aggressive Toggle
-# Passive | Attack only on specified
-# Aggressive | Attack all in range
-# Specified Attack | Chase on exit
-# Stop chasing when target is dead
-#region NEW Pathing
-var desired_target = null; ## The attacking target
 var desired_position : Vector2;
+var desired_target : Unit = null;
+var behaviour : BEHAVIOUR = BEHAVIOUR.PASSIVE;
 #endregion
-
+#region Processes
 func _ready() -> void:
-	set_collision_layer_value(Common.layer_unit,true);
-	print("%s | Initialized Unit" % name);
-	## Apply Attack Range
 	attack_area.scale = data.unitrange();
-	## Apply Defaults
 	speed = data.speed;
 	health = data.max_health;
-	attack_node.cooldown = data.cooldown;
-func _physics_process(_delta) -> void:
-	if (nav_agent.is_navigation_finished()): return;
-	if (sprite.attacking or attack_area.is_in_range(target)):
-		velocity = Vector2.ZERO;
-	else:
-		apply_velocity();
+	desired_position = global_position;
 func _process(_delta) -> void:
+	if (is_instance_valid(desired_target)):
+		lock_move = sprite.attacking or attack_area.is_in_range(desired_target);
+	else:
+		lock_move = sprite.attacking;
 	apply_slowdown();
-	if (!is_instance_valid(target)): target = null;
-	if (target):
-		attack_bev();
-
+	match behaviour:
+		BEHAVIOUR.PASSIVE:
+			passive_bev();
+		BEHAVIOUR.DEFENSIVE:
+			defensive_bev();
+		BEHAVIOUR.AGGRESSIVE:
+			aggressive_bev();
+func _physics_process(_delta):
+	if (nav.is_navigation_finished()): return;
+	apply_velocity();
+#endregion
+#region Actions
+func move_action(pos : Vector2) -> void:
+	move_to(pos);
+	match (behaviour):
+		BEHAVIOUR.PASSIVE:
+			desired_target = null;
+func attack_action(target : Unit) -> void:
+	if (!is_instance_valid(target)): return;
+	desired_target = target;
+	move_to(target.global_position);
+func attack_action_stay(target : Unit) -> void:
+	if (!is_instance_valid(target)): return;
+	desired_target = target;
+	move_to_stay(target.global_position);
+func move_to(pos : Vector2) -> void:
+	desired_position = pos;
+	nav_pos = pos;
+	if (path_timer.is_stopped()):
+		path_timer.start();
+func move_to_stay(pos : Vector2) -> void:
+	nav_pos = pos;
+	if (path_timer.is_stopped()):
+		path_timer.start();
+var nav_pos : Vector2;
+#endregion
 #region Behaviours
-func attack_bev() -> void:
-	if (attack_area.is_in_range(target)):
+func passive_bev() -> void:
+	force_attack_response();
+func defensive_bev() -> void:
+	if (!is_instance_valid(desired_target)):
+		desired_target = null;
+		move_to(desired_position);
+		return;
+	var diff : Vector2 = desired_target.global_position - global_position;
+	var ret_dist : int = (desired_target.data.range + data.range) * 8;
+	if (diff.abs() >= Vector2(ret_dist,ret_dist)):
+		print_rich("[color=red]Target Left Range[/color]");
+		print_rich("[color=green]Return Distance %s | Difference %s | ABS Difference %s[/color]" % [ret_dist,diff,diff.abs()]);
+		desired_target = null;
+		move_to(desired_position);
+		return;
+	force_attack_response();
+func aggressive_bev() -> void:
+	if (!is_instance_valid(desired_target)):
+		if (attack_area.is_empty()):
+			return;
+		desired_target = get_lowest_health();
+		return;
+	force_attack_response();
+func damage_response(source : Unit) -> void:
+	if (behaviour == BEHAVIOUR.PASSIVE): return;
+	attack_action_stay(source);
+func force_attack_response() -> void:
+	if (!is_instance_valid(desired_target)):
+		return;
+	if (attack_area.is_in_range(desired_target)):
 		if (!attack_node.on_cooldown):
 			sprite.attack();
-			attack_node.attack(target,data.damage);
+			attack_node.attack(desired_target,data.damage);
 	else:
-		move_to(target.global_position);
-#endregion
-#region External
-func move_to(pos : Vector2) -> void:
-	nav_agent.target_position = pos;
-func stop_move_to(pos : Vector2) -> void:
-	move_to(pos);
-	target = null;
-func force_attack(unit) -> void:
-	sprite.reset();
-	apply_target(unit);
+		move_to_stay(desired_target.global_position);
+func get_lowest_health() -> Unit:
+	var lowest : float = 0;
+	var lowest_unit : Unit = null;
+	for n in attack_area.tracker.collection:
+		if (!is_instance_valid(n)): continue;
+		if (n.health < lowest):
+			lowest_unit = n;
+			lowest = n.health;
+	return null;
 #endregion
 #region Applications
-func apply_null_target() -> void:
-	target = null;
-	move_to(global_position);
-func apply_target(unit) -> void:
-	if (target == unit): return;
-	target = unit;
-	move_to(target.global_position);
-func apply_velocity() -> void:
-	var direction : Vector2 = nav_agent.get_next_path_position() - global_position;
-	var vel : Vector2 = direction * speed;
-	nav_agent.velocity = vel;
 func apply_slowdown() -> void:
-	if (walk_area.is_empty()):
-		speed = data.speed;
-	else:
-		speed = data.speed / data.slowdown;
+	if (walk_area.is_empty()): speed = data.speed;
+	else: speed = data.speed / data.slowdown;
+func apply_damage(damage : float, source : Unit) -> void:
+	health -= damage;
+	if (!is_instance_valid(source)): return;
+	if (health <= 0):
+		source.report_death(self);
+	damage_response(source);
+func apply_velocity() -> void:
+	var direction : Vector2 = nav.get_next_path_position() - global_position;
+	var vel : Vector2 = direction * speed;
+	nav.velocity = vel;
 #endregion
-#region Signal Callbacks
-func _velocity_computed_from_navigation_agent_2d(safe_velocity):
-	if (sprite.attacking): return;
-	velocity = safe_velocity;
+#region Callbacks
+func _nav_safe_velocity(safe : Vector2) -> void:
+	if (lock_move): return;
+	velocity = safe;
 	move_and_slide();
-func _animation_finished_from_animator():
-	if (is_instance_valid(target)):
-		target.health -= data.damage;
+func report_death(unit : Unit) -> void:
+	if (desired_target != unit): return;
+	print("Unit Death Reported %s" % unit);
+	move_to_stay(global_position);
+func _timeout_from_path_timer():
+	nav.target_position = nav_pos;
 #endregion

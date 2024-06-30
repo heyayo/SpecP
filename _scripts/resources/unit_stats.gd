@@ -11,6 +11,7 @@ class_name UnitStats
 @export var speed : float = 5;
 @export var max_health : float = 100;
 @export var range : int = 3;
+@export var defense_range : int = 10;
 @export var slowdown : float = 2;
 @export var cooldown : float = 1;
 #endregion

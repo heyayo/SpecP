@@ -8,7 +8,7 @@ class_name HostileNPC
 
 func _ready() -> void:
 	sight.scale = stats.npcaggro();
-	unit.behaviour = UnitRewrite.BEHAVIOUR.PASSIVE;
+	unit.behaviour = Unit.BEHAVIOUR.PASSIVE;
 func _process(_delta) -> void:
 	attack_nearest();
 func attack_nearest() -> void:

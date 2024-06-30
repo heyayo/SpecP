@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://s8q6nha8tudh"]
+
+[ext_resource type="Script" path="res://_scenes/prefabs/boss_list.gd" id="1_2kdub"]
+[ext_resource type="PackedScene" uid="uid://c6eft7u610doh" path="res://_scenes/npc/spider.tscn" id="1_fu7kt"]
+
+[node name="BossList" type="Node2D"]
+script = ExtResource("1_2kdub")
+
+[node name="Spider" parent="." instance=ExtResource("1_fu7kt")]

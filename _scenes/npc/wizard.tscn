@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7hn6hmdjaq2y"]
+[gd_scene load_steps=9 format=3 uid="uid://c7hn6hmdjaq2y"]
 
 [ext_resource type="PackedScene" uid="uid://l2qsl86i3nn6" path="res://_scenes/npc/template_unit.tscn" id="1_fu3w3"]
 [ext_resource type="Script" path="res://_scripts/units/attack_cores/unit_ranged.gd" id="2_nkqup"]
-[ext_resource type="Script" path="res://_scripts/units/unit_rewrite.gd" id="2_xfint"]
 [ext_resource type="Texture2D" uid="uid://ue3pnona3sah" path="res://_sprites/colonist/archer/2_atk/2_atk_2.png" id="3_4smye"]
 [ext_resource type="Script" path="res://_scripts/resources/unit_stats.gd" id="4_utmcx"]
-[ext_resource type="SpriteFrames" uid="uid://cfytftoxxx62k" path="res://_resources/animations/archer.tres" id="5_m0pql"]
+[ext_resource type="SpriteFrames" uid="uid://cskygdubf72bw" path="res://_resources/animations/wizard.tres" id="5_17aps"]
 [ext_resource type="PackedScene" uid="uid://c4p0o5v3pc6pg" path="res://_scenes/prefabs/projectiles/fireball.tscn" id="7_efars"]
 
 [sub_resource type="Resource" id="Resource_08wjd"]
@@ -18,26 +17,26 @@ damage = 80.0
 speed = 3.0
 max_health = 150.0
 range = 30
+defense_range = 10
 slowdown = 3.0
 cooldown = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aov7u"]
 
 [node name="Wizard" instance=ExtResource("1_fu3w3")]
-script = ExtResource("2_xfint")
 data = SubResource("Resource_08wjd")
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_aov7u")
 
 [node name="Animator" parent="." index="1"]
-position = Vector2(0, -21)
-scale = Vector2(0.5, 0.5)
-sprite_frames = ExtResource("5_m0pql")
+position = Vector2(0.999998, -2)
+scale = Vector2(0.265789, 0.265789)
+sprite_frames = ExtResource("5_17aps")
 animation = &"attack"
+frame = 7
+frame_progress = 1.0
 
 [node name="Attack" type="Timer" parent="." index="6"]
 script = ExtResource("2_nkqup")
 projectile = ExtResource("7_efars")
-
-[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_nav_safe_velocity"]

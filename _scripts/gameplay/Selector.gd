@@ -25,7 +25,9 @@ func _unhandled_input(_event : InputEvent) -> void:
 		reset_selector();
 		
 		interact_menu.show_actions(selection);
-		overseer.units = get_friendly_units();
+		var friendly_units = get_friendly_units();
+		interact_menu.show_unit_info(friendly_units);
+		overseer.units = friendly_units.duplicate();
 	if (Input.is_action_just_pressed("Left_Click")):
 		clear_highlights();
 		selection.clear();

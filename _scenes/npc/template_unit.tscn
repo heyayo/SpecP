@@ -35,6 +35,10 @@ script = ExtResource("5_kh5hf")
 
 [node name="Selectable" parent="." instance=ExtResource("6_xj5cv")]
 
-[connection signal="animation_finished" from="Animator" to="." method="_animation_finished_from_animator"]
+[node name="Path Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
 [connection signal="animation_finished" from="Animator" to="Animator" method="_on_animation_finished"]
-[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_velocity_computed_from_navigation_agent_2d"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_nav_safe_velocity"]
+[connection signal="timeout" from="Path Timer" to="." method="_timeout_from_path_timer"]

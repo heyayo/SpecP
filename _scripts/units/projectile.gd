@@ -13,7 +13,7 @@ func setup(d : int, t : Node2D, o) -> void:
 	#print("Fired Projectile | Speed: %s | Damage: %s | Target: %s" % [speed,damage,target.name]);
 
 func _process(_delta) -> void:
-	if (!is_instance_valid(target)):
+	if (!is_instance_valid(target) or !is_instance_valid(source)):
 		queue_free();
 		return;
 	look_at(target.global_position);

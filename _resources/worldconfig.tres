@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_5yygh")
-world_size = Vector2i(250, 250)
+world_size = Vector2i(500, 500)
 tree_frequency = 0.0
 stone_frequency = 0.0

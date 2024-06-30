@@ -47,7 +47,7 @@ func generate_world() -> void:
 				and
 				y > -spawn_radius and y < spawn_radius
 				): continue;
-			generate_resource(x,y);
+			#generate_resource(x,y);
 	print("Statistics | Trees: %s | Stones: %s | Stone Patch Area: %s" % [tree_count,stone_count,stone_patches.size()]);
 func generate_tile(x : int, y : int) -> void:
 	set_cell(0,Vector2i(x,y),1,grasses[randi_range(0,2)]);
