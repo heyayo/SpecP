@@ -11,6 +11,7 @@ const spawn_radius : int = 150;
 func _ready() -> void:
 	calculate_cells();
 	var spider_spawn := random_spawn();
+	spider.global_position = spider_spawn;
 	spider.move_to(spider_spawn);
 	print("Spawning Spider at | %s" % spider_spawn);
 
@@ -30,6 +31,6 @@ func calculate_cells() -> void:
 	print(cells);
 func random_spawn() -> Vector2:
 	var index : int = randi_range(0,cells.size()-1);
-	var ret : Vector2 = cells[index];
+	var ret : Vector2 = cells[index] * 16;
 	cells.remove_at(index);
 	return ret;

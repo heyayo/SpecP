@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://cci24jx8t82vw"]
+
+[ext_resource type="PackedScene" uid="uid://br5pqkvwr7yj3" path="res://_scenes/prefabs/structures/template_structure.tscn" id="1_7s13v"]
+[ext_resource type="Script" path="res://_scripts/structures/structure.gd" id="2_qhe44"]
+[ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="3_k53gk"]
+[ext_resource type="Texture2D" uid="uid://bf3atuwxjcir1" path="res://_sprites/structures/steel_mill.png" id="4_5hm3t"]
+[ext_resource type="Script" path="res://_scenes/prefabs/structures/refinery.gd" id="4_25i4d"]
+
+[sub_resource type="Resource" id="Resource_1s2tr"]
+script = ExtResource("3_k53gk")
+name = "Steel Mill"
+desc = "Refines Stone into strong, useful metal"
+work = 12
+wood = 500
+food = 0
+stone = 250
+metal = 0
+max_health = 250
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ux7ik"]
+size = Vector2(112, 80)
+
+[node name="Steel Mill" instance=ExtResource("1_7s13v")]
+script = ExtResource("2_qhe44")
+data = SubResource("Resource_1s2tr")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("4_5hm3t")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_ux7ik")
+
+[node name="Refinery" type="Node" parent="." index="3"]
+script = ExtResource("4_25i4d")
+refinery_source = 2
+refinery_output = 3
+efficiency_ratio = 2
+
+[connection signal="sig_finish_construction" from="." to="Refinery" method="start_refining"]

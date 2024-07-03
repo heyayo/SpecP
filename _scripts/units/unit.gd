@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Unit ## TODO Rename
+class_name Unit
 #region Modules
 @onready var sprite : Animator = $Animator;
 @onready var nav : UnitNavigator = $NavigationAgent2D;
@@ -62,7 +62,7 @@ func attack_action(target : Unit) -> void:
 	if (!is_instance_valid(target)): return;
 	desired_target = target;
 	move_to(target.global_position);
-func attack_action_stay(target : Unit) -> void:
+func attack_action_stay(target) -> void:
 	if (!is_instance_valid(target)): return;
 	desired_target = target;
 	move_to_stay(target.global_position);
@@ -101,7 +101,7 @@ func aggressive_bev() -> void:
 		desired_target = get_lowest_health();
 		return;
 	force_attack_response();
-func damage_response(source : Unit) -> void:
+func damage_response(source) -> void:
 	if (behaviour == BEHAVIOUR.PASSIVE): return;
 	attack_action_stay(source);
 func force_attack_response() -> void:
@@ -127,7 +127,7 @@ func get_lowest_health() -> Unit:
 func apply_slowdown() -> void:
 	if (walk_area.is_empty()): speed = data.speed;
 	else: speed = data.speed / data.slowdown;
-func apply_damage(damage : float, source : Unit) -> void:
+func apply_damage(damage : float, source) -> void:
 	health -= damage;
 	if (!is_instance_valid(source)): return;
 	if (health <= 0):

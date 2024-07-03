@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://kg05bx8x1dfy"]
+
+[ext_resource type="Script" path="res://_scripts/units/projectile.gd" id="1_2ahdc"]
+[ext_resource type="Texture2D" uid="uid://c0xrumguiqfe8" path="res://_sprites/structures/defenses/ballista/Bolt_For_Shots_000.png" id="2_yr8ks"]
+
+[node name="Ballista Arrow" type="Node2D"]
+script = ExtResource("1_2ahdc")
+speed = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.78814e-07, 1.78814e-07)
+scale = Vector2(0.046875, 0.046875)
+texture = ExtResource("2_yr8ks")

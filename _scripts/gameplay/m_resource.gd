@@ -23,10 +23,21 @@ var metal : int = 500 :
 	get: return metal;
 	set(value):
 		metal = value;
-		## TODO Metal Label
+		labels.set_metal(value);
 
 func _ready() -> void:
 	labels.call_deferred("set_all",self);
+func have_resource(amount : int, type : Common.RESOURCE_TYPE) -> bool:
+	match (type):
+		Common.RESOURCE_TYPE.WOOD:
+			return wood >= amount;
+		Common.RESOURCE_TYPE.FOOD:
+			return food >= amount;
+		Common.RESOURCE_TYPE.STONE:
+			return stone >= amount;
+		Common.RESOURCE_TYPE.METAL:
+			return metal >= amount;
+	return false;
 
 @onready var tree : SceneTree = get_tree();
 func _timeout_from_timer():

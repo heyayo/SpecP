@@ -52,16 +52,25 @@ func cost_check(structure : Structure) -> bool:
 	if (cost.stone > resources.stone): return false;
 	if (cost.metal > resources.metal): return false;
 	return true;
-# TODO Fourth Resource
 func cost_preview(costs : StructureData) -> void:
 	costs_label.text = "
 	Wood: %s
 	Food: %s
 	Stone: %s
-	" % [costs.wood,costs.food,costs.stone];
+	Metal: %s
+	" % [costs.wood,costs.food,costs.stone,costs.metal];
 func sprite_preview(structure : Structure) -> void:
-	var sprite : Texture = structure.get_node("Sprite2D").texture;
-	sprite_textrect.texture = sprite;
+	var sprite = structure.get_node("Sprite2D");
+	var preview_texture : Texture;
+	if (sprite is Sprite2D):
+		preview_texture = sprite.texture;
+		sprite_textrect.texture = preview_texture;
+		return;
+	if (sprite is AnimatedSprite2D):
+		var asp : AnimatedSprite2D = sprite as AnimatedSprite2D;
+		preview_texture = asp.sprite_frames.get_frame_texture("default",0);
+		sprite_textrect.texture = preview_texture;
+		return;
 #endregion
 
 #region Enable/Disable

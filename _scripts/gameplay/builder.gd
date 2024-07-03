@@ -1,8 +1,8 @@
 extends Node2D
 
 class_name Builder
-## TODO Prevent Out of Bounds Building
-## TODO Oneshot place buildings or determine resource requirements per
+## FIXME Prevent Out of Bounds Building
+## FIXME Oneshot place buildings or determine resource requirements per
 ## TODO MINOR | Cleanup code
 var con_mark : PackedScene = preload("res://_scenes/prefabs/construction_mark.tscn")
 
@@ -53,13 +53,24 @@ func place_building() -> void: ## Places the building in the world and begins it
 	## Deduct Resources
 	game.adjust_structure_cost(b.data);
 #region Preview Functions
+const preview_target_size : int = 64;
 func start_preview(building : Structure) -> void: ## Prepare the Build Preview
 	selector.disable(); ## Disable Selector
 	to_build = building; ## Sets Global Build Object
 	## Set Preview Texture
-	var bSprite : Sprite2D = building.get_node("Sprite2D");
-	preview_sprite.texture = bSprite.texture;
-	resize_preview(bSprite.texture.get_size());
+	var bSprite = building.get_node("Sprite2D");
+	var prev_texture : Texture;
+	if (is_instance_valid(bSprite)):
+		if (bSprite is Sprite2D):
+			prev_texture = bSprite.texture;
+			preview_sprite.texture = bSprite.texture;
+		elif (bSprite is AnimatedSprite2D):
+			prev_texture = bSprite.sprite_frames.get_frame_texture("default",0);
+			preview_sprite.texture = prev_texture;
+		preview_sprite.scale = bSprite.scale;
+		resize_preview(prev_texture.get_size() * bSprite.scale);
+	else:
+		preview_sprite.texture = null;
 	## Make Preview Visible and Sets Initial Color
 	preview_area.visible = true;
 	## Resource Structure Previe5w
@@ -90,7 +101,7 @@ func resize_resource_preview(size : Vector2i, structure_size : Vector2i) -> void
 #endregion
 #region Modulation
 func update_preview_modulation() -> void:
-	var have_resources : bool = false;
+	var have_resources : bool = true;
 	if (to_build is ResourceStructure):
 		var count : int = 0;
 		for res in resource_track.collection:
@@ -101,8 +112,8 @@ func update_preview_modulation() -> void:
 			var resource : WorldResource = res;
 			if (resource.type == to_build.stats.type):
 				count += 1;
-		if (count >= to_build.stats.required_amount):
-			have_resources = true;
+		## Set have_resources based on requirement
+		have_resources = count >= to_build.stats.required_amount;
 	is_obstructed = preview_track.collection.is_empty() and have_resources;
 	preview_sprite.modulate = Color.GREEN if is_obstructed else Color.RED;
 func update_preview_position() -> void:

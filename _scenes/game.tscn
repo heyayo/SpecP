@@ -1,14 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=36 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
-[ext_resource type="Script" path="res://_scenes/worldgen.gd" id="3_fjm8q"]
+[ext_resource type="Script" path="res://_scripts/gameplay/worldgen.gd" id="3_fjm8q"]
 [ext_resource type="Script" path="res://_scripts/gameplay/Selector.gd" id="3_y6ca4"]
 [ext_resource type="Resource" uid="uid://koit31muys02" path="res://_resources/worldconfig.tres" id="4_4c83m"]
 [ext_resource type="Script" path="res://_scripts/gameplay/overseer.gd" id="4_6rlxo"]
 [ext_resource type="Texture2D" uid="uid://crpy06mncl4ws" path="res://_sprites/blank.jpg" id="4_6751o"]
+[ext_resource type="Script" path="res://_scenes/prefabs/boss_list.gd" id="5_8d48f"]
 [ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="5_dabfu"]
-[ext_resource type="PackedScene" uid="uid://s8q6nha8tudh" path="res://_scenes/prefabs/boss_list.tscn" id="5_fle47"]
+[ext_resource type="PackedScene" uid="uid://c6eft7u610doh" path="res://_scenes/npc/spider.tscn" id="6_h4hvq"]
 [ext_resource type="Script" path="res://_scripts/gameplay/camera.gd" id="7_e0ybk"]
 [ext_resource type="Script" path="res://_scripts/gameplay/action_menu.gd" id="9_31up8"]
 [ext_resource type="Texture2D" uid="uid://cf1co6dtcf0ig" path="res://_sprites/resource_icons/Material/Wood Log.png" id="10_51fdt"]
@@ -22,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://ysu0yhmffrk2" path="res://_sprites/colonist/sword/Attack/Warrior_Attack_3.png" id="18_avx15"]
 [ext_resource type="Script" path="res://_scripts/gameplay/m_resource.gd" id="18_h4vt7"]
 [ext_resource type="PackedScene" uid="uid://bfxsv8w1mvndx" path="res://_scenes/npc/archer.tscn" id="21_omxwq"]
+[ext_resource type="Texture2D" uid="uid://b7o0utoof5uue" path="res://_sprites/reshot-icon-arrow-up-ZGEKU95YAJ.svg" id="21_xbqp2"]
+[ext_resource type="Script" path="res://_scripts/gameplay/boss_finder.gd" id="22_tf81x"]
+[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="26_63uvw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -40,6 +44,67 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_rh7af"]
 font_size = 13
 
+[sub_resource type="Animation" id="Animation_a72vr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_73xur"]
+resource_name = "fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lihub"]
+_data = {
+"RESET": SubResource("Animation_a72vr"),
+"fade": SubResource("Animation_73xur")
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lvycr")
 
@@ -54,8 +119,11 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("3_fjm8q")
 config = ExtResource("4_4c83m")
 
-[node name="BossList" parent="." instance=ExtResource("5_fle47")]
+[node name="BossList" type="Node2D" parent="."]
+script = ExtResource("5_8d48f")
 world_config = ExtResource("4_4c83m")
+
+[node name="Spider" parent="BossList" instance=ExtResource("6_h4hvq")]
 
 [node name="Resources" type="Node2D" parent="." node_paths=PackedStringArray("labels")]
 script = ExtResource("18_h4vt7")
@@ -183,6 +251,7 @@ anchor_right = 1.0
 offset_left = -150.0
 offset_bottom = 121.0
 grow_horizontal = 0
+expand_mode = 2
 
 [node name="Costs" type="Label" parent="Interface/Action Menu"]
 layout_mode = 1
@@ -317,6 +386,35 @@ grow_vertical = 2
 texture = ExtResource("12_kxb3b")
 
 [node name="TitleCount" type="Label" parent="Interface/Resources/HBoxContainer/Stone/Icon"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_right = 81.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Wood: 500"
+
+[node name="Metal" type="Control" parent="Interface/Resources/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Icon" type="TextureRect" parent="Interface/Resources/HBoxContainer/Metal"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_vertical = 2
+texture = ExtResource("12_kxb3b")
+
+[node name="TitleCount" type="Label" parent="Interface/Resources/HBoxContainer/Metal/Icon"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -511,11 +609,37 @@ label_settings = SubResource("LabelSettings_rh7af")
 autowrap_mode = 2
 clip_text = true
 
+[node name="Boss Finder" type="TextureRect" parent="Interface"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -63.0
+offset_right = 64.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("21_xbqp2")
+script = ExtResource("22_tf81x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface/Boss Finder"]
+libraries = {
+"": SubResource("AnimationLibrary_lihub")
+}
+
 [node name="Base" parent="." instance=ExtResource("16_rh54v")]
 units = Array[PackedScene]([ExtResource("5_dabfu"), ExtResource("21_omxwq")])
 
 [node name="Archer" parent="." groups=["Friendly"] instance=ExtResource("21_omxwq")]
 position = Vector2(136, 48)
+
+[node name="Swordsman" parent="." groups=["Hostile"] instance=ExtResource("5_dabfu")]
+position = Vector2(120, -112)
+
+[node name="HostileNPC" parent="Swordsman" instance=ExtResource("26_63uvw")]
 
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]

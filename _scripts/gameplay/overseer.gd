@@ -4,6 +4,8 @@ class_name Overseer
 
 @onready var click_detect : Area2D = $"Click Detect"
 @onready var interact_menu = $"../Interface/Interact Menu"
+@onready var camera_2d = $"../Camera2D"
+@onready var boss_finder : BossFinder = $"../Interface/Boss Finder"
 
 var units : Array;
 var detect : Tracker = Tracker.new();
@@ -28,7 +30,16 @@ func _input(_event : InputEvent) -> void:
 		set_behaviour(Unit.BEHAVIOUR.DEFENSIVE);
 	if (Input.is_action_just_pressed("Set Aggressive")):
 		set_behaviour(Unit.BEHAVIOUR.AGGRESSIVE);
+	if (Input.is_action_just_pressed("Center Camera")):
+		center_camera();
+	if (Input.is_action_just_pressed("Find Boss")):
+		boss_finder.point_nearest();
 
+func center_camera() -> void:
+	if (units.is_empty() or units.size() > 1):
+		camera_2d.global_position = Vector2(0,0);
+		return;
+	camera_2d.global_position = units.front().global_position;
 func set_behaviour(behaviour : Unit.BEHAVIOUR) -> void:
 	for u in units:
 		u.behaviour = behaviour;

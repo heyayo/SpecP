@@ -1,5 +1,7 @@
 extends Area2D
 class_name Structure
+## TODO Replace with 90 Degree Sprites
+signal sig_finish_construction;
 
 @export var data : StructureData;
 var health : int = 100 :
@@ -16,5 +18,6 @@ func _ready() -> void:
 	health = data.max_health;
 func finish_construction() -> void:
 	print("%s | Constructed" % name);
-func apply_damage(damage : float, source : Unit) -> void:
+	sig_finish_construction.emit();
+func apply_damage(damage : float, source) -> void:
 	health -= damage;
