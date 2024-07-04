@@ -13,12 +13,12 @@
 script = ExtResource("3_yehmu")
 name = "Ballista"
 desc = "A Strong Bow for defending structures"
-work = 1
+work = 3
 wood = 500
 food = 0
 stone = 500
 metal = 50
-max_health = 100
+max_health = 250
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36l8h"]
 size = Vector2(48, 80)
@@ -43,7 +43,7 @@ shape = SubResource("RectangleShape2D_36l8h")
 [node name="Shooter" type="Node2D" parent="."]
 script = ExtResource("5_g28ky")
 projectile = ExtResource("6_a1224")
-damage = 1
+damage = 5
 
 [node name="Range" parent="Shooter" instance=ExtResource("7_belxr")]
 scale = Vector2(50, 50)

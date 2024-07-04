@@ -26,3 +26,5 @@ func finish_construction() -> void:
 	sig_finish_construction.emit();
 func apply_damage(damage : float, source) -> void:
 	health -= damage;
+func report_death(source) -> void:
+	pass
