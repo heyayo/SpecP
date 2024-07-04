@@ -2,8 +2,10 @@ extends Structure
 class_name UnitStructure
 
 @onready var game : Game = get_tree().root.get_node("Game");
+@onready var resources : MResource = $"../Resources"
 @onready var unit_signal : ColorRect = $Signal
 @onready var selectable : Selectable = $Selectable
+@onready var notifier : Notifier= $"../Interface/Notification"
 
 @export var units : Array[PackedScene];
 
@@ -24,6 +26,10 @@ func _ready() -> void:
 func finish() -> void:
 	print("%s | Constructing Unit Structure" % name);
 func queue_training(unit : Unit) -> void:
+	if (!cost_check(unit.data)):
+		notifier.notify("Not enough resources to train");
+		return;
+	game.adjust_resources(0,-unit.data.food,0,-unit.data.metal);
 	if (queue.is_empty()):
 		training_timer.wait_time = unit.data.training_time;
 		training_timer.start();
@@ -31,6 +37,10 @@ func queue_training(unit : Unit) -> void:
 	unit_signal.color = Color.GREEN;
 	
 	print("%s | Queued Unit Training" % unit.data.name);
+func cost_check(data : UnitStats) -> bool:
+	if (data.food > resources.food): return false;
+	if (data.metal > resources.metal): return false;
+	return true;
 
 ## Function for spawning units
 func _timeout_from_training_timer():

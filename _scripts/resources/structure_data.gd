@@ -14,4 +14,6 @@ class_name StructureData
 #endregion
 #region Stats
 @export var max_health : int = 100;
+@export var defense_range : float = 0; ## Compatiblity
+@export var range : int = 10; ## Compatiblity
 #endregion

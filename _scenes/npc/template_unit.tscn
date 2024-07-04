@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://l2qsl86i3nn6"]
+[gd_scene load_steps=5 format=3 uid="uid://l2qsl86i3nn6"]
 
 [ext_resource type="Script" path="res://_scripts/units/unit.gd" id="1_65gav"]
 [ext_resource type="Script" path="res://_scripts/units/animator.gd" id="3_t5blr"]
 [ext_resource type="PackedScene" uid="uid://bu8fvflbob7sy" path="res://_scenes/prefabs/range.tscn" id="4_iedq0"]
-[ext_resource type="Script" path="res://_scripts/units/unit_navigator.gd" id="5_kh5hf"]
 [ext_resource type="PackedScene" uid="uid://nlup42k1sgdo" path="res://_scenes/prefabs/selectable.tscn" id="6_xj5cv"]
 
 [node name="TemplateUnit" type="CharacterBody2D" groups=["Unit"]]
@@ -26,19 +25,9 @@ collision_mask = 24576
 [node name="Attack Area" parent="." instance=ExtResource("4_iedq0")]
 collision_mask = 20480
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
-radius = 8.0
-max_speed = 500.0
-debug_enabled = true
-script = ExtResource("5_kh5hf")
-
 [node name="Selectable" parent="." instance=ExtResource("6_xj5cv")]
 
-[node name="Path Timer" type="Timer" parent="."]
-wait_time = 0.05
-one_shot = true
+[node name="DistanceFromOthers" parent="." instance=ExtResource("4_iedq0")]
+collision_mask = 4096
 
 [connection signal="animation_finished" from="Animator" to="Animator" method="_on_animation_finished"]
-[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_nav_safe_velocity"]
-[connection signal="timeout" from="Path Timer" to="." method="_timeout_from_path_timer"]

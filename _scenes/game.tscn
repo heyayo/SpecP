@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=42 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -25,8 +25,12 @@
 [ext_resource type="PackedScene" uid="uid://bfxsv8w1mvndx" path="res://_scenes/npc/archer.tscn" id="21_omxwq"]
 [ext_resource type="Texture2D" uid="uid://b7o0utoof5uue" path="res://_sprites/reshot-icon-arrow-up-ZGEKU95YAJ.svg" id="21_xbqp2"]
 [ext_resource type="Script" path="res://_scripts/gameplay/boss_finder.gd" id="22_tf81x"]
-[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="26_63uvw"]
+[ext_resource type="Script" path="res://_scripts/gameplay/notifier.gd" id="23_8sq7o"]
+[ext_resource type="PackedScene" uid="uid://c3agpxcpq858p" path="res://_scenes/prefabs/structures/mason_hut.tscn" id="26_l2xfv"]
+[ext_resource type="PackedScene" uid="uid://bhlxf1ymsr3cg" path="res://_scenes/prefabs/structures/wood_mill.tscn" id="26_lewgn"]
 [ext_resource type="PackedScene" uid="uid://cu4lvhv0xyep8" path="res://_scenes/prefabs/structures/bandit/bandit_outpost.tscn" id="27_xow0p"]
+[ext_resource type="PackedScene" uid="uid://baklj5mrrv42t" path="res://_scenes/prefabs/resources/tree.tscn" id="28_cvg17"]
+[ext_resource type="PackedScene" uid="uid://bx1gegd7uj7j3" path="res://_scenes/prefabs/resources/stone.tscn" id="30_ttdbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -131,6 +135,7 @@ script = ExtResource("5_8d48f")
 world_config = ExtResource("4_4c83m")
 
 [node name="Spider" parent="BossList" instance=ExtResource("6_h4hvq")]
+position = Vector2(-1017, 6)
 
 [node name="Resources" type="Node2D" parent="." node_paths=PackedStringArray("labels")]
 script = ExtResource("18_h4vt7")
@@ -226,6 +231,29 @@ text = "Base Destroyed"
 label_settings = SubResource("LabelSettings_h5l4b")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Game Win" type="Label" parent="Interface/Game Conditions"]
+visible = false
+z_index = 15
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -228.0
+offset_top = -68.0
+offset_right = 236.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "All Bosses Killed"
+label_settings = SubResource("LabelSettings_h5l4b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Game Win Timer" type="Timer" parent="Interface/Game Conditions"]
+wait_time = 3.0
+one_shot = true
 
 [node name="Action Menu" type="ColorRect" parent="Interface" node_paths=PackedStringArray("builder", "resources")]
 anchors_preset = 8
@@ -670,16 +698,72 @@ libraries = {
 "": SubResource("AnimationLibrary_lihub")
 }
 
+[node name="Notification" type="Control" parent="Interface"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 192.0
+offset_bottom = 320.0
+script = ExtResource("23_8sq7o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/Notification"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Template Label" type="Label" parent="Interface/Notification/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "test message test message test message test message test message test message test message test message "
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Timer" type="Timer" parent="Interface/Notification/VBoxContainer/Template Label"]
+wait_time = 2.0
+one_shot = true
+
 [node name="Base" parent="." instance=ExtResource("16_rh54v")]
 units = Array[PackedScene]([ExtResource("5_dabfu"), ExtResource("21_omxwq")])
 
-[node name="Archer" parent="." groups=["Friendly"] instance=ExtResource("21_omxwq")]
-position = Vector2(136, 48)
+[node name="Mason Hut" parent="." groups=["ResourceStructure"] instance=ExtResource("26_l2xfv")]
+position = Vector2(72, -72)
 
-[node name="Swordsman" parent="." groups=["Hostile"] instance=ExtResource("5_dabfu")]
-position = Vector2(120, -112)
+[node name="Wood Mill" parent="." groups=["ResourceStructure"] instance=ExtResource("26_lewgn")]
+position = Vector2(-72, -72)
 
-[node name="HostileNPC" parent="Swordsman" instance=ExtResource("26_63uvw")]
+[node name="Tree5" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -88)
+
+[node name="Tree4" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -80)
+
+[node name="Tree3" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -72)
+
+[node name="Tree2" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -64)
+
+[node name="Tree" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -56)
+
+[node name="Tree6" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -88)
+
+[node name="Tree7" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -80)
+
+[node name="Tree8" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -72)
+
+[node name="Tree9" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -64)
+
+[node name="Tree10" parent="." instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -56)
 
 [node name="Game End Timer" type="Timer" parent="."]
 process_mode = 2
@@ -687,7 +771,25 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Bandit Outpost" parent="." instance=ExtResource("27_xow0p")]
-position = Vector2(-248, -152)
+position = Vector2(-323, 0)
+
+[node name="Stone" parent="." instance=ExtResource("30_ttdbg")]
+position = Vector2(32, -88)
+
+[node name="Stone2" parent="." instance=ExtResource("30_ttdbg")]
+position = Vector2(32, -72)
+
+[node name="Stone3" parent="." instance=ExtResource("30_ttdbg")]
+position = Vector2(32, -56)
+
+[node name="Stone4" parent="." instance=ExtResource("30_ttdbg")]
+position = Vector2(0, -88)
+
+[node name="Stone5" parent="." instance=ExtResource("30_ttdbg")]
+position = Vector2(0, -72)
+
+[node name="Stone6" parent="." instance=ExtResource("30_ttdbg")]
+position = Vector2(0, -56)
 
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]
@@ -704,8 +806,11 @@ position = Vector2(-248, -152)
 [connection signal="body_exited" from="Builder/PreviewArea" to="Builder" method="_exit_preview"]
 [connection signal="area_entered" from="Builder/ResourceArea" to="Builder" method="_area_entered_from_resource_area"]
 [connection signal="area_exited" from="Builder/ResourceArea" to="Builder" method="_area_exited_from_resource_area"]
+[connection signal="timeout" from="Interface/Game Conditions/Game Win Timer" to="BossList" method="_timeout_from_game_win_timer"]
 [connection signal="pressed" from="Interface/Bar/Buildings" to="Interface/Action Menu" method="toggle"]
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Demolish" to="Selector" method="_pressed_from_demolish"]
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Bills" to="Interface/Bills" method="_pressed_from_bills"]
 [connection signal="sig_destroyed" from="Base" to="." method="end_game"]
+[connection signal="sig_harvest" from="Mason Hut" to="." method="give_resource"]
+[connection signal="sig_harvest" from="Wood Mill" to="." method="give_resource"]
 [connection signal="timeout" from="Game End Timer" to="." method="_timeout_from_game_end_timer"]

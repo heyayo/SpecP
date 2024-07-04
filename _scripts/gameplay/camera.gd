@@ -7,7 +7,7 @@ class_name Camera
 @export var max_zoom : float = 5;
 @export var step_zoom : float = 0.25;
 @export_category("Movement")
-@export var speed : float = 5;
+@export var speed : float = 500;
 
 func _ready() -> void:
 	adjust_zoom_fixed(min_zoom);
@@ -18,7 +18,9 @@ func _unhandled_input(event) -> void:
 		adjust_zoom_relative(-step_zoom);
 func _process(_delta):
 	var move_dir : Vector2 = Input.get_vector("Left","Right","Up","Down");
-	global_position += move_dir * speed;
+	if (Input.is_action_pressed("SpeedCamera")):
+		move_dir *= 3;
+	global_position += move_dir * speed * _delta;
 
 func adjust_zoom_relative(step : float) -> void:
 	zoom += Vector2(step,step);

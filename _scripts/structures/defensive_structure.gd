@@ -12,6 +12,8 @@ var unit : Unit = null;
 
 func _ready() -> void:
 	disable();
+	var p_range : int = parent.data.range;
+	range.scale = Vector2(p_range,p_range);
 func shoot() -> void:
 	if (!is_instance_valid(unit)): return;
 	parent.look_at(unit.global_position);

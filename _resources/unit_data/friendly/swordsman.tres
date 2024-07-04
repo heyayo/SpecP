@@ -16,3 +16,5 @@ range = 3
 defense_range = 10
 slowdown = 2.0
 cooldown = 0.1
+food = 100
+metal = 0

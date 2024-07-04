@@ -15,6 +15,10 @@ class_name UnitStats
 @export var slowdown : float = 2;
 @export var cooldown : float = 1;
 #endregion
+#region Costs
+@export var food : int = 10;
+@export var metal : int = 0;
+#endregion
 #region Convenience Functions
 func unitrange() -> Vector2:
 	return Vector2(range,range);

@@ -34,6 +34,8 @@ func spawn_unit() -> void:
 	spawn.add_to_group(Common.group_hostile);
 
 	units.push_back(spawn);
+	var random_direction : Vector2 = Vector2(15,0).rotated(deg_to_rad(randf_range(0,360))) * 4;
+	spawn.move_to(random_direction + spawn.global_position);
 	resume_spawns();
 
 #region Unit Reports

@@ -13,13 +13,15 @@ name = "Wizard"
 desc = "Master of the Mystic Arts"
 preview = ExtResource("3_4smye")
 training_time = 1
-damage = 80.0
-speed = 3.0
+damage = 500.0
+speed = 10.0
 max_health = 150.0
 range = 30
 defense_range = 10
 slowdown = 3.0
 cooldown = 2.0
+food = 10
+metal = 0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aov7u"]
 
@@ -37,6 +39,6 @@ animation = &"attack"
 frame = 7
 frame_progress = 1.0
 
-[node name="Attack" type="Timer" parent="." index="6"]
+[node name="Attack" type="Timer" parent="." index="5"]
 script = ExtResource("2_nkqup")
 projectile = ExtResource("7_efars")

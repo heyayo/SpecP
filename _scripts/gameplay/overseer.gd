@@ -26,10 +26,13 @@ func _input(_event : InputEvent) -> void:
 	## Unit Behaviour Settings
 	if (Input.is_action_just_pressed("Set Passive")):
 		set_behaviour(Unit.BEHAVIOUR.PASSIVE);
+		print_rich("[color=blue]Switched To Passive[/color]")
 	if (Input.is_action_just_pressed("Set Defensive")):
 		set_behaviour(Unit.BEHAVIOUR.DEFENSIVE);
+		print_rich("[color=yellow]Switched To Defensive[/color]")
 	if (Input.is_action_just_pressed("Set Aggressive")):
 		set_behaviour(Unit.BEHAVIOUR.AGGRESSIVE);
+		print_rich("[color=red]Switched To Aggressive[/color]")
 	if (Input.is_action_just_pressed("Center Camera")):
 		center_camera();
 	if (Input.is_action_just_pressed("Find Boss")):

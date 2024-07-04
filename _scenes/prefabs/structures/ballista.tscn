@@ -19,6 +19,8 @@ food = 0
 stone = 500
 metal = 50
 max_health = 250
+defense_range = 10.0
+range = 50
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36l8h"]
 size = Vector2(48, 80)
@@ -32,8 +34,10 @@ data = SubResource("Resource_qj5vh")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 3
+rotation = 1.57079
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("3_yy4d5")
+animation = &"shoot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_36l8h")

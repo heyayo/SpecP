@@ -10,6 +10,7 @@ signal sig_destroyed;
 var health : int = 100 :
 	get: return health;
 	set(value):
+		health_bar.appear();
 		health = value;
 		health_bar.update_bar(value,data.max_health);
 		health = clamp(health,0,data.max_health);

@@ -4,12 +4,15 @@ class_name InteractMenu
 
 @onready var structure_actions : ColorRect = $"Structure Actions"
 @onready var behaviour = $"Unit Info/Behaviour"
+@onready var unit_info = $"Unit Info"
 
 func _ready() -> void:
 	hide_actions();
 
 func hide_actions() -> void:
 	structure_actions.visible = false;
+func hide_unit_info() -> void:
+	unit_info.visible = false;
 func show_actions(selection : Array) -> void:
 	hide_actions();
 	for n in selection:
@@ -18,7 +21,10 @@ func show_actions(selection : Array) -> void:
 			structure_actions.visible = true;
 			break;
 func show_unit_info(units : Array) -> void:
-	if (units.is_empty()): return;
+	if (units.is_empty()):
+		hide_unit_info();
+		return;
+	unit_info.visible = true;
 	if (units.size() > 1):
 		var check : Dictionary = {};
 		for u in units:

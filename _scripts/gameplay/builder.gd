@@ -17,6 +17,7 @@ var con_mark : PackedScene = preload("res://_scenes/prefabs/construction_mark.ts
 #region External
 @export var selector : Selector;
 @export var game : Game;
+var world_config : WorldConfiguration = preload("res://_resources/worldconfig.tres");
 #endregion
 
 var preview_track : Tracker = Tracker.new();
@@ -30,14 +31,13 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	update_preview_position();
 	update_resource_position();
+	update_preview_modulation();
 func _input(_event : InputEvent) -> void:
 	if (Input.is_action_just_pressed("Right_Click")):
 		stop_preview();
 	if (Input.is_action_just_pressed("Left_Click")):
 		if (not is_obstructed): return;
 		place_building();
-	#if (Input.is_action_just_re5leased("Left_Click")):
-		#call_deferred("stop_preview");
 func place_building() -> void: ## Places the building in the world and begins its construction
 	var b : Structure = to_build.duplicate();
 	add_child(b);
@@ -101,6 +101,12 @@ func resize_resource_preview(size : Vector2i, structure_size : Vector2i) -> void
 #endregion
 #region Modulation
 func update_preview_modulation() -> void:
+	var place_pos : Vector2i = game.get_hover_position().abs();
+	var wsize : Vector2i = world_config.world_size * 8;
+	if (place_pos.x >= wsize.x or place_pos.y >= wsize.y):
+		is_obstructed = false;
+		preview_sprite.modulate = Color.GREEN if is_obstructed else Color.RED;
+		return;
 	var have_resources : bool = true;
 	if (to_build is ResourceStructure):
 		var count : int = 0;

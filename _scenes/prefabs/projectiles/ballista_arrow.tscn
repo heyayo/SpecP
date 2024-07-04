@@ -9,5 +9,6 @@ speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.78814e-07, 1.78814e-07)
+rotation = 1.57079
 scale = Vector2(0.046875, 0.046875)
 texture = ExtResource("2_yr8ks")

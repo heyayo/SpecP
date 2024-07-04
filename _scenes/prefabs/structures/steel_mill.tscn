@@ -16,6 +16,8 @@ food = 0
 stone = 250
 metal = 0
 max_health = 250
+defense_range = 0.0
+range = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ux7ik"]
 size = Vector2(112, 80)
@@ -35,5 +37,11 @@ script = ExtResource("4_25i4d")
 refinery_source = 2
 refinery_output = 3
 efficiency_ratio = 2
+
+[node name="HealthBar" parent="." index="4"]
+offset_left = -56.0
+offset_top = 32.0
+offset_right = 56.0
+offset_bottom = 48.0
 
 [connection signal="sig_finish_construction" from="." to="Refinery" method="start_refining"]

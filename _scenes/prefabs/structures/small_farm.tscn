@@ -22,3 +22,9 @@ shape = SubResource("RectangleShape2D_n78cc")
 
 [node name="Selectable" parent="." index="2"]
 scale = Vector2(3, 3)
+
+[node name="HealthBar" parent="." index="3"]
+offset_left = -24.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 40.0

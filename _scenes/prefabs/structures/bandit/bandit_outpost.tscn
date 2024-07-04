@@ -18,6 +18,8 @@ food = 0
 stone = 0
 metal = 0
 max_health = 1000
+defense_range = 0.0
+range = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlwx1"]
 size = Vector2(48, 80)
