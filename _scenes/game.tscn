@@ -681,13 +681,13 @@ position = Vector2(120, -112)
 
 [node name="HostileNPC" parent="Swordsman" instance=ExtResource("26_63uvw")]
 
-[node name="Bandit Outpost" parent="." instance=ExtResource("27_xow0p")]
-position = Vector2(440, -280)
-
 [node name="Game End Timer" type="Timer" parent="."]
 process_mode = 2
 wait_time = 5.0
 one_shot = true
+
+[node name="Bandit Outpost" parent="." instance=ExtResource("27_xow0p")]
+position = Vector2(-248, -152)
 
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]

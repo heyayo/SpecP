@@ -48,9 +48,17 @@ func _process(_delta) -> void:
 			defensive_bev();
 		BEHAVIOUR.AGGRESSIVE:
 			aggressive_bev();
+const lazy_speed_adjust : float = 50;
 func _physics_process(_delta):
-	if (nav.is_navigation_finished()): return;
-	apply_velocity();
+	var goto : Vector2;
+	if (is_instance_valid(desired_target)):
+		goto = desired_target.global_position;
+	else: goto = desired_position;
+	if (lock_move): return;
+	velocity = global_position.direction_to(goto) * speed * lazy_speed_adjust;
+	move_and_slide();
+	#if (nav.is_navigation_finished()): return;
+	#apply_velocity();
 #endregion
 #region Actions
 func move_action(pos : Vector2) -> void:
@@ -63,14 +71,24 @@ func attack_action(target) -> void:
 	## DEBUG
 	if (!target is Unit and !target is Structure):
 		print("Attempted Attack on non-world object");
-	desired_target = target;
-	move_to(target.global_position);
+	if (target == desired_target):
+		var diff : Vector2 = target.global_position - desired_target.global_position;
+		if (diff.x > 1 and diff.y > 1):
+			move_to(target.global_position);
+	else:
+		desired_target = target;
+		move_to(target.global_position);
 func attack_action_stay(target) -> void:
 	if (!is_instance_valid(target)): return;
 	if (!target is Unit and !target is Structure):
 		print("Attempted Attack on non-world object");
-	desired_target = target;
-	move_to_stay(target.global_position);
+	if (target == desired_target):
+		var diff : Vector2 = target.global_position - desired_target.global_position;
+		if (diff.x > 1 and diff.y > 1):
+			move_to(target.global_position);
+	else:
+		desired_target = target;
+		move_to_stay(target.global_position);
 func move_to(pos : Vector2) -> void:
 	desired_position = pos;
 	nav_pos = pos;
@@ -145,6 +163,7 @@ func apply_velocity() -> void:
 #endregion
 #region Callbacks
 func _nav_safe_velocity(safe : Vector2) -> void:
+	return; ## TEMPORARY
 	if (lock_move): return;
 	velocity = safe;
 	move_and_slide();

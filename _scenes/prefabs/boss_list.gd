@@ -4,6 +4,7 @@ class_name BossList
 @onready var spider : Unit = $Spider
 @export var world_config : WorldConfiguration;
 
+const bandit_outpost : PackedScene = preload("res://_scenes/prefabs/structures/bandit/bandit_outpost.tscn");
 const world_edge : int = 25;
 const cell_step : int = 50;
 const spawn_radius : int = 150;
@@ -13,6 +14,7 @@ func _ready() -> void:
 	var spider_spawn := random_spawn();
 	spider.global_position = spider_spawn;
 	spider.move_to(spider_spawn);
+	surround_with(bandit_outpost,1,spider_spawn,128);
 	print("Spawning Spider at | %s" % spider_spawn);
 
 var cells : Array[Vector2i];
@@ -34,3 +36,11 @@ func random_spawn() -> Vector2:
 	var ret : Vector2 = cells[index] * 16;
 	cells.remove_at(index);
 	return ret;
+func surround_with(posts : PackedScene, amount : int, pivot : Vector2, radius : float) -> void:
+	var deg_step : float = 360/amount;
+	for i in range(amount):
+		var rad : float = deg_to_rad(i * deg_step);
+		var post = posts.instantiate();
+		add_child(post);
+		var pos : Vector2 = pivot + Vector2(sin(rad),cos(rad)) * radius;
+		post.global_position = pos;
