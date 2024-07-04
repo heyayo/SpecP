@@ -17,7 +17,7 @@ func shoot() -> void:
 	parent.look_at(unit.global_position);
 	sprite_2d.play("shoot");
 	var dupe : Projectile = projectile.instantiate();
-	dupe.setup(damage,unit,self);
+	dupe.setup(damage,unit,get_parent());
 	game.add_child(dupe);
 	dupe.global_position = global_position;
 func _process(_delta) -> void:

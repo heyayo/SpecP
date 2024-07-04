@@ -26,7 +26,7 @@ var health : float = 100 :
 		if (health <= 0):
 			queue_free();
 var desired_position : Vector2;
-var desired_target : Unit = null;
+var desired_target = null;
 var behaviour : BEHAVIOUR = BEHAVIOUR.PASSIVE;
 #endregion
 #region Processes
@@ -58,12 +58,17 @@ func move_action(pos : Vector2) -> void:
 	match (behaviour):
 		BEHAVIOUR.PASSIVE:
 			desired_target = null;
-func attack_action(target : Unit) -> void:
+func attack_action(target) -> void:
 	if (!is_instance_valid(target)): return;
+	## DEBUG
+	if (!target is Unit and !target is Structure):
+		print("Attempted Attack on non-world object");
 	desired_target = target;
 	move_to(target.global_position);
 func attack_action_stay(target) -> void:
 	if (!is_instance_valid(target)): return;
+	if (!target is Unit and !target is Structure):
+		print("Attempted Attack on non-world object");
 	desired_target = target;
 	move_to_stay(target.global_position);
 func move_to(pos : Vector2) -> void:
@@ -143,7 +148,7 @@ func _nav_safe_velocity(safe : Vector2) -> void:
 	if (lock_move): return;
 	velocity = safe;
 	move_and_slide();
-func report_death(unit : Unit) -> void:
+func report_death(unit) -> void:
 	if (desired_target != unit): return;
 	print("Unit Death Reported %s" % unit);
 	move_to_stay(global_position);

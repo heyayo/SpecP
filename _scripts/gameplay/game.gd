@@ -4,6 +4,9 @@ class_name Game
 
 @onready var tilemap : TileMap = $TileMap;
 @onready var resources : MResource = $Resources
+@onready var game_conditions = $"Interface/Game Conditions"
+@onready var game_end_title = $"Interface/Game Conditions/Game End"
+@onready var game_end_timer = $"Game End Timer"
 
 const tile_size = 16;
 func get_hover_position() -> Vector2i:
@@ -53,4 +56,12 @@ func spawn_unit(unit : Unit) -> void:
 func spawn_friendly(unit : Unit) -> void:
 	add_child(unit);
 	unit.add_to_group(Common.group_friendly);
+#endregion
+#region Game Win/Loss
+func end_game() -> void:
+	game_end_title.visible = true;
+	get_tree().paused = true;
+	game_end_timer.start();
+func _timeout_from_game_end_timer():
+	print("TODO Return to main menu");
 #endregion

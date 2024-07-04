@@ -11,3 +11,4 @@ wood = 0
 food = 0
 stone = 0
 metal = 0
+max_health = 1000

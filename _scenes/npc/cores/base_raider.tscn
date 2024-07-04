@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk8scl68lnwdd"]
+
+[ext_resource type="Script" path="res://_scripts/units/npc_cores/base_raider.gd" id="1_hhrad"]
+
+[node name="Base Raider" type="Node"]
+script = ExtResource("1_hhrad")
