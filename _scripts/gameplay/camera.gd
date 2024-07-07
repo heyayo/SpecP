@@ -16,10 +16,11 @@ func _unhandled_input(event) -> void:
 		adjust_zoom_relative(step_zoom);
 	if (event.is_action_released("Zoom_Out")):
 		adjust_zoom_relative(-step_zoom);
+const fast_speed : float = 5;
 func _process(_delta):
 	var move_dir : Vector2 = Input.get_vector("Left","Right","Up","Down");
 	if (Input.is_action_pressed("SpeedCamera")):
-		move_dir *= 3;
+		move_dir *= fast_speed;
 	global_position += move_dir * speed * _delta;
 
 func adjust_zoom_relative(step : float) -> void:

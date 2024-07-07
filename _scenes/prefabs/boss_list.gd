@@ -17,7 +17,7 @@ func _ready() -> void:
 	var spider_spawn := random_spawn();
 	spider.global_position = spider_spawn;
 	spider.move_to(spider_spawn);
-	surround_with(bandit_outpost,1,spider_spawn,128);
+	#surround_with(bandit_outpost,1,spider_spawn,128);
 	spider.tree_exited.connect(report_boss_death);
 	print("Spawning Spider at | %s" % spider_spawn);
 

@@ -45,6 +45,7 @@ func center_camera() -> void:
 	camera_2d.global_position = units.front().global_position;
 func set_behaviour(behaviour : Unit.BEHAVIOUR) -> void:
 	for u in units:
+		if (!is_instance_valid(u)): continue; ## lazy
 		u.behaviour = behaviour;
 	interact_menu.show_unit_info(units);
 func move_units() -> void:

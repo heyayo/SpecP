@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://_scripts/gameplay/interact_menu.gd" id="12_31y1f"]
 [ext_resource type="Texture2D" uid="uid://c43pc8cpkjx4v" path="res://_sprites/resource_icons/Ore & Gem/Obsidian.png" id="12_kxb3b"]
 [ext_resource type="Script" path="res://_scripts/gameplay/builder.gd" id="13_f5c5u"]
+[ext_resource type="Script" path="res://_scenes/Random Spawner.gd" id="13_kd0xl"]
 [ext_resource type="Script" path="res://_scripts/bills.gd" id="14_q6f14"]
 [ext_resource type="Script" path="res://_scripts/gameplay/resource_labels.gd" id="16_ah8rg"]
 [ext_resource type="PackedScene" uid="uid://dc8608qo3vmbi" path="res://_scenes/prefabs/structures/base.tscn" id="16_rh54v"]
@@ -28,7 +29,6 @@
 [ext_resource type="Script" path="res://_scripts/gameplay/notifier.gd" id="23_8sq7o"]
 [ext_resource type="PackedScene" uid="uid://c3agpxcpq858p" path="res://_scenes/prefabs/structures/mason_hut.tscn" id="26_l2xfv"]
 [ext_resource type="PackedScene" uid="uid://bhlxf1ymsr3cg" path="res://_scenes/prefabs/structures/wood_mill.tscn" id="26_lewgn"]
-[ext_resource type="PackedScene" uid="uid://cu4lvhv0xyep8" path="res://_scenes/prefabs/structures/bandit/bandit_outpost.tscn" id="27_xow0p"]
 [ext_resource type="PackedScene" uid="uid://baklj5mrrv42t" path="res://_scenes/prefabs/resources/tree.tscn" id="28_cvg17"]
 [ext_resource type="PackedScene" uid="uid://bx1gegd7uj7j3" path="res://_scenes/prefabs/resources/stone.tscn" id="30_ttdbg"]
 
@@ -196,6 +196,12 @@ texture = ExtResource("4_6751o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_e0ybk")
+
+[node name="Random Spawner" type="Node2D" parent="."]
+script = ExtResource("13_kd0xl")
+
+[node name="Timer" type="Timer" parent="Random Spawner"]
+autostart = true
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
@@ -770,9 +776,6 @@ process_mode = 2
 wait_time = 5.0
 one_shot = true
 
-[node name="Bandit Outpost" parent="." instance=ExtResource("27_xow0p")]
-position = Vector2(-323, 0)
-
 [node name="Stone" parent="." instance=ExtResource("30_ttdbg")]
 position = Vector2(32, -88)
 
@@ -806,6 +809,7 @@ position = Vector2(0, -56)
 [connection signal="body_exited" from="Builder/PreviewArea" to="Builder" method="_exit_preview"]
 [connection signal="area_entered" from="Builder/ResourceArea" to="Builder" method="_area_entered_from_resource_area"]
 [connection signal="area_exited" from="Builder/ResourceArea" to="Builder" method="_area_exited_from_resource_area"]
+[connection signal="timeout" from="Random Spawner/Timer" to="Random Spawner" method="_timeout_from_timer"]
 [connection signal="timeout" from="Interface/Game Conditions/Game Win Timer" to="BossList" method="_timeout_from_game_win_timer"]
 [connection signal="pressed" from="Interface/Bar/Buildings" to="Interface/Action Menu" method="toggle"]
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Demolish" to="Selector" method="_pressed_from_demolish"]
