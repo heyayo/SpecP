@@ -11,6 +11,7 @@ var game_scene : PackedScene = preload("res://_scenes/game.tscn");
 func _pressed_from_quit():
 	get_tree().quit();
 func _pressed_from_start():
+	print("Pressed Start");
 	menu.visible = false;
 	world_gen.visible = true;
 func _pressed_from_generate():

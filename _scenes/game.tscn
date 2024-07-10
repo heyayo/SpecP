@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=47 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -25,12 +25,15 @@
 [ext_resource type="Script" path="res://_scripts/gameplay/m_resource.gd" id="18_h4vt7"]
 [ext_resource type="PackedScene" uid="uid://bfxsv8w1mvndx" path="res://_scenes/npc/archer.tscn" id="21_omxwq"]
 [ext_resource type="Texture2D" uid="uid://b7o0utoof5uue" path="res://_sprites/reshot-icon-arrow-up-ZGEKU95YAJ.svg" id="21_xbqp2"]
+[ext_resource type="Script" path="res://_scenes/unit_queue_icon.gd" id="22_71b2o"]
 [ext_resource type="Script" path="res://_scripts/gameplay/boss_finder.gd" id="22_tf81x"]
 [ext_resource type="Script" path="res://_scripts/gameplay/notifier.gd" id="23_8sq7o"]
 [ext_resource type="PackedScene" uid="uid://c3agpxcpq858p" path="res://_scenes/prefabs/structures/mason_hut.tscn" id="26_l2xfv"]
 [ext_resource type="PackedScene" uid="uid://bhlxf1ymsr3cg" path="res://_scenes/prefabs/structures/wood_mill.tscn" id="26_lewgn"]
 [ext_resource type="PackedScene" uid="uid://baklj5mrrv42t" path="res://_scenes/prefabs/resources/tree.tscn" id="28_cvg17"]
 [ext_resource type="PackedScene" uid="uid://bx1gegd7uj7j3" path="res://_scenes/prefabs/resources/stone.tscn" id="30_ttdbg"]
+[ext_resource type="Script" path="res://_scenes/Tutorial.gd" id="32_wujv3"]
+[ext_resource type="Script" path="res://_scenes/archive_button.gd" id="33_fvr38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -54,6 +57,9 @@ font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_rh7af"]
 font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_46rvv"]
+font_size = 12
 
 [sub_resource type="Animation" id="Animation_a72vr"]
 length = 0.001
@@ -115,6 +121,9 @@ _data = {
 "RESET": SubResource("Animation_a72vr"),
 "fade": SubResource("Animation_73xur")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_b885f"]
+font_size = 30
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lvycr")
@@ -550,6 +559,7 @@ layout_mode = 2
 text = "Bills"
 
 [node name="Unit Info" type="ColorRect" parent="Interface/Interact Menu"]
+visible = false
 layout_mode = 0
 offset_top = 128.0
 offset_right = 192.0
@@ -683,6 +693,45 @@ label_settings = SubResource("LabelSettings_rh7af")
 autowrap_mode = 2
 clip_text = true
 
+[node name="Unit Queue" type="ColorRect" parent="Interface/Bills"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -248.0
+offset_top = -88.0
+offset_right = 248.0
+offset_bottom = -16.0
+grow_horizontal = 2
+color = Color(0.431373, 0.686275, 1, 0.784314)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface/Bills/Unit Queue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Template Icon" type="ColorRect" parent="Interface/Bills/Unit Queue/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+color = Color(0.244776, 0.244776, 0.244776, 1)
+script = ExtResource("22_71b2o")
+
+[node name="Name" type="Label" parent="Interface/Bills/Unit Queue/HBoxContainer/Template Icon"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 72.0
+grow_horizontal = 2
+text = "Swordsman"
+label_settings = SubResource("LabelSettings_46rvv")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
 [node name="Boss Finder" type="TextureRect" parent="Interface"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -731,6 +780,116 @@ clip_text = true
 [node name="Timer" type="Timer" parent="Interface/Notification/VBoxContainer/Template Label"]
 wait_time = 2.0
 one_shot = true
+
+[node name="Tutorial" type="CanvasLayer" parent="."]
+script = ExtResource("32_wujv3")
+
+[node name="Helpers" type="Control" parent="Tutorial"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -196.0
+offset_right = 256.0
+offset_bottom = 188.0
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="Tutorial/Helpers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.431373, 0.686275, 1, 0.784314)
+
+[node name="Archive" type="VBoxContainer" parent="Tutorial/Helpers/BG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Key Binds" type="Button" parent="Tutorial/Helpers/BG/Archive"]
+layout_mode = 2
+text = "Key Binds"
+script = ExtResource("33_fvr38")
+title = "Key Binds"
+info = "WASD Moves the Camera
+Shift Speeds Camera movement
+Q/E Zooms in/out
+Space centers camera on the base
+Left Click and/or drag to select
+Right Click to deselect
+P Opens the tutorial helper
+F Locates the end boss
+Z/X/C Sets selected Unit Aggression to Passive/Defensive/Aggressive"
+
+[node name="Resources" type="Button" parent="Tutorial/Helpers/BG/Archive"]
+layout_mode = 2
+text = "Resources"
+script = ExtResource("33_fvr38")
+title = "Resources"
+info = "Harvest Wood using a Wood Mill
+Harvest Stone using a Mason Hut
+Grow Food using farms
+Refine Metal using Steel Mills
+
+Wood Mills and Mason Huts need to be built around wood and stone respectively
+
+PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING "
+
+[node name="Info Dump" type="Control" parent="Tutorial/Helpers/BG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Tutorial/Helpers/BG/Info Dump"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "TITLE TITLE TITLE TITLE TITLE "
+label_settings = SubResource("LabelSettings_b885f")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Info Scroll" type="ScrollContainer" parent="Tutorial/Helpers/BG/Info Dump"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Info" type="Label" parent="Tutorial/Helpers/BG/Info Dump/Info Scroll"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP INFO DUMP "
+autowrap_mode = 2
+
+[node name="Back" type="Button" parent="Tutorial/Helpers/BG/Info Dump"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
 
 [node name="Base" parent="." instance=ExtResource("16_rh54v")]
 units = Array[PackedScene]([ExtResource("5_dabfu"), ExtResource("21_omxwq")])
@@ -814,7 +973,11 @@ position = Vector2(0, -56)
 [connection signal="pressed" from="Interface/Bar/Buildings" to="Interface/Action Menu" method="toggle"]
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Demolish" to="Selector" method="_pressed_from_demolish"]
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Bills" to="Interface/Bills" method="_pressed_from_bills"]
+[connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Key Binds" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Resources" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Info Dump/Back" to="Tutorial" method="_pressed_from_info_back"]
 [connection signal="sig_destroyed" from="Base" to="." method="end_game"]
+[connection signal="sig_kill_icon" from="Base" to="Interface/Bills" method="trained"]
 [connection signal="sig_harvest" from="Mason Hut" to="." method="give_resource"]
 [connection signal="sig_harvest" from="Wood Mill" to="." method="give_resource"]
 [connection signal="timeout" from="Game End Timer" to="." method="_timeout_from_game_end_timer"]

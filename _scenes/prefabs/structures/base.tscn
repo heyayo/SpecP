@@ -1,17 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc8608qo3vmbi"]
+[gd_scene load_steps=9 format=3 uid="uid://dc8608qo3vmbi"]
 
 [ext_resource type="Script" path="res://_scripts/structures/unit_structure.gd" id="1_dfqy0"]
 [ext_resource type="Texture2D" uid="uid://d24rh54lnr81k" path="res://_sprites/structures/base.png" id="1_epjax"]
 [ext_resource type="PackedScene" uid="uid://br5pqkvwr7yj3" path="res://_scenes/prefabs/structures/template_structure.tscn" id="1_ulkyu"]
 [ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="2_krqt5"]
 [ext_resource type="Resource" uid="uid://rgyv553jkjal" path="res://_resources/structure data/base.tres" id="3_3ofls"]
+[ext_resource type="PackedScene" uid="uid://bfxsv8w1mvndx" path="res://_scenes/npc/archer.tscn" id="4_bi8wu"]
+[ext_resource type="PackedScene" uid="uid://c7hn6hmdjaq2y" path="res://_scenes/npc/wizard.tscn" id="5_u8hyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_838yh"]
 size = Vector2(96, 80)
 
 [node name="Base" instance=ExtResource("1_ulkyu")]
 script = ExtResource("1_dfqy0")
-units = Array[PackedScene]([ExtResource("2_krqt5")])
+units = Array[PackedScene]([ExtResource("2_krqt5"), ExtResource("4_bi8wu"), ExtResource("5_u8hyx")])
 data = ExtResource("3_3ofls")
 
 [node name="Sprite2D" parent="." index="0"]

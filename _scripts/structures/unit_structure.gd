@@ -1,6 +1,8 @@
 extends Structure
 class_name UnitStructure
 
+signal sig_kill_icon;
+
 @onready var game : Game = get_tree().root.get_node("Game");
 @onready var resources : MResource = $"../Resources"
 @onready var unit_signal : ColorRect = $Signal
@@ -49,6 +51,7 @@ func _timeout_from_training_timer():
 	game.spawn_friendly(dupe);
 	dupe.global_position = global_position;
 	
+	sig_kill_icon.emit();
 	queue.remove_at(0);
 	if (queue.is_empty()):
 		unit_signal.color = Color.RED;
