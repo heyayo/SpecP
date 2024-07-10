@@ -7,6 +7,9 @@ class_name Unit
 @onready var distance_from_others : Detection = $DistanceFromOthers
 @onready var attack_node : UnitAttack = $Attack;
 #endregion
+#region Signals
+signal sig_attack_action(target);
+#endregion
 #region Stores
 enum BEHAVIOUR
 {
@@ -73,6 +76,7 @@ func attack_action(target) -> void:
 	if (!target is Unit and !target is Structure):
 		print("Attempted Attack on non-world object");
 	desired_target = target;
+	sig_attack_action.emit(desired_target);
 func move_to(pos : Vector2) -> void:
 	desired_position = pos;
 #endregion

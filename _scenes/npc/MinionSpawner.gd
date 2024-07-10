@@ -18,6 +18,8 @@ func spawn_minion() -> void:
 	spawn.global_position = global_position;
 	spawn.tree_exiting.connect(report_death.bind(spawn));
 	spawn.add_to_group(Common.group_hostile);
+	spawn.sig_attack_action.connect(parent.attack_action);
+	spawn.sig_attack_action.connect(attack_action);
 
 	minions.push_back(spawn);
 	var random_direction : Vector2 = Vector2(15,0).rotated(deg_to_rad(randf_range(0,360))) * space;
@@ -33,6 +35,10 @@ func report_death(unit : Unit) -> void:
 	if (is_instance_valid(unit.desired_target)):
 		parent.attack_action(unit.desired_target);
 	resume_spawning();
+func attack_action(target) -> void:
+	if (!is_instance_valid(target)): return;
+	for u in minions:
+		u.desired_target = target;
 
 func _timeout_from_timer():
 	spawn_minion();
