@@ -7,7 +7,8 @@ class_name MainMenu
 @onready var size_options = $"World Gen/World Size/Size Options";
 var world_config : WorldConfiguration = preload("res://_resources/worldconfig.tres");
 var game_scene : PackedScene = preload("res://_scenes/game.tscn");
-
+func _ready() -> void:
+	get_tree().paused = false; ## Required for return trip
 func _pressed_from_quit():
 	get_tree().quit();
 func _pressed_from_start():

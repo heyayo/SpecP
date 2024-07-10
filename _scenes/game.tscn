@@ -822,7 +822,7 @@ Shift Speeds Camera movement
 Q/E Zooms in/out
 Space centers camera on the base
 Left Click and/or drag to select
-Right Click to deselect
+Right Click to deselect or move units
 P Opens the tutorial helper
 F Locates the end boss
 Z/X/C Sets selected Unit Aggression to Passive/Defensive/Aggressive"
@@ -840,6 +840,41 @@ Refine Metal using Steel Mills
 Wood Mills and Mason Huts need to be built around wood and stone respectively
 
 PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING PADDING "
+
+[node name="Defenses" type="Button" parent="Tutorial/Helpers/BG/Archive"]
+layout_mode = 2
+text = "Defenses"
+script = ExtResource("33_fvr38")
+title = "Defenses"
+info = "The destruction of your base is the end of the game.
+Build defenses to help out so that your units have an easier time."
+
+[node name="Units" type="Button" parent="Tutorial/Helpers/BG/Archive"]
+layout_mode = 2
+text = "Units"
+script = ExtResource("33_fvr38")
+title = "Units"
+info = "Click on the base to open up its actions.
+Clicking on Bills open up the training menu to create units.
+Select units and right click to move them or attack other units."
+
+[node name="Aggression" type="Button" parent="Tutorial/Helpers/BG/Archive"]
+layout_mode = 2
+text = "Aggression"
+script = ExtResource("33_fvr38")
+title = "Aggression"
+info = "Units have an aggression level.
+Passive means that they only attack who when asked to.
+Defensive attacks anything that comes within range or that attacks them.
+Aggressive is like defensive but units will chase the enemy forever."
+
+[node name="WinLoss" type="Button" parent="Tutorial/Helpers/BG/Archive"]
+layout_mode = 2
+text = "Winning"
+script = ExtResource("33_fvr38")
+title = "Winning"
+info = "Winning the game requires you to kill the spider that roams these lands.
+Press F to locate it"
 
 [node name="Info Dump" type="Control" parent="Tutorial/Helpers/BG"]
 layout_mode = 1
@@ -953,6 +988,13 @@ position = Vector2(0, -72)
 [node name="Stone6" parent="." instance=ExtResource("30_ttdbg")]
 position = Vector2(0, -56)
 
+[node name="END_GAME" type="Button" parent="."]
+offset_left = 216.0
+offset_top = -104.0
+offset_right = 367.0
+offset_bottom = -73.0
+text = "DEBUG END GAME"
+
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]
 [connection signal="area_exited" from="Overseer/Click Detect" to="Overseer" method="_body_exited_from_click_detect"]
@@ -975,9 +1017,14 @@ position = Vector2(0, -56)
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Bills" to="Interface/Bills" method="_pressed_from_bills"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Key Binds" to="Tutorial" method="_pressed_from_archive"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Resources" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Defenses" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Units" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Aggression" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/WinLoss" to="Tutorial" method="_pressed_from_archive"]
 [connection signal="pressed" from="Tutorial/Helpers/BG/Info Dump/Back" to="Tutorial" method="_pressed_from_info_back"]
 [connection signal="sig_destroyed" from="Base" to="." method="end_game"]
 [connection signal="sig_kill_icon" from="Base" to="Interface/Bills" method="trained"]
 [connection signal="sig_harvest" from="Mason Hut" to="." method="give_resource"]
 [connection signal="sig_harvest" from="Wood Mill" to="." method="give_resource"]
 [connection signal="timeout" from="Game End Timer" to="." method="_timeout_from_game_end_timer"]
+[connection signal="pressed" from="END_GAME" to="." method="end_game"]
