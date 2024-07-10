@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=48 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bx1gegd7uj7j3" path="res://_scenes/prefabs/resources/stone.tscn" id="30_ttdbg"]
 [ext_resource type="Script" path="res://_scenes/Tutorial.gd" id="32_wujv3"]
 [ext_resource type="Script" path="res://_scenes/archive_button.gd" id="33_fvr38"]
+[ext_resource type="Script" path="res://_scenes/menu_audio.gd" id="35_adlav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -995,6 +996,9 @@ offset_right = 367.0
 offset_bottom = -73.0
 text = "DEBUG END GAME"
 
+[node name="MenuAudio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("35_adlav")
+
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]
 [connection signal="area_exited" from="Overseer/Click Detect" to="Overseer" method="_body_exited_from_click_detect"]
@@ -1013,15 +1017,25 @@ text = "DEBUG END GAME"
 [connection signal="timeout" from="Random Spawner/Timer" to="Random Spawner" method="_timeout_from_timer"]
 [connection signal="timeout" from="Interface/Game Conditions/Game Win Timer" to="BossList" method="_timeout_from_game_win_timer"]
 [connection signal="pressed" from="Interface/Bar/Buildings" to="Interface/Action Menu" method="toggle"]
+[connection signal="pressed" from="Interface/Bar/Buildings" to="MenuAudio" method="button_pressed_two"]
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Demolish" to="Selector" method="_pressed_from_demolish"]
+[connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Demolish" to="MenuAudio" method="button_pressed_two"]
 [connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Bills" to="Interface/Bills" method="_pressed_from_bills"]
+[connection signal="pressed" from="Interface/Interact Menu/Structure Actions/VBoxContainer/Bills" to="MenuAudio" method="button_pressed_two"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Archive/Key Binds" to="MenuAudio" method="button_pressed_two"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Key Binds" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Archive/Resources" to="MenuAudio" method="button_pressed_two"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Resources" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Archive/Defenses" to="MenuAudio" method="button_pressed_two"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Defenses" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Archive/Units" to="MenuAudio" method="button_pressed_two"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Units" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Archive/Aggression" to="MenuAudio" method="button_pressed_two"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/Aggression" to="Tutorial" method="_pressed_from_archive"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Archive/WinLoss" to="MenuAudio" method="button_pressed_two"]
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/WinLoss" to="Tutorial" method="_pressed_from_archive"]
 [connection signal="pressed" from="Tutorial/Helpers/BG/Info Dump/Back" to="Tutorial" method="_pressed_from_info_back"]
+[connection signal="pressed" from="Tutorial/Helpers/BG/Info Dump/Back" to="MenuAudio" method="button_pressed_two"]
 [connection signal="sig_destroyed" from="Base" to="." method="end_game"]
 [connection signal="sig_kill_icon" from="Base" to="Interface/Bills" method="trained"]
 [connection signal="sig_harvest" from="Mason Hut" to="." method="give_resource"]

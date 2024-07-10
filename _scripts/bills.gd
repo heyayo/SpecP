@@ -4,6 +4,7 @@ class_name Bills
 
 #region Modules
 @onready var selector : Selector = $"../../Selector"
+@onready var menu_audio = $"../../MenuAudio"
 #endregion
 
 #region Preview
@@ -47,6 +48,7 @@ func build_bills(units : Array[PackedScene], origin : UnitStructure) -> void:
 		
 		b.mouse_entered.connect(bill_hovered.bind(unit, origin));
 		b.pressed.connect(bill_pressed.bind(unit, origin));
+		b.pressed.connect(menu_audio.button_pressed_two);
 var queue_array : Array[UnitQueueIcon] = [];
 func build_queue(unit : Unit) -> UnitQueueIcon:
 	var nicon : UnitQueueIcon = template_icon.duplicate();
