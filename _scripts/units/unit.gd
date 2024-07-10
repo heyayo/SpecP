@@ -9,6 +9,8 @@ class_name Unit
 #endregion
 #region Signals
 signal sig_attack_action(target);
+signal sig_damage_response(source);
+signal sig_death(unit);
 #endregion
 #region Stores
 enum BEHAVIOUR
@@ -26,6 +28,7 @@ var health : float = 100 :
 		health = value;
 		health = clamp(health,0,data.max_health);
 		if (health <= 0):
+			sig_death.emit(self);
 			queue_free();
 var desired_position : Vector2;
 var desired_target = null;
@@ -105,6 +108,7 @@ func aggressive_bev() -> void:
 func damage_response(source) -> void:
 	if (behaviour == BEHAVIOUR.PASSIVE): return;
 	attack_action(source);
+	sig_damage_response.emit(source);
 func force_attack_response() -> void:
 	if (!is_instance_valid(desired_target)):
 		return;
