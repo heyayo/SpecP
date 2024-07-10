@@ -9,7 +9,7 @@ class_name Tutorial
 @onready var dump_info = $"Helpers/BG/Info Dump/Info Scroll/Info"
 
 func _ready() -> void:
-	helpers.visible = false;
+	helpers.visible = true;
 	archive.visible = true;
 	info_dump.visible = false;
 	dump_title.text = "";
