@@ -7,6 +7,11 @@ class_name Unit
 @onready var distance_from_others : Detection = $DistanceFromOthers
 @onready var attack_node : UnitAttack = $Attack;
 #endregion
+#region Signals
+signal sig_attack_action(target);
+signal sig_damage_response(source);
+signal sig_death(unit);
+#endregion
 #region Stores
 enum BEHAVIOUR
 {
@@ -23,6 +28,7 @@ var health : float = 100 :
 		health = value;
 		health = clamp(health,0,data.max_health);
 		if (health <= 0):
+			sig_death.emit(self);
 			queue_free();
 var desired_position : Vector2;
 var desired_target = null;
@@ -73,6 +79,7 @@ func attack_action(target) -> void:
 	if (!target is Unit and !target is Structure):
 		print("Attempted Attack on non-world object");
 	desired_target = target;
+	sig_attack_action.emit(desired_target);
 func move_to(pos : Vector2) -> void:
 	desired_position = pos;
 #endregion
@@ -101,6 +108,7 @@ func aggressive_bev() -> void:
 func damage_response(source) -> void:
 	if (behaviour == BEHAVIOUR.PASSIVE): return;
 	attack_action(source);
+	sig_damage_response.emit(source);
 func force_attack_response() -> void:
 	if (!is_instance_valid(desired_target)):
 		return;

@@ -64,4 +64,5 @@ func end_game() -> void:
 	game_end_timer.start();
 func _timeout_from_game_end_timer():
 	print("TODO Return to main menu");
+	get_tree().change_scene_to_file("res://_scenes/main_menu.tscn");
 #endregion

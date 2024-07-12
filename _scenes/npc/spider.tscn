@@ -1,8 +1,8 @@
-[gd_scene load_steps=65 format=3 uid="uid://c6eft7u610doh"]
+[gd_scene load_steps=66 format=3 uid="uid://c6eft7u610doh"]
 
 [ext_resource type="PackedScene" uid="uid://l2qsl86i3nn6" path="res://_scenes/npc/template_unit.tscn" id="1_ib6ij"]
 [ext_resource type="Texture2D" uid="uid://p6e888quq81c" path="res://_sprites/hostiles/sp eye der/Idle/Body/090/Idle_Body_090_0001.png" id="2_0kro2"]
-[ext_resource type="Script" path="res://_scripts/resources/unit_stats.gd" id="3_udv1a"]
+[ext_resource type="Resource" uid="uid://drhh4uytjooih" path="res://_resources/unit_data/hostiles/spider.tres" id="2_wsdq4"]
 [ext_resource type="Texture2D" uid="uid://c4sq8doau8w8s" path="res://_sprites/hostiles/sp eye der/Attack1/Body/090/Attack1_Body_090_0001.png" id="4_5l1dx"]
 [ext_resource type="Texture2D" uid="uid://cx3ligmk2eyek" path="res://_sprites/hostiles/sp eye der/Attack1/Body/090/Attack1_Body_090_0002.png" id="5_0mghy"]
 [ext_resource type="Texture2D" uid="uid://c3nndkcs2osxm" path="res://_sprites/hostiles/sp eye der/Attack1/Body/090/Attack1_Body_090_0003.png" id="6_im7q8"]
@@ -61,22 +61,8 @@
 [ext_resource type="Script" path="res://_scripts/units/attack_cores/unit_melee.gd" id="59_irdvf"]
 [ext_resource type="Script" path="res://_scenes/npc/SpiderNPC.gd" id="60_jlc05"]
 [ext_resource type="PackedScene" uid="uid://bu8fvflbob7sy" path="res://_scenes/prefabs/range.tscn" id="61_ujf24"]
-
-[sub_resource type="Resource" id="Resource_gygv7"]
-script = ExtResource("3_udv1a")
-name = "Spider"
-desc = "Massive spider"
-preview = ExtResource("2_0kro2")
-training_time = 1
-damage = 250.0
-speed = 5.0
-max_health = 800.0
-range = 12
-defense_range = 30
-slowdown = 1.0
-cooldown = 2.0
-food = 10
-metal = 0
+[ext_resource type="Script" path="res://_scenes/npc/MinionSpawner.gd" id="62_1nmvr"]
+[ext_resource type="PackedScene" uid="uid://cws627tey04k8" path="res://_scenes/npc/small_spider.tscn" id="63_gghxn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ryjm"]
 radius = 73.7564
@@ -268,7 +254,7 @@ animations = [{
 }]
 
 [node name="Spider" groups=["Hostile"] instance=ExtResource("1_ib6ij")]
-data = SubResource("Resource_gygv7")
+data = ExtResource("2_wsdq4")
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_8ryjm")
@@ -288,3 +274,13 @@ script = ExtResource("59_irdvf")
 script = ExtResource("60_jlc05")
 
 [node name="Range" parent="SpiderNPC" index="0" instance=ExtResource("61_ujf24")]
+
+[node name="MinionSpawner" type="Node2D" parent="." index="8"]
+script = ExtResource("62_1nmvr")
+minion = ExtResource("63_gghxn")
+max_minions = 5
+
+[node name="Timer" type="Timer" parent="MinionSpawner" index="0"]
+one_shot = true
+
+[connection signal="timeout" from="MinionSpawner/Timer" to="MinionSpawner" method="_timeout_from_timer"]

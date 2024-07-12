@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://drhh4uytjooih"]
+
+[ext_resource type="Texture2D" uid="uid://p6e888quq81c" path="res://_sprites/hostiles/sp eye der/Idle/Body/090/Idle_Body_090_0001.png" id="1_383ie"]
+[ext_resource type="Script" path="res://_scripts/resources/unit_stats.gd" id="2_bwwat"]
+
+[resource]
+script = ExtResource("2_bwwat")
+name = "Spider"
+desc = "Massive spider"
+preview = ExtResource("1_383ie")
+training_time = 1
+damage = 250.0
+speed = 5.0
+max_health = 800.0
+range = 12
+defense_range = 30
+slowdown = 1.0
+cooldown = 2.0
+food = 10
+metal = 0

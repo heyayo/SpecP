@@ -1,0 +1,159 @@
+[gd_scene load_steps=3 format=3 uid="uid://bltr5xpfv1khx"]
+
+[ext_resource type="Script" path="res://_scenes/main_menu.gd" id="1_4w1o7"]
+[ext_resource type="Script" path="res://_scenes/menu_audio.gd" id="2_pmegh"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4w1o7")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = 140.0
+offset_right = -344.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Quit" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -16.0
+offset_right = 93.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+text = "Quit"
+flat = true
+
+[node name="Tail" type="ColorRect" parent="Menu/Quit"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -4.0
+offset_right = -1.0
+offset_bottom = 4.0
+grow_vertical = 2
+color = Color(7.12335e-06, 0.729842, 0.978114, 1)
+
+[node name="Start" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -68.0
+offset_right = 93.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+text = "Start"
+flat = true
+
+[node name="Tail" type="ColorRect" parent="Menu/Start"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -4.0
+offset_right = -1.0
+offset_bottom = 4.0
+grow_vertical = 2
+color = Color(7.12335e-06, 0.729842, 0.978114, 1)
+
+[node name="World Gen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -196.0
+offset_right = 384.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="World Gen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.431373, 0.686275, 1, 0.784314)
+
+[node name="Generate" type="Button" parent="World Gen"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 360.0
+offset_right = 424.0
+offset_bottom = 391.0
+text = "Generate"
+
+[node name="Return" type="Button" parent="World Gen"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 404.0
+offset_right = 424.0
+offset_bottom = 435.0
+text = "Return"
+
+[node name="World Size" type="Label" parent="World Gen"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 40.0
+offset_right = 192.0
+offset_bottom = 63.0
+text = "World Size"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Size Options" type="OptionButton" parent="World Gen/World Size"]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 128.0
+offset_bottom = 48.0
+item_count = 2
+selected = 0
+popup/item_0/text = "Small"
+popup/item_0/id = 0
+popup/item_1/text = "Large"
+popup/item_1/id = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_pmegh")
+
+[connection signal="pressed" from="Menu/Quit" to="." method="_pressed_from_quit"]
+[connection signal="pressed" from="Menu/Quit" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="Menu/Start" to="." method="_pressed_from_start"]
+[connection signal="pressed" from="Menu/Start" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="World Gen/Generate" to="." method="_pressed_from_generate"]
+[connection signal="pressed" from="World Gen/Generate" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="World Gen/Return" to="." method="_pressed_from_return"]
+[connection signal="pressed" from="World Gen/Return" to="AudioStreamPlayer" method="button_pressed"]

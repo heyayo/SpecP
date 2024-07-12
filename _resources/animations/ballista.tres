@@ -50,5 +50,5 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 24.0
+"speed": 120.0
 }]
