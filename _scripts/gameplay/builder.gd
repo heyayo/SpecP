@@ -17,7 +17,12 @@ var con_mark : PackedScene = preload("res://_scenes/prefabs/construction_mark.ts
 #region External
 @export var selector : Selector;
 @export var game : Game;
+@onready var resources = $"../Resources"
+@onready var audio_instancer = $AudioInstancer
 var world_config : WorldConfiguration = preload("res://_resources/worldconfig.tres");
+#endregion
+#region Audio Resources
+const construct_sfx = preload("res://_audio/structures/Hammer_Nail_Wood_1a.wav");
 #endregion
 
 var preview_track : Tracker = Tracker.new();
@@ -52,6 +57,10 @@ func place_building() -> void: ## Places the building in the world and begins it
 		res_struct.sig_harvest.connect(game.give_resource);
 	## Deduct Resources
 	game.adjust_structure_cost(b.data);
+	if (!cost_check(b)):
+		stop_preview();
+	## Play Build SFX
+	audio_instancer.play_instance(construct_sfx);
 #region Preview Functions
 const preview_target_size : int = 64;
 func start_preview(building : Structure) -> void: ## Prepare the Build Preview
@@ -86,6 +95,13 @@ func stop_preview() -> void:
 	preview_area.visible = false; ## Hides Preview Sprite
 	resource_area.visible = false;
 	disable();
+func cost_check(structure : Structure) -> bool:
+	var cost : StructureData = structure.data;
+	if (cost.wood > resources.wood): return false;
+	if (cost.food > resources.food): return false;
+	if (cost.stone > resources.stone): return false;
+	if (cost.metal > resources.metal): return false;
+	return true;
 #endregion
 #region Preview Preparation
 func resize_preview(size : Vector2i) -> void:

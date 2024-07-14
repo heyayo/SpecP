@@ -5,6 +5,7 @@ class_name ActionsMenu
 #region External
 @export var builder : Builder;
 @export var resources : MResource;
+@onready var notification = $"../Notification"
 #endregion
 @onready var scroll_con = $ScrollContainer;
 @onready var vbox : VBoxContainer = $ScrollContainer/VBoxContainer;
@@ -41,7 +42,7 @@ func hover_details(structure : Structure) -> void:
 	cost_preview(structure.data); ## Sets Cost Label
 	sprite_preview(structure);
 func action_pressed(object : Structure) -> void:
-	# TODO UI for deny
+	notification.notify("Not enough resources");
 	if (not cost_check(object)): return; ## Denies Build Request if they cannot afford it
 	builder.start_preview(object); ## Begins Build Request
 	visible = false; ## Hides Menu

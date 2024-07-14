@@ -125,7 +125,7 @@ func get_lowest_health() -> Unit:
 		if (n.health < lowest):
 			lowest_unit = n;
 			lowest = n.health;
-	return null;
+	return lowest_unit;
 #endregion
 #region Applications
 func apply_slowdown() -> void:

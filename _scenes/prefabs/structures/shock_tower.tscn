@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://cuij734weobdl"]
+
+[ext_resource type="PackedScene" uid="uid://br5pqkvwr7yj3" path="res://_scenes/prefabs/structures/template_structure.tscn" id="1_fleug"]
+[ext_resource type="Script" path="res://shock_tower.gd" id="2_0wl85"]
+[ext_resource type="Script" path="res://_scripts/structures/structure.gd" id="2_hru76"]
+[ext_resource type="Texture2D" uid="uid://dnh7w871fa75d" path="res://_sprites/structures/defenses/shock tower/ADSdish.png" id="2_seabh"]
+[ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="3_l0gph"]
+[ext_resource type="PackedScene" uid="uid://bu8fvflbob7sy" path="res://_scenes/prefabs/range.tscn" id="3_nl3tn"]
+[ext_resource type="AudioStream" uid="uid://b2efpkmci0u2u" path="res://_audio/structures/railgun.ogg" id="5_vf0e8"]
+
+[sub_resource type="Resource" id="Resource_llnoc"]
+script = ExtResource("3_l0gph")
+name = "Shock Tower"
+desc = "Shocks up to 5 nearby enemies dealing heavy damage but with a long cooldown"
+work = 1
+wood = 0
+food = 0
+stone = 0
+metal = 0
+max_health = 50000
+defense_range = 0.0
+range = 10
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqsvy"]
+size = Vector2(48, 40)
+
+[node name="Shock Tower" instance=ExtResource("1_fleug")]
+script = ExtResource("2_hru76")
+data = SubResource("Resource_llnoc")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-4.76837e-07, 4.76837e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_seabh")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_fqsvy")
+
+[node name="Selectable" parent="." index="2"]
+scale = Vector2(3, 3)
+
+[node name="HealthBar" parent="." index="3"]
+offset_left = -24.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 40.0
+
+[node name="Shock Tower" type="Node2D" parent="." index="4"]
+script = ExtResource("2_0wl85")
+damage = 1.0
+
+[node name="Range" parent="Shock Tower" index="0" instance=ExtResource("3_nl3tn")]
+scale = Vector2(40, 40)
+collision_mask = 4096
+
+[node name="Timer" type="Timer" parent="Shock Tower" index="1"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Shock Tower" index="2"]
+stream = ExtResource("5_vf0e8")
+
+[connection signal="sig_finish_construction" from="." to="Shock Tower" method="enable"]
+[connection signal="sig_detect_enter" from="Shock Tower/Range" to="Shock Tower" method="why"]

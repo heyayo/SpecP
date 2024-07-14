@@ -7,11 +7,10 @@ class_name HostileNPC
 @export var stats : HostileStats;
 
 func _ready() -> void:
-	sight.scale = stats.npcaggro();
-	unit.behaviour = Unit.BEHAVIOUR.DEFENSIVE;
-func _process(_delta) -> void:
-	if (sight.is_empty()):
-		return;
-	var target = sight.has_group_node(Common.group_friendly);
-	if (is_instance_valid(target)):
-		unit.attack_action(target);
+	unit.behaviour = Unit.BEHAVIOUR.AGGRESSIVE;
+#func _process(_delta) -> void:
+	#if (sight.is_empty()):
+		#return;
+	#var target = sight.has_group_node(Common.group_friendly);
+	#if (is_instance_valid(target)):
+		#unit.attack_action(target);

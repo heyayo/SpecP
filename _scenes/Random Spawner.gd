@@ -4,6 +4,7 @@ class_name RandomSpawner
 @onready var notification = $"../Interface/Notification"
 @onready var timer : Timer = $Timer
 @onready var game : Game = $"/root/Game";
+@onready var audio_instancer = $AudioInstancer
 
 var small_spider : PackedScene = preload("res://_scenes/npc/small_spider.tscn");
 var base_raider : PackedScene = preload("res://_scenes/npc/cores/base_raider.tscn")
@@ -12,12 +13,17 @@ var base_raider : PackedScene = preload("res://_scenes/npc/cores/base_raider.tsc
 @export var minimum : float = 10;
 @export var maximum : float = 120;
 
+#region Audio Resources
+const RAIN_OF_SPIDERS = preload("res://_audio/events/rain_of_spiders.ogg")
+#endregion
+
 func _ready() -> void:
 	timer.wait_time = randf_range(minimum,maximum);
 func run_event() -> void:
 	pass
 func rain_of_spiders() -> void:
-	const spider_count : int = 50;
+	audio_instancer.play_instance(RAIN_OF_SPIDERS);
+	const spider_count : int = 64;
 	const radius : float = 150 * 16;
 	const radial : float = (PI*2)/spider_count;
 	for i in spider_count:
@@ -29,7 +35,7 @@ func rain_of_spiders() -> void:
 		spider.sig_damage_response.connect(alert_spiders);
 		game.add_child(spider);
 		spider.global_position = offset;
-		#spider.add_child(base_raider.instantiate());
+		spider.add_child(base_raider.instantiate());
 func alert_spiders(source) -> void: ## Alert All Spiders when one is attacked
 	for s in spider_tracker:
 		if (is_instance_valid(s.desired_target)): continue;

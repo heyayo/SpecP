@@ -1,8 +1,8 @@
 extends Area2D
 class_name Structure
-## TODO Replace with 90 Degree Sprites
 signal sig_finish_construction;
 signal sig_destroyed;
+signal sig_damaged(source, damage);
 
 @export var data : StructureData;
 @onready var health_bar : HealthBar = $HealthBar
@@ -27,5 +27,6 @@ func finish_construction() -> void:
 	sig_finish_construction.emit();
 func apply_damage(damage : float, source) -> void:
 	health -= damage;
+	sig_damaged.emit(source,damage);
 func report_death(source) -> void:
 	pass

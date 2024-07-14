@@ -61,15 +61,17 @@ func build_queue(unit : Unit) -> UnitQueueIcon:
 #region Signal Callbacks
 func bill_hovered(unit : Unit, origin : UnitStructure) -> void:
 	unit_name.text = unit.data.name;
-	unit_description.text = unit.data.desc;
+	unit_description.text = unit.data.desc + "
+	Costs: %s Food and %s Metal" % [unit.data.food,unit.data.metal];
 	unit_origin.text = "Originates From\n%s" % origin.data.name;
 	if (unit.data.preview != null):
 		unit_preview.texture = unit.data.preview;
 	else:
 		unit_preview.texture = unit.get_node("Animator").get_preview_texture();
 func bill_pressed(unit : Unit, origin : UnitStructure) -> void:
-	origin.queue_training(unit);
-	var nicon = build_queue(unit);
+	var can = origin.queue_training(unit);
+	if (can):
+		var nicon = build_queue(unit);
 func trained() -> void:
 	var a = queue_array.front();
 	a.queue_free();

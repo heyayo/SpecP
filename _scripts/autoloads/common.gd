@@ -30,6 +30,7 @@ var structures : Array[PackedScene] = [
 	preload("res://_scenes/prefabs/structures/small_farm.tscn"),
 	preload("res://_scenes/prefabs/structures/steel_mill.tscn"),
 	preload("res://_scenes/prefabs/structures/ballista.tscn"),
+	preload("res://_scenes/prefabs/structures/shock_tower.tscn"),
 ];
 
 ## Resource Types

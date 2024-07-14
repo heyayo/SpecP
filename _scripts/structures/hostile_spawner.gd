@@ -5,7 +5,7 @@ class_name HostileSpawner
 @export var max_spawns : int = 1; ## Maximum number of Units spawned
 @export var spawn_rate : float = 1; ## Spawn Rate in Seconds
 @export var unit : PackedScene;
-@export var core : PackedScene;
+@export var core : Script;
 
 var spawn_timer : Timer;
 var units : Array[Unit] = [];
@@ -30,7 +30,7 @@ func spawn_unit() -> void:
 	game.spawn_unit(spawn);
 	spawn.global_position = global_position;
 	spawn.tree_exiting.connect(report_death.bind(spawn));
-	spawn.add_child(core.instantiate());
+	spawn.add_child(core.new());
 	spawn.add_to_group(Common.group_hostile);
 
 	units.push_back(spawn);
@@ -43,4 +43,9 @@ func report_death(unit : Unit) -> void:
 	print("%s | Unit Reported Death" % unit.name);
 	units.erase(unit); ## Mark Unit as Dead
 	resume_spawns(); ## Resume Unit Spawning
+func report_damage(source, damage : float) -> void:
+	for u in units:
+		if (!is_instance_valid(u)): continue;
+		if (is_instance_valid(u.desired_target)): continue;
+		u.attack_action(source);
 #endregion

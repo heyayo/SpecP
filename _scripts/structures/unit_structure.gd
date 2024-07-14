@@ -27,10 +27,10 @@ func _ready() -> void:
 	selectable.sig_disable.connect(func(): unit_signal.visible = false);
 func finish() -> void:
 	print("%s | Constructing Unit Structure" % name);
-func queue_training(unit : Unit) -> void:
+func queue_training(unit : Unit) -> bool:
 	if (!cost_check(unit.data)):
 		notifier.notify("Not enough resources to train");
-		return;
+		return false;
 	game.adjust_resources(0,-unit.data.food,0,-unit.data.metal);
 	if (queue.is_empty()):
 		training_timer.wait_time = unit.data.training_time;
@@ -39,6 +39,7 @@ func queue_training(unit : Unit) -> void:
 	unit_signal.color = Color.GREEN;
 	
 	print("%s | Queued Unit Training" % unit.data.name);
+	return true;
 func cost_check(data : UnitStats) -> bool:
 	if (data.food > resources.food): return false;
 	if (data.metal > resources.metal): return false;

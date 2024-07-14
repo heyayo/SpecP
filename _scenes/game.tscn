@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=49 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cf1co6dtcf0ig" path="res://_sprites/resource_icons/Material/Wood Log.png" id="10_51fdt"]
 [ext_resource type="Texture2D" uid="uid://bfq3614o74so" path="res://_sprites/resource_icons/Food/Meat.png" id="11_67ouv"]
 [ext_resource type="Script" path="res://_scripts/gameplay/interact_menu.gd" id="12_31y1f"]
+[ext_resource type="Script" path="res://_scripts/helpers/audio_instancer.gd" id="12_34504"]
 [ext_resource type="Texture2D" uid="uid://c43pc8cpkjx4v" path="res://_sprites/resource_icons/Ore & Gem/Obsidian.png" id="12_kxb3b"]
 [ext_resource type="Script" path="res://_scripts/gameplay/builder.gd" id="13_f5c5u"]
 [ext_resource type="Script" path="res://_scenes/Random Spawner.gd" id="13_kd0xl"]
@@ -204,14 +205,21 @@ modulate = Color(0.911862, 0.857629, 0.40441, 0.858824)
 z_index = 1
 texture = ExtResource("4_6751o")
 
+[node name="AudioInstancer" type="Node" parent="Builder"]
+script = ExtResource("12_34504")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_e0ybk")
+min_zoom = 0.1
 
 [node name="Random Spawner" type="Node2D" parent="."]
 script = ExtResource("13_kd0xl")
 
 [node name="Timer" type="Timer" parent="Random Spawner"]
 autostart = true
+
+[node name="AudioInstancer" type="Node" parent="Random Spawner"]
+script = ExtResource("12_34504")
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
@@ -812,6 +820,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Title" type="Label" parent="Tutorial/Helpers/BG/Archive"]
+layout_mode = 2
+text = "Tutorials
+Press P to close"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Key Binds" type="Button" parent="Tutorial/Helpers/BG/Archive"]
 layout_mode = 2

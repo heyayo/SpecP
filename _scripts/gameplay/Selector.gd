@@ -7,6 +7,7 @@ class_name Selector
 @onready var overseer : Overseer = $"../Overseer"
 @onready var bills : Bills = $"../Interface/Bills"
 @onready var base = $"../Base"
+@onready var notification = $"../Interface/Notification"
 #endregion
 
 var tracker : Tracker = Tracker.new();
@@ -88,7 +89,7 @@ func _pressed_from_demolish():
 		if (o is Structure):
 			if (o == base):
 				print("%s | Cannot Demolish" % o.data.name);
-				# TODO UI Notifications
+				notification.notify("Cannot demolish Base");
 				continue;
 			o.queue_free();
 			selection.erase(n);

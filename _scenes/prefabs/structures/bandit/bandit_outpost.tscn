@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://corrtirfvasw8" path="res://_sprites/structures/small_castle.png" id="4_quapn"]
 [ext_resource type="Script" path="res://_scripts/structures/hostile_spawner.gd" id="5_3w446"]
 [ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="6_nyojo"]
-[ext_resource type="PackedScene" uid="uid://bk8scl68lnwdd" path="res://_scenes/npc/cores/base_raider.tscn" id="7_mhvaw"]
+[ext_resource type="Script" path="res://_scenes/npc/cores/bandit_npc.gd" id="7_jiqbn"]
 
 [sub_resource type="Resource" id="Resource_0pwl8"]
 script = ExtResource("3_ftb7t")
@@ -40,10 +40,12 @@ scale = Vector2(3, 5)
 [node name="Spawner" type="Node2D" parent="." index="3"]
 script = ExtResource("5_3w446")
 unit = ExtResource("6_nyojo")
-core = ExtResource("7_mhvaw")
+core = ExtResource("7_jiqbn")
 
 [node name="HealthBar" parent="." index="4"]
 offset_left = -24.0
 offset_top = 40.0
 offset_right = 24.0
 offset_bottom = 56.0
+
+[connection signal="sig_damaged" from="." to="Spawner" method="report_damage"]
