@@ -18,6 +18,12 @@ const grass_1 := Vector2i(5,0);
 const grass_2 := Vector2i(5,1);
 const grass_3 := Vector2i(5,2);
 const grasses = [grass_1,grass_2,grass_3];
+const ocean_tiles = [
+	Vector2i(6,13),
+	Vector2i(6,14),
+	Vector2i(7,13),
+	Vector2i(7,14),
+]
 #endregion
 #region Assets
 const tree_pack : PackedScene = preload("res://_scenes/prefabs/resources/tree.tscn");
@@ -37,6 +43,7 @@ func _ready() -> void:
 	mountain_noise.seed = randi();
 	generate_world();
 func generate_world() -> void:
+	#generate_ocean();
 	var halfx = config.world_size.x / 2;
 	var halfy = config.world_size.y / 2;
 	for x in range(-halfx,halfx):
@@ -72,6 +79,12 @@ func generate_resource(x : int, y : int) -> void:
 		stone_count += 1;
 		spawn(real_pos,stone_pack);
 		return;
+func generate_ocean() -> void:
+	var halfx = config.world_size.x;
+	var halfy = config.world_size.y;
+	for x in range(-halfx,halfx):
+		for y in range(-halfy,halfy):
+			set_cell(0,Vector2i(x,y),1,ocean_tiles.pick_random());
 func snap(value : float, threshold : float) -> float:
 	if (value >= threshold): return 1;
 	return 0;

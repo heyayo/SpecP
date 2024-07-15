@@ -22,4 +22,6 @@ class_name UnitStats
 #region Convenience Functions
 func unitrange() -> Vector2:
 	return Vector2(range,range);
+func aggressionrange() -> Vector2:
+	return Vector2(range+defense_range,range+defense_range);
 #endregion

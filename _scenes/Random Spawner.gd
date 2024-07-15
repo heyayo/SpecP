@@ -33,8 +33,8 @@ func rain_of_spiders() -> void:
 		spider_tracker.push_back(spider);
 		spider.sig_death.connect(spider_death);
 		spider.sig_damage_response.connect(alert_spiders);
-		game.add_child(spider);
 		spider.global_position = offset;
+		game.add_child(spider);
 		spider.add_child(base_raider.instantiate());
 func alert_spiders(source) -> void: ## Alert All Spiders when one is attacked
 	for s in spider_tracker:

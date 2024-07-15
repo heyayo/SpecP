@@ -8,6 +8,10 @@ class_name Game
 @onready var game_end_title = $"Interface/Game Conditions/Game End"
 @onready var game_end_timer = $"Game End Timer"
 
+static var instance : Game = null;
+
+func _init() -> void:
+	instance = self;
 const tile_size = 16;
 func get_hover_position() -> Vector2i:
 	var tilemap_position : Vector2i = get_tilemap_position();
@@ -66,3 +70,8 @@ func _timeout_from_game_end_timer():
 	print("TODO Return to main menu");
 	get_tree().change_scene_to_file("res://_scenes/main_menu.tscn");
 #endregion
+
+static func get_game() -> Game:
+	if (!is_instance_valid(instance)):
+		printerr("GAME INSTANCE IS NOT SET DURING GAME TIME");
+	return instance;

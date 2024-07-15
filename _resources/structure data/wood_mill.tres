@@ -6,8 +6,11 @@
 script = ExtResource("1_gegrr")
 name = "Wood Mill"
 desc = "Harvests Trees from the surroundings"
-work = 1
+work = 5
 wood = 0
 food = 0
-stone = 100
+stone = 250
 metal = 0
+max_health = 250
+defense_range = 0.0
+range = 10

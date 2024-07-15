@@ -14,8 +14,8 @@ func _ready() -> void:
 
 func spawn_minion() -> void:
 	var spawn : Unit = minion.instantiate();
-	game.spawn_unit(spawn);
 	spawn.global_position = global_position;
+	game.spawn_unit(spawn);
 	spawn.tree_exiting.connect(report_death.bind(spawn));
 	spawn.add_to_group(Common.group_hostile);
 	spawn.sig_attack_action.connect(parent.attack_action);

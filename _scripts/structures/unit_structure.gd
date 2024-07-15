@@ -51,6 +51,8 @@ func _timeout_from_training_timer():
 	var dupe : Unit = unit.duplicate();
 	game.spawn_friendly(dupe);
 	dupe.global_position = global_position;
+	dupe.add_to_group(Common.group_friendly);
+	dupe.host_group = Common.group_friendly;
 	
 	sig_kill_icon.emit();
 	queue.remove_at(0);

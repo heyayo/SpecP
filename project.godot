@@ -21,6 +21,7 @@ Common="*res://_scripts/autoloads/common.gd"
 
 [display]
 
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [dotnet]

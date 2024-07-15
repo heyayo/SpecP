@@ -1,0 +1,130 @@
+[gd_scene load_steps=5 format=3 uid="uid://df5vlqx4byl00"]
+
+[ext_resource type="Script" path="res://_scenes/prefabs/audio_sliders.gd" id="1_qihtx"]
+[ext_resource type="AudioStream" uid="uid://d3iis3dqd6tew" path="res://_audio/bgm/wet_hands.ogg" id="2_vidd1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bk7mm"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_sr73j"]
+font_size = 30
+
+[node name="Options" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -260.0
+offset_right = 512.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.431373, 0.686275, 1, 0.784314)
+
+[node name="Label" type="Label" parent="Control/BG"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Options"
+label_settings = SubResource("LabelSettings_bk7mm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sections" type="Control" parent="Control/BG"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -192.0
+offset_right = -32.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/BG/Sections"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Section" type="VBoxContainer" parent="Control/BG/Sections/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_qihtx")
+
+[node name="Label" type="Label" parent="Control/BG/Sections/HBoxContainer/Section"]
+layout_mode = 2
+text = "Audio"
+label_settings = SubResource("LabelSettings_sr73j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master" type="Label" parent="Control/BG/Sections/HBoxContainer/Section"]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="Control/BG/Sections/HBoxContainer/Section"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="Music" type="Label" parent="Control/BG/Sections/HBoxContainer/Section"]
+layout_mode = 2
+text = "Music
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music Slider" type="HSlider" parent="Control/BG/Sections/HBoxContainer/Section"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="SFX" type="Label" parent="Control/BG/Sections/HBoxContainer/Section"]
+layout_mode = 2
+text = "Sound Effects"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFX Slider" type="HSlider" parent="Control/BG/Sections/HBoxContainer/Section"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vidd1")
+autoplay = true
+bus = &"Music"
+
+[connection signal="value_changed" from="Control/BG/Sections/HBoxContainer/Section/Master Slider" to="Control/BG/Sections/HBoxContainer/Section" method="_value_changed_from_master_slider"]
+[connection signal="value_changed" from="Control/BG/Sections/HBoxContainer/Section/Music Slider" to="Control/BG/Sections/HBoxContainer/Section" method="_value_changed_from_music_slider"]
+[connection signal="value_changed" from="Control/BG/Sections/HBoxContainer/Section/SFX Slider" to="Control/BG/Sections/HBoxContainer/Section" method="_value_changed_from_sfx_slider"]

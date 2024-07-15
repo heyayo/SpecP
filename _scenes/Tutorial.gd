@@ -1,6 +1,8 @@
 extends CanvasLayer
 class_name Tutorial
 
+signal sig_on_open;
+
 @onready var helpers = $Helpers
 
 @onready var info_dump = $"Helpers/BG/Info Dump"
@@ -17,6 +19,7 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	if (Input.is_action_just_pressed("helper")):
 		helpers.visible = !helpers.visible;
+		sig_on_open.emit();
 
 #region Signal Callbacks
 func _pressed_from_info_back():

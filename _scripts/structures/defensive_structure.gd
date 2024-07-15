@@ -23,12 +23,14 @@ func _ready() -> void:
 	disable();
 	var p_range : int = parent.data.range;
 	range.scale = Vector2(p_range,p_range);
-	if (sfx):
-		for i in audio_reserved:
-			var stream : AudioStreamPlayer = AudioStreamPlayer.new();
-			stream.stream = sfx;
-			streams.push_back(stream);
-			add_child(stream);
+	if (!sfx):
+		printerr("Ballista SFX Not Set");
+	for i in audio_reserved:
+		var stream : AudioStreamPlayer = AudioStreamPlayer.new();
+		stream.stream = sfx;
+		stream.bus = "Sound Effects"
+		streams.push_back(stream);
+		add_child(stream);
 func shoot() -> void:
 	if (!is_instance_valid(unit)): return;
 	streams[audio_index].play();

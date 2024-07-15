@@ -5,6 +5,7 @@ class_name Unit
 @onready var walk_area : Detection = $"Walk Area";
 @onready var attack_area : Detection = $"Attack Area";
 @onready var distance_from_others : Detection = $DistanceFromOthers
+@onready var aggression : Detection = $Aggression
 @onready var attack_node : UnitAttack = $Attack;
 #endregion
 #region Signals
@@ -34,10 +35,12 @@ var desired_position : Vector2;
 var desired_target = null;
 var focus_attack : bool = true;
 var behaviour : BEHAVIOUR = BEHAVIOUR.PASSIVE;
+var host_group : StringName = Common.group_hostile;
 #endregion
 #region Processes
 func _ready() -> void:
 	attack_area.scale = data.unitrange();
+	aggression.scale = data.aggressionrange();
 	speed = data.speed;
 	health = data.max_health;
 	desired_position = global_position;
@@ -102,7 +105,7 @@ func aggressive_bev() -> void:
 	if (!is_instance_valid(desired_target)):
 		if (attack_area.is_empty()):
 			return;
-		desired_target = get_lowest_health();
+		desired_target = get_lowest_health(aggression);
 		return;
 	force_attack_response();
 func damage_response(source) -> void:
@@ -117,11 +120,13 @@ func force_attack_response() -> void:
 			return;
 		sprite.attack();
 		attack_node.attack(desired_target,data.damage);
-func get_lowest_health() -> Unit:
-	var lowest : float = 0;
-	var lowest_unit : Unit = null;
-	for n in attack_area.tracker.collection:
+func get_lowest_health(source : Detection):
+	var lowest : float = 9999999;
+	var lowest_unit = null;
+	for n in source.tracker.collection:
 		if (!is_instance_valid(n)): continue;
+		if (n == self): continue;
+		if (n.is_in_group(host_group)): continue;
 		if (n.health < lowest):
 			lowest_unit = n;
 			lowest = n.health;

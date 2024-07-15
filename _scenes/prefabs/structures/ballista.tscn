@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcsc4gl80ou67"]
+[gd_scene load_steps=15 format=3 uid="uid://bcsc4gl80ou67"]
 
 [ext_resource type="Script" path="res://_scripts/structures/structure.gd" id="2_3efsy"]
 [ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="3_yehmu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://_scripts/structures/defensive_structure.gd" id="5_g28ky"]
 [ext_resource type="PackedScene" uid="uid://kg05bx8x1dfy" path="res://_scenes/prefabs/projectiles/ballista_arrow.tscn" id="6_a1224"]
 [ext_resource type="PackedScene" uid="uid://bu8fvflbob7sy" path="res://_scenes/prefabs/range.tscn" id="7_belxr"]
+[ext_resource type="AudioStream" uid="uid://fns5u8ici0ie" path="res://_audio/structures/old_bow_sfx.ogg" id="7_f4ejb"]
 [ext_resource type="Script" path="res://_scenes/prefabs/structures/health_bar.gd" id="8_bf3md"]
 
 [sub_resource type="Resource" id="Resource_qj5vh"]
@@ -14,11 +15,11 @@ script = ExtResource("3_yehmu")
 name = "Ballista"
 desc = "A Strong Bow for defending structures"
 work = 1
-wood = 500
+wood = 750
 food = 0
-stone = 500
-metal = 50
-max_health = 500000
+stone = 250
+metal = 10
+max_health = 1000
 defense_range = 10.0
 range = 50
 
@@ -86,6 +87,8 @@ shape = SubResource("RectangleShape2D_36l8h")
 [node name="Shooter" type="Node2D" parent="."]
 script = ExtResource("5_g28ky")
 projectile = ExtResource("6_a1224")
+damage = 3
+sfx = ExtResource("7_f4ejb")
 
 [node name="Range" parent="Shooter" instance=ExtResource("7_belxr")]
 scale = Vector2(60, 60)
