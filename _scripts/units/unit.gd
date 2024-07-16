@@ -44,6 +44,7 @@ func _ready() -> void:
 	speed = data.speed;
 	health = data.max_health;
 	desired_position = global_position;
+	add_to_group(Common.group_persist);
 func _process(_delta) -> void:
 	if (is_instance_valid(desired_target)):
 		lock_move = sprite.attacking or attack_area.is_in_range(desired_target);
@@ -149,3 +150,22 @@ func report_death(unit) -> void:
 	print("Unit Death Reported %s" % unit);
 	desired_target = null;
 #endregion
+
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"x":global_position.x,
+		"y":global_position.y,
+		"group":host_group,
+		"health":health,
+		"behaviour":behaviour,
+		"res":scene_file_path
+	}
+	return data;
+static func from_json(data : Dictionary) -> Unit:
+	var scene = load(data["res"]);
+	var u : Unit = scene.instantiate();
+	u.global_position = Vector2(data["x"],data["y"]);
+	u.host_group = data["group"];
+	u.behaviour = data["behaviour"];
+	u.health = data["health"];
+	return u;

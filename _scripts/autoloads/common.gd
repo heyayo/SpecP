@@ -6,6 +6,7 @@ const group_hostile : StringName = "Hostile";
 const group_unit : StringName = "Unit";
 const group_selectable : StringName = "Selectable";
 const group_resource_structure : StringName = "ResourceStructure";
+const group_persist : StringName = "persistent";
 #endregion
 #region Collision Layer Constants
 const layer_selectable : int = 16;

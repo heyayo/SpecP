@@ -12,6 +12,9 @@ const cell_step : int = 50;
 const spawn_radius : int = 64;
 
 func _ready() -> void:
+	if (is_instance_valid(Game.game_save)):
+		spider.queue_free();
+		return;
 	calculate_cells();
 	
 	#for i in range(cells.size()):

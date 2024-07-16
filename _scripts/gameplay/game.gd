@@ -7,11 +7,26 @@ class_name Game
 @onready var game_conditions = $"Interface/Game Conditions"
 @onready var game_end_title = $"Interface/Game Conditions/Game End"
 @onready var game_end_timer = $"Game End Timer"
+@onready var builder = $Builder
+@onready var starter_bundle = $"Starter Bundle"
 
+static var game_save : SaveData = null;
 static var instance : Game = null;
 
 func _init() -> void:
 	instance = self;
+func _ready() -> void:
+	if (!is_instance_valid(game_save)): return;
+	starter_bundle.queue_free();
+	for r in game_save.environmental_resources:
+		var wr : WorldResource = WorldResource.from_json(r);
+		add_child(wr);
+	for u in game_save.units:
+		var unit : Unit = Unit.from_json(u);
+		add_child(unit);
+	for s in game_save.structures:
+		var st : Structure = Structure.from_json(s);
+		builder.add_child(st);
 const tile_size = 16;
 func get_hover_position() -> Vector2i:
 	var tilemap_position : Vector2i = get_tilemap_position();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=51 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -34,6 +34,8 @@
 [ext_resource type="Script" path="res://_scenes/Tutorial.gd" id="32_wujv3"]
 [ext_resource type="Script" path="res://_scenes/archive_button.gd" id="33_fvr38"]
 [ext_resource type="Script" path="res://_scenes/menu_audio.gd" id="35_adlav"]
+[ext_resource type="Script" path="res://_scenes/pause_menu.gd" id="35_dur23"]
+[ext_resource type="PackedScene" uid="uid://df5vlqx4byl00" path="res://_scenes/prefabs/options.tscn" id="36_n6ppj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bmb"]
 size = Vector2(1, 1)
@@ -125,6 +127,12 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_b885f"]
 font_size = 30
 
+[sub_resource type="LabelSettings" id="LabelSettings_87vx7"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ox07o"]
+font_color = Color(0, 0, 0, 1)
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lvycr")
 
@@ -207,7 +215,6 @@ script = ExtResource("12_34504")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_e0ybk")
-min_zoom = 0.1
 
 [node name="Random Spawner" type="Node2D" parent="."]
 script = ExtResource("13_kd0xl")
@@ -939,68 +946,13 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[node name="Base" parent="." instance=ExtResource("16_rh54v")]
-
-[node name="Mason Hut" parent="." groups=["ResourceStructure"] instance=ExtResource("26_l2xfv")]
-position = Vector2(72, -72)
-
-[node name="Wood Mill" parent="." groups=["ResourceStructure"] instance=ExtResource("26_lewgn")]
-position = Vector2(-72, -72)
-
-[node name="Tree5" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-40, -88)
-
-[node name="Tree4" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-40, -80)
-
-[node name="Tree3" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-40, -72)
-
-[node name="Tree2" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-40, -64)
-
-[node name="Tree" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-40, -56)
-
-[node name="Tree6" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-24, -88)
-
-[node name="Tree7" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-24, -80)
-
-[node name="Tree8" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-24, -72)
-
-[node name="Tree9" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-24, -64)
-
-[node name="Tree10" parent="." instance=ExtResource("28_cvg17")]
-position = Vector2(-24, -56)
-
 [node name="Game End Timer" type="Timer" parent="."]
 process_mode = 2
 wait_time = 5.0
 one_shot = true
 
-[node name="Stone" parent="." instance=ExtResource("30_ttdbg")]
-position = Vector2(32, -88)
-
-[node name="Stone2" parent="." instance=ExtResource("30_ttdbg")]
-position = Vector2(32, -72)
-
-[node name="Stone3" parent="." instance=ExtResource("30_ttdbg")]
-position = Vector2(32, -56)
-
-[node name="Stone4" parent="." instance=ExtResource("30_ttdbg")]
-position = Vector2(0, -88)
-
-[node name="Stone5" parent="." instance=ExtResource("30_ttdbg")]
-position = Vector2(0, -72)
-
-[node name="Stone6" parent="." instance=ExtResource("30_ttdbg")]
-position = Vector2(0, -56)
-
 [node name="END_GAME" type="Button" parent="."]
+visible = false
 offset_left = 216.0
 offset_top = -104.0
 offset_right = 367.0
@@ -1010,6 +962,292 @@ text = "RAIN OF SPIDERS"
 [node name="MenuAudio" type="AudioStreamPlayer" parent="."]
 bus = &"Sound Effects"
 script = ExtResource("35_adlav")
+
+[node name="Pause" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 2
+visible = false
+script = ExtResource("35_dur23")
+
+[node name="Control" type="Control" parent="Pause"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="Pause/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -132.0
+offset_right = 192.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.431373, 0.686275, 1, 0.784314)
+
+[node name="Resume" type="ColorRect" parent="Pause/Control/BG"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 352.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Pause/Control/BG/Resume"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Pause/Control/BG/Resume"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+label_settings = SubResource("LabelSettings_87vx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="ColorRect" parent="Pause/Control/BG"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 352.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Pause/Control/BG/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Pause/Control/BG/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+label_settings = SubResource("LabelSettings_87vx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Save" type="ColorRect" parent="Pause/Control/BG"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+offset_left = 32.0
+offset_top = 128.0
+offset_right = 352.0
+offset_bottom = 160.0
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Pause/Control/BG/Save"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Pause/Control/BG/Save"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+label_settings = SubResource("LabelSettings_87vx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="ColorRect" parent="Pause/Control/BG"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+offset_left = 32.0
+offset_top = 176.0
+offset_right = 352.0
+offset_bottom = 208.0
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Pause/Control/BG/Quit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Pause/Control/BG/Quit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit
+"
+label_settings = SubResource("LabelSettings_87vx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" parent="Pause" instance=ExtResource("36_n6ppj")]
+layer = 2
+visible = false
+
+[node name="Back" type="ColorRect" parent="Pause/Options"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 196.0
+offset_right = 64.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Pause/Options/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Pause/Options/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_87vx7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Apply" type="ColorRect" parent="Pause/Options"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 140.0
+offset_right = 64.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Pause/Options/Apply"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Pause/Options/Apply"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Apply"
+label_settings = SubResource("LabelSettings_ox07o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Starter Bundle" type="Node2D" parent="."]
+
+[node name="Base" parent="Starter Bundle" instance=ExtResource("16_rh54v")]
+
+[node name="Mason Hut" parent="Starter Bundle" groups=["ResourceStructure"] instance=ExtResource("26_l2xfv")]
+position = Vector2(72, -72)
+
+[node name="Wood Mill" parent="Starter Bundle" groups=["ResourceStructure"] instance=ExtResource("26_lewgn")]
+position = Vector2(-72, -72)
+
+[node name="Tree5" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -88)
+
+[node name="Tree4" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -80)
+
+[node name="Tree3" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -72)
+
+[node name="Tree2" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -64)
+
+[node name="Tree" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-40, -56)
+
+[node name="Tree6" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -88)
+
+[node name="Tree7" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -80)
+
+[node name="Tree8" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -72)
+
+[node name="Tree9" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -64)
+
+[node name="Tree10" parent="Starter Bundle" instance=ExtResource("28_cvg17")]
+position = Vector2(-24, -56)
+
+[node name="Stone" parent="Starter Bundle" instance=ExtResource("30_ttdbg")]
+position = Vector2(32, -88)
+
+[node name="Stone2" parent="Starter Bundle" instance=ExtResource("30_ttdbg")]
+position = Vector2(32, -72)
+
+[node name="Stone3" parent="Starter Bundle" instance=ExtResource("30_ttdbg")]
+position = Vector2(32, -56)
+
+[node name="Stone4" parent="Starter Bundle" instance=ExtResource("30_ttdbg")]
+position = Vector2(0, -88)
+
+[node name="Stone5" parent="Starter Bundle" instance=ExtResource("30_ttdbg")]
+position = Vector2(0, -72)
+
+[node name="Stone6" parent="Starter Bundle" instance=ExtResource("30_ttdbg")]
+position = Vector2(0, -56)
 
 [connection signal="timeout" from="Resources/Timer" to="Resources" method="_timeout_from_timer"]
 [connection signal="area_entered" from="Overseer/Click Detect" to="Overseer" method="_body_entered_from_click_detect"]
@@ -1049,9 +1287,21 @@ script = ExtResource("35_adlav")
 [connection signal="sig_archive_pressed" from="Tutorial/Helpers/BG/Archive/WinLoss" to="Tutorial" method="_pressed_from_archive"]
 [connection signal="pressed" from="Tutorial/Helpers/BG/Info Dump/Back" to="Tutorial" method="_pressed_from_info_back"]
 [connection signal="pressed" from="Tutorial/Helpers/BG/Info Dump/Back" to="MenuAudio" method="button_pressed_two"]
-[connection signal="sig_destroyed" from="Base" to="." method="end_game"]
-[connection signal="sig_kill_icon" from="Base" to="Interface/Bills" method="trained"]
-[connection signal="sig_harvest" from="Mason Hut" to="." method="give_resource"]
-[connection signal="sig_harvest" from="Wood Mill" to="." method="give_resource"]
 [connection signal="timeout" from="Game End Timer" to="." method="_timeout_from_game_end_timer"]
 [connection signal="pressed" from="END_GAME" to="Random Spawner" method="rain_of_spiders"]
+[connection signal="pressed" from="Pause/Control/BG/Resume/Button" to="MenuAudio" method="button_pressed"]
+[connection signal="pressed" from="Pause/Control/BG/Resume/Button" to="Pause" method="callback_resume_game"]
+[connection signal="pressed" from="Pause/Control/BG/Options/Button" to="MenuAudio" method="button_pressed"]
+[connection signal="pressed" from="Pause/Control/BG/Options/Button" to="Pause" method="_pressed_from_options"]
+[connection signal="pressed" from="Pause/Control/BG/Save/Button" to="MenuAudio" method="button_pressed"]
+[connection signal="pressed" from="Pause/Control/BG/Save/Button" to="Pause" method="callback_save_game"]
+[connection signal="pressed" from="Pause/Control/BG/Quit/Button" to="MenuAudio" method="button_pressed"]
+[connection signal="pressed" from="Pause/Control/BG/Quit/Button" to="Pause" method="callback_quit_menu"]
+[connection signal="pressed" from="Pause/Options/Back/Button" to="MenuAudio" method="button_pressed"]
+[connection signal="pressed" from="Pause/Options/Back/Button" to="Pause" method="_pressed_from_options_back"]
+[connection signal="pressed" from="Pause/Options/Apply/Button" to="MenuAudio" method="button_pressed"]
+[connection signal="pressed" from="Pause/Options/Apply/Button" to="Pause" method="_pressed_from_apply"]
+[connection signal="sig_destroyed" from="Starter Bundle/Base" to="." method="end_game"]
+[connection signal="sig_kill_icon" from="Starter Bundle/Base" to="Interface/Bills" method="trained"]
+[connection signal="sig_harvest" from="Starter Bundle/Mason Hut" to="." method="give_resource"]
+[connection signal="sig_harvest" from="Starter Bundle/Wood Mill" to="." method="give_resource"]

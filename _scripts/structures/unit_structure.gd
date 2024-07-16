@@ -4,10 +4,10 @@ class_name UnitStructure
 signal sig_kill_icon;
 
 @onready var game : Game = get_tree().root.get_node("Game");
-@onready var resources : MResource = $"../Resources"
+@onready var resources : MResource = $"../../Resources"
 @onready var unit_signal : ColorRect = $Signal
 @onready var selectable : Selectable = $Selectable
-@onready var notifier : Notifier= $"../Interface/Notification"
+@onready var notifier : Notifier= $"../../Interface/Notification"
 
 @export var units : Array[PackedScene];
 

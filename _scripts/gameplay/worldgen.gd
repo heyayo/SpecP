@@ -43,18 +43,19 @@ func _ready() -> void:
 	mountain_noise.seed = randi();
 	generate_world();
 func generate_world() -> void:
-	#generate_ocean();
+	generate_ocean();
 	var halfx = config.world_size.x / 2;
 	var halfy = config.world_size.y / 2;
 	for x in range(-halfx,halfx):
 		for y in range(-halfy,halfy):
 			generate_tile(x,y);
+			if (is_instance_valid(Game.game_save)): continue;
 			if (
 				x > -spawn_radius and x < spawn_radius
 				and
 				y > -spawn_radius and y < spawn_radius
 				): continue;
-			#generate_resource(x,y);
+			generate_resource(x,y);
 	print("Statistics | Trees: %s | Stones: %s | Stone Patch Area: %s" % [tree_count,stone_count,stone_patches.size()]);
 func generate_tile(x : int, y : int) -> void:
 	set_cell(0,Vector2i(x,y),1,grasses[randi_range(0,2)]);

@@ -6,7 +6,7 @@ class_name Selector
 @onready var interact_menu : InteractMenu = $"../Interface/Interact Menu"
 @onready var overseer : Overseer = $"../Overseer"
 @onready var bills : Bills = $"../Interface/Bills"
-@onready var base = $"../Base"
+@onready var base = get_tree().get_nodes_in_group("Base Structure").front();
 @onready var notification = $"../Interface/Notification"
 #endregion
 

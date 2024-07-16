@@ -1,7 +1,7 @@
 extends Node
 class_name BaseRaider
 
-@onready var base = $"/root/Game/Base";
+@onready var base = get_tree().get_nodes_in_group("Base Structure").front();;
 @onready var parent : Unit = get_parent();
 
 func _ready() -> void:

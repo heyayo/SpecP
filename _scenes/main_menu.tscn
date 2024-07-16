@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bltr5xpfv1khx"]
+[gd_scene load_steps=10 format=3 uid="uid://bltr5xpfv1khx"]
 
 [ext_resource type="Script" path="res://_scenes/main_menu.gd" id="1_4w1o7"]
 [ext_resource type="Script" path="res://_scenes/menu_audio.gd" id="2_pmegh"]
+[ext_resource type="Texture2D" uid="uid://dk8lnqnt8j8a1" path="res://_sprites/splash/Splash_4_0.png" id="3_2uxo6"]
+[ext_resource type="PackedScene" uid="uid://df5vlqx4byl00" path="res://_scenes/prefabs/options.tscn" id="4_1wp6o"]
+[ext_resource type="AudioStream" uid="uid://d3iis3dqd6tew" path="res://_audio/bgm/wet_hands.ogg" id="5_3qqw0"]
+[ext_resource type="Script" path="res://_scenes/save_panel.gd" id="6_fj2my"]
+[ext_resource type="Script" path="res://_scenes/save_panel_builder.gd" id="6_t0xkj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m6y4u"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cmw48"]
+font_size = 40
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -12,6 +23,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4w1o7")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Sound Effects"
+script = ExtResource("2_pmegh")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_2uxo6")
+expand_mode = 2
+
 [node name="Menu" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -19,10 +44,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -384.0
-offset_top = 140.0
-offset_right = -344.0
-offset_bottom = 180.0
+offset_left = -400.0
+offset_top = 108.0
+offset_right = -360.0
+offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -33,10 +58,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.0
-offset_top = -16.0
-offset_right = 93.0
-offset_bottom = 16.0
+offset_left = -92.0
+offset_top = 44.0
+offset_right = 94.0
+offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
@@ -55,6 +80,64 @@ offset_bottom = 4.0
 grow_vertical = 2
 color = Color(7.12335e-06, 0.729842, 0.978114, 1)
 
+[node name="Settings" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -20.0
+offset_right = 94.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+text = "Settings"
+flat = true
+
+[node name="Tail" type="ColorRect" parent="Menu/Settings"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -4.0
+offset_right = -1.0
+offset_bottom = 4.0
+grow_vertical = 2
+color = Color(7.12335e-06, 0.729842, 0.978114, 1)
+
+[node name="Load" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -84.0
+offset_right = 94.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+text = "Load"
+flat = true
+
+[node name="Tail" type="ColorRect" parent="Menu/Load"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -4.0
+offset_right = -1.0
+offset_bottom = 4.0
+grow_vertical = 2
+color = Color(7.12335e-06, 0.729842, 0.978114, 1)
+
 [node name="Start" type="Button" parent="Menu"]
 layout_mode = 1
 anchors_preset = 8
@@ -62,10 +145,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.0
-offset_top = -68.0
-offset_right = 93.0
-offset_bottom = -36.0
+offset_left = -92.0
+offset_top = -148.0
+offset_right = 94.0
+offset_bottom = -116.0
 grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
@@ -108,22 +191,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.431373, 0.686275, 1, 0.784314)
 
-[node name="Generate" type="Button" parent="World Gen"]
-layout_mode = 0
-offset_left = 344.0
-offset_top = 360.0
-offset_right = 424.0
-offset_bottom = 391.0
-text = "Generate"
-
-[node name="Return" type="Button" parent="World Gen"]
-layout_mode = 0
-offset_left = 344.0
-offset_top = 404.0
-offset_right = 424.0
-offset_bottom = 435.0
-text = "Return"
-
 [node name="World Size" type="Label" parent="World Gen"]
 layout_mode = 0
 offset_left = 64.0
@@ -146,14 +213,297 @@ popup/item_0/id = 0
 popup/item_1/text = "Large"
 popup/item_1/id = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-script = ExtResource("2_pmegh")
+[node name="Back" type="ColorRect" parent="World Gen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 176.0
+offset_right = 64.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="World Gen/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="World Gen/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_m6y4u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Generate" type="ColorRect" parent="World Gen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 136.0
+offset_right = 64.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="World Gen/Generate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="World Gen/Generate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Generate"
+label_settings = SubResource("LabelSettings_m6y4u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" parent="." instance=ExtResource("4_1wp6o")]
+visible = false
+
+[node name="Back" type="ColorRect" parent="Options"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 196.0
+offset_right = 64.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Options/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Options/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_m6y4u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Apply" type="ColorRect" parent="Options"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 140.0
+offset_right = 64.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Options/Apply"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Options/Apply"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Apply"
+label_settings = SubResource("LabelSettings_m6y4u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3qqw0")
+bus = &"Music"
+
+[node name="Load Saves" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="Load Saves"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -260.0
+offset_right = 512.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.431373, 0.686275, 1, 0.784314)
+
+[node name="Title" type="Label" parent="Load Saves/BG"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 55.0
+grow_horizontal = 2
+text = "Load Save"
+label_settings = SubResource("LabelSettings_cmw48")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Load Saves/BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -128.0
+offset_right = 448.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Load Saves/BG/ScrollContainer"]
+layout_mode = 2
+script = ExtResource("6_t0xkj")
+
+[node name="Template Panel" type="ColorRect" parent="Load Saves/BG/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(192, 320)
+layout_mode = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+script = ExtResource("6_fj2my")
+
+[node name="Load" type="Button" parent="Load Saves/BG/ScrollContainer/HBoxContainer/Template Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Load"
+
+[node name="Title" type="Label" parent="Load Saves/BG/ScrollContainer/HBoxContainer/Template Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Save 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Date" type="Label" parent="Load Saves/BG/ScrollContainer/HBoxContainer/Template Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 47.0
+grow_horizontal = 2
+text = "01/01/2000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="ColorRect" parent="Load Saves/BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 196.0
+offset_right = 64.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45098, 0.764706, 0, 0.588235)
+
+[node name="Button" type="Button" parent="Load Saves/BG/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Title" type="Label" parent="Load Saves/BG/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_m6y4u")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Menu/Quit" to="." method="_pressed_from_quit"]
 [connection signal="pressed" from="Menu/Quit" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="Menu/Settings" to="." method="_pressed_from_settings"]
+[connection signal="pressed" from="Menu/Settings" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="Menu/Load" to="." method="_pressed_from_load"]
+[connection signal="pressed" from="Menu/Load" to="AudioStreamPlayer" method="button_pressed"]
 [connection signal="pressed" from="Menu/Start" to="." method="_pressed_from_start"]
 [connection signal="pressed" from="Menu/Start" to="AudioStreamPlayer" method="button_pressed"]
-[connection signal="pressed" from="World Gen/Generate" to="." method="_pressed_from_generate"]
-[connection signal="pressed" from="World Gen/Generate" to="AudioStreamPlayer" method="button_pressed"]
-[connection signal="pressed" from="World Gen/Return" to="." method="_pressed_from_return"]
-[connection signal="pressed" from="World Gen/Return" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="World Gen/Back/Button" to="." method="_pressed_from_return"]
+[connection signal="pressed" from="World Gen/Back/Button" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="World Gen/Generate/Button" to="." method="_pressed_from_generate"]
+[connection signal="pressed" from="World Gen/Generate/Button" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="Options/Back/Button" to="." method="_pressed_from_back"]
+[connection signal="pressed" from="Options/Back/Button" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="Options/Apply/Button" to="." method="_pressed_from_apply"]
+[connection signal="pressed" from="Options/Apply/Button" to="AudioStreamPlayer" method="button_pressed"]
+[connection signal="pressed" from="Load Saves/BG/ScrollContainer/HBoxContainer/Template Panel/Load" to="Load Saves/BG/ScrollContainer/HBoxContainer/Template Panel" method="load_save"]
+[connection signal="pressed" from="Load Saves/BG/Back/Button" to="." method="_pressed_from_load_back"]

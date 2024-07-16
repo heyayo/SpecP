@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://d361aownr28n4"]
+
+[ext_resource type="Script" path="res://_scenes/loading_screen.gd" id="1_l51i5"]
+[ext_resource type="Texture2D" uid="uid://k5u54xwcoj8r" path="res://_sprites/splash/Splash_2_0.png" id="2_rq12v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7w0bq"]
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[node name="Loading Screen" type="CanvasLayer"]
+script = ExtResource("1_l51i5")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rq12v")
+expand_mode = 2
+
+[node name="Loading" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -34.5
+offset_right = 96.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading"
+label_settings = SubResource("LabelSettings_7w0bq")

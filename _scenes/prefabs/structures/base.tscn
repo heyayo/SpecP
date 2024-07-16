@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_838yh"]
 size = Vector2(96, 80)
 
-[node name="Base" instance=ExtResource("1_ulkyu")]
+[node name="Base" groups=["Base Structure"] instance=ExtResource("1_ulkyu")]
 script = ExtResource("1_dfqy0")
 units = Array[PackedScene]([ExtResource("2_krqt5"), ExtResource("4_bi8wu"), ExtResource("5_u8hyx")])
 data = ExtResource("3_3ofls")
