@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bltr5xpfv1khx"]
+[gd_scene load_steps=11 format=3 uid="uid://bltr5xpfv1khx"]
 
 [ext_resource type="Script" path="res://_scenes/main_menu.gd" id="1_4w1o7"]
 [ext_resource type="Script" path="res://_scenes/menu_audio.gd" id="2_pmegh"]
@@ -7,6 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://d3iis3dqd6tew" path="res://_audio/bgm/wet_hands.ogg" id="5_3qqw0"]
 [ext_resource type="Script" path="res://_scenes/save_panel.gd" id="6_fj2my"]
 [ext_resource type="Script" path="res://_scenes/save_panel_builder.gd" id="6_t0xkj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxi80"]
+font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_m6y4u"]
 font_color = Color(0, 0, 0, 1)
@@ -166,6 +169,24 @@ offset_right = -1.0
 offset_bottom = 4.0
 grow_vertical = 2
 color = Color(7.12335e-06, 0.729842, 0.978114, 1)
+
+[node name="Title" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = -236.0
+offset_right = 154.0
+offset_bottom = -167.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "White Forest"
+label_settings = SubResource("LabelSettings_oxi80")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="World Gen" type="Control" parent="."]
 visible = false

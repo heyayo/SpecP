@@ -59,7 +59,6 @@ func generate_world() -> void:
 	print("Statistics | Trees: %s | Stones: %s | Stone Patch Area: %s" % [tree_count,stone_count,stone_patches.size()]);
 func generate_tile(x : int, y : int) -> void:
 	set_cell(0,Vector2i(x,y),1,grasses[randi_range(0,2)]);
-	set_cell(0,Vector2i(x,y),0,Vector2i(0,0));
 func generate_resource(x : int, y : int) -> void:
 	var real_pos : Vector2 = real_position(x,y);
 	var tx : float = x * forest_scale;
