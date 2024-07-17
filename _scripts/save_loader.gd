@@ -9,6 +9,7 @@ static func load_save(file : FileAccess) -> SaveData:
 
 static func save_game(persist : Array, resources : MResource) -> SaveData:
 	var data : SaveData = SaveData.new();
+	data.name = Game.game_save_name;
 	var date_values = Time.get_date_dict_from_system();
 	data.date = "%s|%s|%s" % [date_values["day"],date_values["month"],date_values["year"]];
 	for p in persist:

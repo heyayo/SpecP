@@ -7,6 +7,7 @@ class_name MainMenu
 @onready var saves = $"Load Saves/BG/ScrollContainer/HBoxContainer"
 @onready var load_saves = $"Load Saves"
 @onready var load_builder : SavePanelBuilder = $"Load Saves/BG/ScrollContainer/HBoxContainer"
+@onready var save_name_input = $"World Gen/Save Name/Save Name Input"
 
 @onready var size_options = $"World Gen/World Size/Size Options";
 var world_config : WorldConfiguration = preload("res://_resources/worldconfig.tres");
@@ -30,10 +31,12 @@ func _pressed_from_generate():
 			world_config.world_size = Vector2i(500,500);
 		1:
 			world_config.world_size = Vector2i(1000,1000);
+	var save_name : String = save_name_input.text;
+	if (!save_name.is_empty()):
+		Game.game_save_name = save_name;
 	## Load Into Main Scene
 	LoadingScreen.scene = game_scene.resource_path;
 	get_tree().change_scene_to_file("res://_scenes/loading_screen.tscn");
-	#get_tree().change_scene_to_packed(game_scene);
 func _pressed_from_return():
 	menu.visible = true;
 	world_gen.visible = false;

@@ -10,6 +10,7 @@ class_name Game
 @onready var builder = $Builder
 @onready var starter_bundle = $"Starter Bundle"
 
+static var game_save_name : String = "default";
 static var game_save : SaveData = null;
 static var instance : Game = null;
 

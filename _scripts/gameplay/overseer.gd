@@ -6,7 +6,6 @@ class_name Overseer
 @onready var interact_menu = $"../Interface/Interact Menu"
 @onready var camera_2d = $"../Camera2D"
 @onready var menu_audio = $"../MenuAudio"
-@onready var boss_finder = $"../Boss Finder"
 
 var units : Array;
 var detect : Tracker = Tracker.new();
