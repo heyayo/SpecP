@@ -5,8 +5,8 @@ class_name Overseer
 @onready var click_detect : Area2D = $"Click Detect"
 @onready var interact_menu = $"../Interface/Interact Menu"
 @onready var camera_2d = $"../Camera2D"
-@onready var boss_finder : BossFinder = $"../Interface/Boss Finder"
 @onready var menu_audio = $"../MenuAudio"
+@onready var boss_finder = $"../Boss Finder"
 
 var units : Array;
 var detect : Tracker = Tracker.new();
@@ -39,8 +39,8 @@ func _input(_event : InputEvent) -> void:
 		print_rich("[color=red]Switched To Aggressive[/color]")
 	if (Input.is_action_just_pressed("Center Camera")):
 		center_camera();
-	if (Input.is_action_just_pressed("Find Boss")):
-		boss_finder.point_nearest();
+	#if (Input.is_action_just_pressed("Find Boss")):
+		#boss_finder.point_nearest();
 
 func center_camera() -> void:
 	if (units.is_empty() or units.size() > 1):
@@ -52,6 +52,7 @@ func set_behaviour(behaviour : Unit.BEHAVIOUR) -> void:
 		if (!is_instance_valid(u)): continue; ## lazy
 		u.behaviour = behaviour;
 	interact_menu.show_unit_info(units);
+	menu_audio.behaviour_action();
 func move_units() -> void:
 	var dead : Array[Unit] = [];
 	for u in units:

@@ -5,7 +5,7 @@ const select_sfx : AudioStreamOggVorbis = preload("res://_audio/ogg/JDSherbert -
 const select_sfx_two : AudioStreamOggVorbis = preload("res://_audio/ogg/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.ogg")
 const move_action_sfx = preload("res://_audio/ogg/JDSherbert - Ultimate UI SFX Pack - Cursor - 4.ogg")
 const attack_action_sfx = preload("res://_audio/ogg/JDSherbert - Ultimate UI SFX Pack - Select - 1.ogg")
-
+const behaviour_action_sfx = preload("res://_audio/ogg/JDSherbert - Ultimate UI SFX Pack - Cancel - 1.ogg")
 func play_audio(audio : AudioStreamOggVorbis) -> void:
 	stream = audio;
 	stop();
@@ -19,3 +19,5 @@ func move_action() -> void:
 	play_audio(move_action_sfx);
 func attack_action() -> void:
 	play_audio(attack_action_sfx);
+func behaviour_action() -> void:
+	play_audio(behaviour_action_sfx);

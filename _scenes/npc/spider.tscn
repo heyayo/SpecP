@@ -253,7 +253,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="Spider" groups=["Hostile"] instance=ExtResource("1_ib6ij")]
+[node name="Spider" groups=["Boss", "Hostile"] instance=ExtResource("1_ib6ij")]
 data = ExtResource("2_wsdq4")
 
 [node name="CollisionShape2D" parent="." index="0"]

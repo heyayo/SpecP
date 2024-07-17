@@ -1,18 +1,19 @@
-extends TextureRect
+extends Node2D
 class_name BossFinder
 
 @onready var animation_player = $AnimationPlayer
 
-@onready var spider = $"../../BossList/Spider"
-@onready var camera_2d = $"../../Camera2D"
+@onready var spider;
+@onready var camera_2d;
 
 func _ready() -> void:
 	visible = false;
+	spider = get_tree().get_nodes_in_group("Boss").front();
+	camera_2d = get_viewport().get_camera_2d();
+#func _process(_delta) -> void:
+	#global_position = camera_2d.global_position;
 func point_nearest() -> void:
-	point_to(spider); ## TODO Actual sorting of nearest boss based on game progression
-func point_to(unit : Unit) -> void:
 	animation_player.stop();
 	animation_player.play("fade");
-	var diff : Vector2 = camera_2d.global_position.direction_to(spider.global_position);
-	var rot : float = atan2(diff.y,diff.x);
-	rotation = rot + 90
+	look_at(spider.global_position);
+	rotate(deg_to_rad(90));

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bpeampwpg2mi4"]
+[gd_scene load_steps=46 format=3 uid="uid://bpeampwpg2mi4"]
 
 [ext_resource type="Script" path="res://_scripts/gameplay/game.gd" id="1_lvycr"]
 [ext_resource type="TileSet" uid="uid://00le76ibcgxk" path="res://_resources/world.tres" id="1_mcjhm"]
@@ -23,9 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dc8608qo3vmbi" path="res://_scenes/prefabs/structures/base.tscn" id="16_rh54v"]
 [ext_resource type="Texture2D" uid="uid://ysu0yhmffrk2" path="res://_sprites/colonist/sword/Attack/Warrior_Attack_3.png" id="18_avx15"]
 [ext_resource type="Script" path="res://_scripts/gameplay/m_resource.gd" id="18_h4vt7"]
-[ext_resource type="Texture2D" uid="uid://b7o0utoof5uue" path="res://_sprites/reshot-icon-arrow-up-ZGEKU95YAJ.svg" id="21_xbqp2"]
 [ext_resource type="Script" path="res://_scenes/unit_queue_icon.gd" id="22_71b2o"]
-[ext_resource type="Script" path="res://_scripts/gameplay/boss_finder.gd" id="22_tf81x"]
 [ext_resource type="Script" path="res://_scripts/gameplay/notifier.gd" id="23_8sq7o"]
 [ext_resource type="PackedScene" uid="uid://c3agpxcpq858p" path="res://_scenes/prefabs/structures/mason_hut.tscn" id="26_l2xfv"]
 [ext_resource type="PackedScene" uid="uid://bhlxf1ymsr3cg" path="res://_scenes/prefabs/structures/wood_mill.tscn" id="26_lewgn"]
@@ -62,67 +60,6 @@ font_size = 13
 
 [sub_resource type="LabelSettings" id="LabelSettings_46rvv"]
 font_size = 12
-
-[sub_resource type="Animation" id="Animation_a72vr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_73xur"]
-resource_name = "fade"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lihub"]
-_data = {
-"RESET": SubResource("Animation_a72vr"),
-"fade": SubResource("Animation_73xur")
-}
 
 [sub_resource type="LabelSettings" id="LabelSettings_b885f"]
 font_size = 30
@@ -746,27 +683,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Boss Finder" type="TextureRect" parent="Interface"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -63.0
-offset_right = 64.0
-offset_bottom = 65.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(64, 64)
-texture = ExtResource("21_xbqp2")
-script = ExtResource("22_tf81x")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface/Boss Finder"]
-libraries = {
-"": SubResource("AnimationLibrary_lihub")
-}
-
 [node name="Notification" type="Control" parent="Interface"]
 layout_mode = 3
 anchors_preset = 0
@@ -845,7 +761,6 @@ Space centers camera on the base
 Left Click and/or drag to select
 Right Click to deselect or move units
 P Opens the tutorial helper
-F Locates the end boss
 Z/X/C Sets selected Unit Aggression to Passive/Defensive/Aggressive"
 
 [node name="Resources" type="Button" parent="Tutorial/Helpers/BG/Archive"]
@@ -894,8 +809,7 @@ layout_mode = 2
 text = "Winning"
 script = ExtResource("33_fvr38")
 title = "Winning"
-info = "Winning the game requires you to kill the spider that roams these lands.
-Press F to locate it"
+info = "Winning the game requires you to kill the spider that lives in these lands."
 
 [node name="Info Dump" type="Control" parent="Tutorial/Helpers/BG"]
 layout_mode = 1
