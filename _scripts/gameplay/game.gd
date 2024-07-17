@@ -27,6 +27,13 @@ func _ready() -> void:
 	for s in game_save.structures:
 		var st : Structure = Structure.from_json(s);
 		builder.add_child(st);
+		st.finish_construction();
+		if (st is ResourceStructure):
+			st.sig_harvest.connect(give_resource);
+	resources.wood = game_save.wood;
+	resources.food = game_save.food;
+	resources.stone = game_save.stone;
+	resources.metal = game_save.metal;
 const tile_size = 16;
 func get_hover_position() -> Vector2i:
 	var tilemap_position : Vector2i = get_tilemap_position();

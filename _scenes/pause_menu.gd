@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name PauseMenu
 
 @onready var options = $Options
+@onready var resources = $"../Resources"
 
 func _input(event):
 	if (Input.is_action_just_pressed("ui_cancel")):
@@ -18,7 +19,7 @@ func _pressed_from_options():
 	options.sync_config();
 func callback_save_game():
 	var persist = get_tree().get_nodes_in_group(Common.group_persist);
-	var data = SaveLoader.save_game(persist);
+	var data = SaveLoader.save_game(persist,resources);
 	var status = SaveLoader.save_file(data);
 	if (!status):
 		printerr("Failed to save game data");

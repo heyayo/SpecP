@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu4lvhv0xyep8"]
+[gd_scene load_steps=9 format=3 uid="uid://cu4lvhv0xyep8"]
 
 [ext_resource type="PackedScene" uid="uid://br5pqkvwr7yj3" path="res://_scenes/prefabs/structures/template_structure.tscn" id="1_tdb6n"]
 [ext_resource type="Script" path="res://_scripts/structures/structure.gd" id="2_c51v6"]
 [ext_resource type="Script" path="res://_scripts/resources/structure_data.gd" id="3_ftb7t"]
 [ext_resource type="Texture2D" uid="uid://corrtirfvasw8" path="res://_sprites/structures/small_castle.png" id="4_quapn"]
 [ext_resource type="Script" path="res://_scripts/structures/hostile_spawner.gd" id="5_3w446"]
-[ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="6_nyojo"]
-[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="7_wk4et"]
+[ext_resource type="PackedScene" uid="uid://fukgm7jpn1rw" path="res://_scenes/npc/hostile_swordsman.tscn" id="6_6qfaa"]
 
 [sub_resource type="Resource" id="Resource_0pwl8"]
 script = ExtResource("3_ftb7t")
@@ -39,8 +38,7 @@ scale = Vector2(3, 5)
 
 [node name="Spawner" type="Node2D" parent="." index="3"]
 script = ExtResource("5_3w446")
-unit = ExtResource("6_nyojo")
-core = ExtResource("7_wk4et")
+unit = ExtResource("6_6qfaa")
 
 [node name="HealthBar" parent="." index="4"]
 offset_left = -24.0

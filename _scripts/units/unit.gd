@@ -92,7 +92,9 @@ func passive_bev() -> void:
 	force_attack_response();
 func defensive_bev() -> void:
 	if (!is_instance_valid(desired_target)):
-		desired_target = null;
+		if (aggression.is_empty()):
+			return;
+		desired_target = get_lowest_health(aggression);
 		return;
 	var diff : Vector2 = desired_target.global_position - global_position;
 	var ret_dist : int = (desired_target.data.range + data.range + data.defense_range) * 8;
@@ -104,7 +106,7 @@ func defensive_bev() -> void:
 	force_attack_response();
 func aggressive_bev() -> void:
 	if (!is_instance_valid(desired_target)):
-		if (attack_area.is_empty()):
+		if (aggression.is_empty()):
 			return;
 		desired_target = get_lowest_health(aggression);
 		return;

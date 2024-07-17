@@ -42,8 +42,9 @@ func hover_details(structure : Structure) -> void:
 	cost_preview(structure.data); ## Sets Cost Label
 	sprite_preview(structure);
 func action_pressed(object : Structure) -> void:
-	notification.notify("Not enough resources");
-	if (not cost_check(object)): return; ## Denies Build Request if they cannot afford it
+	if (not cost_check(object)):
+		notification.notify("Not enough resources");
+		return; ## Denies Build Request if they cannot afford it
 	builder.start_preview(object); ## Begins Build Request
 	visible = false; ## Hides Menu
 func cost_check(structure : Structure) -> bool:

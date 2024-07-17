@@ -215,6 +215,7 @@ script = ExtResource("12_34504")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_e0ybk")
+min_zoom = 0.25
 
 [node name="Random Spawner" type="Node2D" parent="."]
 script = ExtResource("13_kd0xl")

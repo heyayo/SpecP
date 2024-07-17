@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://fukgm7jpn1rw"]
+
+[ext_resource type="PackedScene" uid="uid://yspwggco06v7" path="res://_scenes/npc/swordsman.tscn" id="1_pbqnn"]
+[ext_resource type="PackedScene" uid="uid://comlb41utkawe" path="res://_scenes/npc/cores/bandit_npc.tscn" id="2_a03bp"]
+
+[node name="Hostile Swordsman" instance=ExtResource("1_pbqnn")]
+
+[node name="HostileNPC" parent="." index="8" instance=ExtResource("2_a03bp")]

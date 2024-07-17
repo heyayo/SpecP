@@ -8,6 +8,10 @@ class_name SaveData
 @export var environmental_resources : Array = [];
 @export var units : Array = [];
 @export var structures : Array = [];
+@export var wood : int;
+@export var food : int;
+@export var stone : int;
+@export var metal : int;
 
 func as_json_string() -> String:
 	var data : Dictionary = {
@@ -18,6 +22,10 @@ func as_json_string() -> String:
 		"environmental_resources":[],
 		"units":[],
 		"structures":[],
+		"wood":wood,
+		"food":food,
+		"stone":stone,
+		"metal":metal
 	};
 	var environ_arr = data["environmental_resources"];
 	for e in environmental_resources:
@@ -39,4 +47,8 @@ static func from_json(json : Dictionary) -> SaveData:
 	data.environmental_resources = json["environmental_resources"].duplicate();
 	data.units = json["units"].duplicate();
 	data.structures = json["structures"].duplicate();
+	data.wood = json["wood"];
+	data.food = json["food"];
+	data.stone = json["stone"];
+	data.metal = json["metal"];
 	return data;

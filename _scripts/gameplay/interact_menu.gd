@@ -39,8 +39,13 @@ func show_unit_info(units : Array) -> void:
 		if (check.size() > 1):
 			behaviour.text = "Behaviour: [MIXED]";
 			return;
-	var unit : Unit = units.front();
-	if (!is_instance_valid(unit)): return;
+	var unit : Unit = null;
+	for u in units:
+		if (!is_instance_valid(u)): continue;
+		unit = u;
+	if (!is_instance_valid(unit)):
+		hide_unit_info();
+		return;
 	match (unit.behaviour):
 		Unit.BEHAVIOUR.PASSIVE:
 			behaviour.text = "Behaviour: Passive";

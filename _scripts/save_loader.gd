@@ -7,7 +7,7 @@ static func load_save(file : FileAccess) -> SaveData:
 	var file_data = json.data;
 	return SaveData.from_json(file_data);
 
-static func save_game(persist : Array) -> SaveData:
+static func save_game(persist : Array, resources : MResource) -> SaveData:
 	var data : SaveData = SaveData.new();
 	var date_values = Time.get_date_dict_from_system();
 	data.date = "%s|%s|%s" % [date_values["day"],date_values["month"],date_values["year"]];
@@ -21,6 +21,10 @@ static func save_game(persist : Array) -> SaveData:
 		if (p is Structure):
 			data.structures.append(p.save());
 			continue;
+	data.wood = resources.wood;
+	data.food = resources.food;
+	data.stone = resources.stone;
+	data.metal = resources.metal;
 	return data;
 
 static func save_file(data : SaveData) -> bool:
