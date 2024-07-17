@@ -97,6 +97,7 @@ func _pressed_from_bills():
 	clear_bills();
 	var selection = selector.selection;
 	for n in selection:
+		if (!is_instance_valid(n)): continue;
 		var o = n.get_parent();
 		if (o is UnitStructure):
 			var unit_struct : UnitStructure = o as UnitStructure;
