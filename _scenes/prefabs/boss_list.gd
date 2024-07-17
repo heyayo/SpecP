@@ -33,7 +33,7 @@ func _ready() -> void:
 	print("Spawning Spider at | %s" % spider_spawn);
 	
 	const surround_radius : int = 16 * 16;
-	for i in range(6):
+	for i in range(16):
 		var pivot : Vector2i = random_spawn();
 		var oset = surround_with(bandit_outpost,randi_range(4,8),pivot,surround_radius)
 
