@@ -5,6 +5,9 @@ class_name HostileSpawner
 @export var max_spawns : int = 1; ## Maximum number of Units spawned
 @export var spawn_rate : float = 1; ## Spawn Rate in Seconds
 @export var unit : PackedScene;
+var base_raider : PackedScene = preload("res://_scenes/npc/cores/base_raider.tscn");
+
+var base_raid_chance : float = 0;
 
 var spawn_timer : Timer;
 var units : Array[Unit] = [];
@@ -30,6 +33,10 @@ func spawn_unit() -> void:
 	game.spawn_unit(spawn);
 	spawn.tree_exiting.connect(report_death.bind(spawn));
 	spawn.add_to_group(Common.group_hostile);
+	
+	var random_chance : float = randf();
+	if (random_chance < base_raid_chance):
+		spawn.add_child(base_raider.instantiate());
 
 	units.push_back(spawn);
 	var random_direction : Vector2 = Vector2(15,0).rotated(deg_to_rad(randf_range(0,360))) * 4;
@@ -47,3 +54,7 @@ func report_damage(source, damage : float) -> void:
 		if (is_instance_valid(u.desired_target)): continue;
 		u.attack_action(source);
 #endregion
+
+
+func _timeout_from_timer():
+	base_raid_chance = 0.05;
