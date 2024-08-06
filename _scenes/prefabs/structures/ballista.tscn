@@ -14,7 +14,7 @@
 script = ExtResource("3_yehmu")
 name = "Ballista"
 desc = "A Strong Bow for defending structures"
-work = 1
+work = 3
 wood = 750
 food = 0
 stone = 250

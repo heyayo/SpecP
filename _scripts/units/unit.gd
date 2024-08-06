@@ -34,7 +34,7 @@ var health : float = 100 :
 var desired_position : Vector2;
 var desired_target = null;
 var focus_attack : bool = true;
-var behaviour : BEHAVIOUR = BEHAVIOUR.PASSIVE;
+var behaviour : BEHAVIOUR = BEHAVIOUR.DEFENSIVE;
 var host_group : StringName = Common.group_hostile;
 #endregion
 #region Processes
@@ -44,6 +44,7 @@ func _ready() -> void:
 	speed = data.speed;
 	health = data.max_health;
 	desired_position = global_position;
+	attack_node.cooldown = data.cooldown;
 	add_to_group(Common.group_persist);
 func _process(_delta) -> void:
 	if (is_instance_valid(desired_target)):

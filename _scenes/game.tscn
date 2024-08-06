@@ -152,7 +152,6 @@ script = ExtResource("12_34504")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("7_e0ybk")
-min_zoom = 0.25
 
 [node name="Random Spawner" type="Node2D" parent="."]
 script = ExtResource("13_kd0xl")
@@ -178,6 +177,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Game End" type="Label" parent="Interface/Game Conditions"]
 visible = false
@@ -218,6 +218,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Game Win Timer" type="Timer" parent="Interface/Game Conditions"]
+process_mode = 3
 wait_time = 3.0
 one_shot = true
 
@@ -645,6 +646,7 @@ autowrap_mode = 2
 clip_text = true
 
 [node name="Unit Queue" type="ColorRect" parent="Interface/Bills"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -657,6 +659,7 @@ grow_horizontal = 2
 color = Color(0.431373, 0.686275, 1, 0.784314)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface/Bills/Unit Queue"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

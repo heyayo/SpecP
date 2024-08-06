@@ -38,6 +38,8 @@ scale = Vector2(3, 5)
 
 [node name="Spawner" type="Node2D" parent="." index="3"]
 script = ExtResource("5_3w446")
+max_spawns = 5
+spawn_rate = 2.0
 unit = ExtResource("6_6qfaa")
 
 [node name="HealthBar" parent="." index="4"]

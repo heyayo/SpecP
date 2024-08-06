@@ -11,12 +11,12 @@
 script = ExtResource("3_l0gph")
 name = "Shock Tower"
 desc = "Shocks up to 5 nearby enemies dealing heavy damage but with a long cooldown"
-work = 1
-wood = 300
+work = 8
+wood = 0
 food = 0
-stone = 1250
-metal = 100
-max_health = 1500
+stone = 750
+metal = 40
+max_health = 800
 defense_range = 0.0
 range = 10
 

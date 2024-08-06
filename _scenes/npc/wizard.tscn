@@ -12,16 +12,16 @@ script = ExtResource("4_utmcx")
 name = "Wizard"
 desc = "Master of the Mystic Arts"
 preview = ExtResource("3_4smye")
-training_time = 1
-damage = 500.0
-speed = 10.0
-max_health = 150.0
-range = 30
+training_time = 4
+damage = 120.0
+speed = 5.0
+max_health = 80.0
+range = 25
 defense_range = 10
 slowdown = 3.0
-cooldown = 2.0
-food = 10
-metal = 0
+cooldown = 3.0
+food = 400
+metal = 20
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aov7u"]
 

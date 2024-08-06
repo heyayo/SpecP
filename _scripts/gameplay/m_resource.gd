@@ -4,17 +4,17 @@ class_name MResource
 
 @export var labels : ResourceLabels;
 @export_category("Resources")
-var wood : int = 1000 :
+var wood : int = 500 :
 	get: return wood;
 	set(value):
 		wood = value;
 		labels.set_wood(value);
-var food : int = 2000 :
+var food : int = 500 :
 	get: return food;
 	set(value):
 		food = value;
 		labels.set_food(value);
-var stone : int = 1000 :
+var stone : int = 500 :
 	get: return stone;
 	set(value):
 		stone = value;

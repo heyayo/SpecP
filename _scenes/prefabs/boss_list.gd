@@ -71,5 +71,8 @@ func surround_with(posts : PackedScene, amount : int, pivot : Vector2, radius : 
 func report_boss_death() -> void:
 	game_win_timer.start();
 	game_win.visible = true;
+	get_tree().paused = true;
 func _timeout_from_game_win_timer():
 	game_win.visible = false;
+	get_tree().paused = false;
+	get_tree().change_scene_to_file("res://_scenes/main_menu.tscn");

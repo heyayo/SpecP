@@ -278,7 +278,8 @@ script = ExtResource("60_jlc05")
 [node name="MinionSpawner" type="Node2D" parent="." index="8"]
 script = ExtResource("62_1nmvr")
 minion = ExtResource("63_gghxn")
-max_minions = 5
+max_minions = 12
+space = 15.0
 
 [node name="Timer" type="Timer" parent="MinionSpawner" index="0"]
 one_shot = true

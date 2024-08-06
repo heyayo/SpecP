@@ -3,6 +3,7 @@ extends Control
 class_name InteractMenu
 
 @onready var structure_actions : ColorRect = $"Structure Actions"
+@onready var bills = $"Structure Actions/VBoxContainer/Bills"
 @onready var behaviour = $"Unit Info/Behaviour"
 @onready var unit_info = $"Unit Info"
 
@@ -19,6 +20,7 @@ func show_actions(selection : Array) -> void:
 		var o = n.get_parent();
 		if (o is Structure):
 			structure_actions.visible = true;
+			bills.visible = o is UnitStructure;
 			break;
 func show_unit_info(units : Array) -> void:
 	if (units.is_empty()):
